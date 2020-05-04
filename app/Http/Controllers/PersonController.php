@@ -18,7 +18,8 @@ class PersonController extends Controller
         $people = Person::all();
         //Show a list of all the people
         return view('people/index', [
-            'people' => $people
+            'people' => $people ,
+            'tags'  => Tag::all()
         ]
         
         );
@@ -45,7 +46,6 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $person = new Person($this->validatePerson());
         $person->save();
 
@@ -63,7 +63,8 @@ class PersonController extends Controller
     public function show(Person $person)
     {
         return view('people/show', [
-            'person' => $person
+            'person' => $person,
+            'tags' => Tag::all()
         ]);
         
     }
@@ -91,7 +92,10 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
-        //
+        $person->update($this->validatePerson());
+        $person->tags()->sync(request('tags'));
+
+        return redirect(route('people.show', $person->id));        
     }
 
     /**
@@ -108,8 +112,11 @@ class PersonController extends Controller
     protected function validatePerson()
     {
         return request()->validate([
-            'first_name' => 'required'
-            
+            'first_name' => 'required',
+            'last_name' => 'nullable',
+            'email'     => 'nullable|email',
+            'number'    => 'nullable',
+            'tags'      => 'exists:tags,id'
         ]);
     }
 }

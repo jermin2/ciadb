@@ -22,13 +22,19 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/people', 'PersonController@index')->name('people.index');
-Route::post('/people/create', 'PersonController@store')->name('people.store');
+Route::post('/people', 'PersonController@store')->name('people.store');
 Route::get('/people/create', 'PersonController@create')->name('people.create');
 Route::get('/people/{person}', 'PersonController@show')->name('people.show');
 Route::get('/people/{person}/edit', 'PersonController@edit')->name('people.edit');
 Route::put('/people/{person}', 'PersonController@update')->name('people.update');
 
 
-Route::get('/tags/{tag}', 'TagController@show')->name('tag.show');
+Route::get('/people/tags/{tag}', 'PersonTagController@show')->name('tag.show');
 
 Route::get('/events', 'EventController@index')->name('events.index');
+Route::get('/events/{event}', 'EventController@show')->name('events.show');
+Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
+Route::put('/events/{event}', 'EventController@update')->name('events.update');
+
+Route::get('/events/tags/{tag}', 'EventTagController@show')->name('event-tag.show');
+Route::get('/events/people/{person}', 'EventPersonController@show')->name('event-person.show');

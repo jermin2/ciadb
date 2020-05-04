@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Tagtype;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class PersonTagController extends Controller
 {
         /**
      * Display the specified resource.
@@ -15,8 +16,10 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('tags/show', [
+        return view('people/index', [
             'people' => $tag->people,
+            'tag'   => $tag,
+            'tagtypes' => Tagtype::all(),
         ]);
         
     }

@@ -13,4 +13,9 @@ class Person extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
+
 }

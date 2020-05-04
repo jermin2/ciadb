@@ -2,6 +2,11 @@
 
 @section ('content')
 
+    @isset($tag)
+    <div class="text-center">
+        <h2>{{$tag->name}}</h2>
+    </div>
+    @endisset
     <div class="row justify-content-between">
         <h2> People </h2>
         <select id="tags" name="tags[]" class="selectpicker" multiple> 
@@ -55,11 +60,11 @@
         $("#people-table tr").filter(function() 
         {
             var row = $(this);
-            var tog = false;
+            var tog = true;
             for(i = 0;i < values.length;i++)
             {
-                if( row.children().eq(3).text().includes(values[i]) )
-                    tog = true;
+                if( !row.children().eq(3).text().includes(values[i]) )
+                    tog = false;
             }
 
             row.toggle(tog);    

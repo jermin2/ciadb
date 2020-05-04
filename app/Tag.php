@@ -12,4 +12,14 @@ class Tag extends Model
     {
         return $this->belongsToMany(Person::class);
     }
+
+    public function tagtype()
+    {
+        return $this->belongsTo(Tagtype::class);
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany(Event::class);
+    }
 }

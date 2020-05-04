@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use App\Tag;
+use App\TagType;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -19,7 +20,8 @@ class PersonController extends Controller
         //Show a list of all the people
         return view('people/index', [
             'people' => $people ,
-            'tags'  => Tag::all()
+            'tags'  => Tag::all(),
+            'tagtypes' => Tagtype::all()
         ]
         
         );

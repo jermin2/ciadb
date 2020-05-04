@@ -30,3 +30,5 @@ Route::put('/people/{person}', 'PersonController@update')->name('people.update')
 
 
 Route::get('/tags/{tag}', 'TagController@show')->name('tag.show');
+
+Route::get('/events', 'EventController@index')->name('events.index');

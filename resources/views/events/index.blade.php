@@ -3,7 +3,7 @@
 @section ('content')
 
     <div class="row justify-content-between">
-        <h2> People </h2>
+        <h2> Event </h2>
         <select id="tags" name="tags[]" class="selectpicker" multiple> 
 
             @foreach ($tagtypes as $tagtype)
@@ -19,20 +19,23 @@
         <thead>
             <tr>
                 <th>id</th>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Location</th>
                 <th>Tags</th>
             </tr>
         </thead>
         <tbody id="people-table">
-        @foreach($people as $person)
+        @foreach($events as $event)
             <tr>
-                <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
-                <td> <a href="{{ route('people.show' , $person->id) }}" >{{ $person->first_name }}</a> </td>
-                <td> {{ $person->last_name }} </td>
+                
+                <td> <a href="#" >{{ $event->id }} </a> </td>
+                <td> {{ $event->time }} </td>
+                <td> <a href="#" >{{ $event->name }}</a> </td>
+                <td> {{ $event->location }} </td>
                 <td> 
-                @foreach ($person->tags as $tag)
-                    <a href="{{route('tag.show', $tag->id)}}">{{$tag->name}}</a>
+                @foreach ($event->tags as $tag)
+                    <a href="#">{{$tag->name}}</a>
                 @endforeach
                  </td>
             </tr>

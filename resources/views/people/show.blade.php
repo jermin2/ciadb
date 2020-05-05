@@ -37,16 +37,13 @@
           </div>
         </div>
 
+         <!-- Tags -->
         <div class="mb-3">
-            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+          <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+            @component('components.tagpicker', ['tags' => $tags, 'selectedTagList' => $person->tags])
 
-            @foreach ($person->tags as $tag)
-              <a href="#"> {{$tag->name}} </a>
-            @endforeach
-
+            @endcomponent
         </div>
-
-
 
 
         <hr class="mb-4">

@@ -39,13 +39,12 @@
           </div>
         </div>
 
+        <!-- Tags -->
         <div class="mb-3">
-            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-            <select class="selectpicker" name="tags[]" id="tags" multiple >
-                @foreach ($tags as $tag)
-                <option value="{{ $tag->id }}" @if($person->tags->contains($tag)) selected @endif > {{ $tag->name }} </option>
-                @endforeach
-            </select>
+          <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+           
+          @component('components.tagpicker', ['tags' => $tags, 'selectedTagList' => $person->tags])
+          @endcomponent
         </div>
 
 

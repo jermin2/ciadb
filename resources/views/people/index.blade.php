@@ -49,27 +49,32 @@
 
 @endsection
 
-@section ('ready-script')
+@section ('footer')
 
+<script>
+    $(document).ready()
+    {
 
-    $('#tags').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
+        $('#tags').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
 
-        var values = [$(this).find("option:selected").text()];
-        values = values.join(" ").split(' ').filter(Boolean);
+            var values = [$(this).find("option:selected").text()];
+            values = values.join(" ").split(' ').filter(Boolean);
 
-        $("#people-table tr").filter(function() 
-        {
-            var row = $(this);
-            var tog = true;
-            for(i = 0;i < values.length;i++)
+            $("#people-table tr").filter(function() 
             {
-                if( !row.children().eq(3).text().includes(values[i]) )
-                    tog = false;
-            }
+                var row = $(this);
+                var tog = true;
+                for(i = 0;i < values.length;i++)
+                {
+                    if( !row.children().eq(3).text().includes(values[i]) )
+                        tog = false;
+                }
 
-            row.toggle(tog);    
+                row.toggle(tog);    
+            });
+
         });
-
-    });
+    }
+</script>
 
 @endsection

@@ -2,23 +2,21 @@
 
 @section ('content')
     <div class="d-flex justify-content-center col-md-12 col-lg-10 mx-auto">
-
-    <form method="POST" action="{{ route('events.update', $event->id) }}" class="needs-validation w-100" novalidate>
+    <form method="POST" action="{{ route('events.store') }}" class="needs-validation w-100" novalidate>
         @csrf 
-        @method('PUT')
     
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label class="label" for="name">Name</label>
 
-                <input class="form-control" type="text" name="name" id="name" value="{{ $event->name }}">
+                <input class="form-control" type="text" name="name" id="name" placeholder="Event Name">
                 <div class="invalid-feedback">Valid event name is required. </div>
             </div>
 
             <div class="col-md-6 mb-3">
                 <label class="label" for="time">Time</label>
 
-                <input class="form-control" type="text" name="time" id="time" value="{{$event->time}}"> 
+                <input class="form-control" type="text" name="time" id="time" placeholder="Time"> 
             </div>
         </div>
 
@@ -26,44 +24,41 @@
             <div class="col-md-6 mb-3">
                 <label class="label" for="location">Location</label>
 
-                <input class="form-control" type="text" name="location" id="location" value="{{ $event->location }}">
+                <input class="form-control" type="text" name="location" id="location" placeholder="Location">
                 <div class="invalid-feedback">Valid first name is required. </div>
             </div>
-
-            <div class="mb-3">
+            
+            <!-- Tags -->
+            <div class="col-md-6 mb-3">
                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
 
-                <div>
-                @component('components.tagpicker', ['tags' => $tags, 'selectedTagList' => $event->tags])
+                @component('components.tagpicker', ['tags' => $tags])
+                    @slot('pickername')
+                        event_tag
+                    @endslot
                 @endcomponent
-                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12 mb-3">
-                <label class="label" for="notes">Attendees</label>
                 <div>
-                @component('components.peoplepicker', ['tags' => $tags, 'people' => $people, 'selectedpeople' => $event->people])
+                @component('components.peoplepicker', ['tags' => $tags, 'people' => $people])
                 @endcomponent
                 </div>
                 <div id="people" class="d-flex flex-wrap">
-                    @foreach ($event->people as $person)
-                    <div class="p-1">
-                        <a href="{{route('event-person.show',$person->id)}}"><input type="hidden" name="peopleid[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
-                    </div>
-                    @endforeach
+                    <!--The peoplepicker will create components in here-->
                 </div>
-
-
             </div>
         </div>
+
+            
 
         <div class="row">
             <div class="col-md-12 mb-3">
                 <label class="label" for="notes">Notes</label>
 
-                <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5>{{ $event->notes }}</textarea>
+                <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes"></textarea>
                 <div class="invalid-feedback">Valid first name is required. </div>
             </div>
         </div>

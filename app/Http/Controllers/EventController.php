@@ -11,6 +11,37 @@ use Illuminate\Http\Request;
 class EventController extends Controller
 {
     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+
+        return view('events/create', [
+            'tags' => Tag::all(),
+            'tagtypes' => Tagtype::all(),
+            'people' => Person::all()
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $event = new Event($this->validateEvent());
+        $event->save();
+
+        $event->tags()->attach(request('tags'));
+
+        return redirect(route('events.index'));
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -61,7 +92,8 @@ class EventController extends Controller
     {
         return view('events/edit', [
             'event' => $event,
-            'tags' => Tag::all()
+            'tags' => Tag::all(),
+            'people' => Person::all()
         ]);
     }
 
@@ -74,11 +106,14 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        dd($request);
         $event->update($this->validateEvent());
         $event->tags()->sync(request('tags'));
 
         return redirect(route('events.show', $event->id));        
     }
+
+
 
     protected function validateEvent()
     {

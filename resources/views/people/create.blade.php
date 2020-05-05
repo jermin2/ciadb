@@ -37,16 +37,10 @@
           </div>
         </div>
 
-        <div class="mb-3">
-        <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-
-        <!-- Tags -->
-        <select id="tags" name="tags[]" class="selectpicker" multiple> 
-            @foreach ($tags as $tag)
-            <option value="{{ $tag->id }}" > {{ $tag->name }} </option>
-            @endforeach
-        </select>
-        </div>
+          <!-- Tags -->
+          @component('components.tagpicker', ['tags' => $tags])
+        
+          @endcomponent
 
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>

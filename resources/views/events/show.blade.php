@@ -3,7 +3,7 @@
 @section ('content')
     <div class="col-md-8 col-lg-6">
 
-    <form method="POST" action="{{ route('people.store') }}" class="needs-validation" novalidate>
+    <form method="POST" action="{{ route('events.store') }}" class="needs-validation" novalidate>
         @csrf 
     
         <div class="row">
@@ -44,9 +44,17 @@
             <div class="col-md-12 mb-3">
                 <label class="label" for="notes">Attendees</label>
 
+                <ul name="people" class="list-group list-group-horizontal">
+                <li class="list-group-item">Cras justo odio</li>
+                <li class="list-group-item">Dapibus ac facilisis in</li>
+                <li class="list-group-item">Morbi leo risus</li>
+                </ul>
+
+                <div class="list-group list-group-horizontal">
                 @foreach ($event->people as $person)
-                    <a href="{{route('event-person.show',$person->id)}}"> {{$person->first_name}} {{$person->last_name }} </a>
+                    <a href="{{route('event-person.show',$person->id)}}" class="list-group-item"> {{$person->first_name}} {{$person->last_name }} </a>
                 @endforeach
+                </div>
 
             </div>
         </div>

@@ -19,7 +19,6 @@ class EventController extends Controller
     {
 
         return view('events/create', [
-            'tags' => Tag::all(),
             'tagtypes' => Tagtype::all(),
             'people' => Person::all()
         ]);
@@ -78,7 +77,7 @@ class EventController extends Controller
     {
         return view('events/show', [
             'event' => $event,
-            'tags' => Tag::all()
+            'tagtypes' => Tagtype::all()
         ]);
         
     }
@@ -93,7 +92,7 @@ class EventController extends Controller
     {
         return view('events/edit', [
             'event' => $event,
-            'tags' => Tag::all(),
+            'tagtypes' => Tagtype::all(),
             'people' => Person::all()
         ]);
     }

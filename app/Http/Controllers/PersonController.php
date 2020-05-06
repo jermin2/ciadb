@@ -20,7 +20,6 @@ class PersonController extends Controller
         //Show a list of all the people
         return view('people/index', [
             'people' => $people ,
-            'tags'  => Tag::all(),
             'tagtypes' => Tagtype::all()
         ]
         
@@ -36,7 +35,7 @@ class PersonController extends Controller
     {
 
         return view('people/create', [
-            'tags' => Tag::all()
+            'tagtypes' => Tagtype::all(),
         ]);
     }
 
@@ -66,7 +65,7 @@ class PersonController extends Controller
     {
         return view('people/show', [
             'person' => $person,
-            'tags' => Tag::all()
+            'tagtypes' => Tagtype::all(),
         ]);
         
     }
@@ -81,7 +80,7 @@ class PersonController extends Controller
     {
         return view('people/edit', [
             'person' => $person,
-            'tags' => Tag::all()
+            'tagtypes' => Tagtype::all(),
         ]);
     }
 

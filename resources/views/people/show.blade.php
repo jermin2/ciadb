@@ -40,7 +40,7 @@
          <!-- Tags -->
         <div class="mb-3">
           <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-            @component('components.tagpicker', ['tags' => $tags, 'selectedTagList' => $person->tags])
+            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])
 
             @endcomponent
         </div>

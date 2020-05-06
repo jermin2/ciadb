@@ -34,7 +34,7 @@
                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
 
                 <div>
-                @component('components.tagpicker', ['tags' => $tags, 'selectedTagList' => $event->tags])
+                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
                 @endcomponent
                 </div>
             </div>
@@ -44,7 +44,7 @@
             <div class="col-md-12 mb-3">
                 <label class="label" for="notes">Attendees</label>
                 <div>
-                @component('components.peoplepicker', ['tags' => $tags, 'people' => $people, 'selectedpeople' => $event->people])
+                @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people, 'selectedpeople' => $event->people])
                 @endcomponent
                 </div>
                 <div id="people" class="d-flex flex-wrap">
@@ -94,5 +94,5 @@
 @endsection
 
 @section('footer')
-<script src="{{ asset('js/peoplepicker.js') }}?1"></script>
+<script src="{{ asset('js/peoplepicker.js') }}?5"></script>
 @endsection

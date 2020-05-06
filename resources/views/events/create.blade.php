@@ -32,7 +32,7 @@
             <div class="col-md-6 mb-3">
                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
 
-                @component('components.tagpicker', ['tags' => $tags])
+                @component('components.tagpicker', ['tagtypes' => $tagtypes])
                     @slot('pickername')
                         event_tag
                     @endslot
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div>
-                @component('components.peoplepicker', ['tags' => $tags, 'people' => $people])
+                @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people])
                 @endcomponent
                 </div>
                 <div id="people" class="d-flex flex-wrap">
@@ -78,5 +78,5 @@
 @endsection
 
 @section('footer')
-<script src="{{ asset('js/peoplepicker.js') }}?1"></script>
+<script src="{{ asset('js/peoplepicker.js') }}?19"></script>
 @endsection

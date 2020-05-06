@@ -3,7 +3,9 @@
     {
         $(function() {
             $('#people-list li').on("click",function(e) {
-                e.target.classList.toggle("active");
+                console.log(e);
+                console.log(this);
+                this.classList.toggle("active");
             });
         });
 
@@ -22,19 +24,20 @@
             var values = [$(this).find("option:selected").text()];
             values = values.join(" ").split(' ').filter(Boolean);
 
+            console.log(values);
 
             //Filter the list based on the presence of each tag
             $("#people-list li").filter(function() {
                 var toggle = true;
-                for(i=0;i < values.length;i++){
-                    if( !$(this).html().includes(values[i]))
+                for(i=0; i< values.length; i++) {
+                    if ( !$(this).html().includes(values[i]))
                     {
                         toggle = false;
                     }
-                        
                 }
                 $(this).toggle(toggle);
-            });   
+            })
+            
         });
 
         //Action when the save button is pushed

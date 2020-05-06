@@ -28,7 +28,7 @@
       <div class="modal-body">
         
 
-        @component('components.tagpicker', ['tags' => $tags])
+        @component('components.tagpicker', ['tagtypes' => $tagtypes])
             @slot('pickername')
                 peoplepicker_tag
             @endslot
@@ -48,11 +48,18 @@
             id="{{$person->id}}" 
             data-id="{{$person->id}}" 
             data-name="{{$person->first_name}} {{$person->last_name}}">
-            {{$person->first_name}} {{$person->last_name}} 
-                @foreach($person->tags as $tag)
-                    {{$tag->name}}
-                @endforeach
-                </li>
+            <div class="row d-flex justify-content-between">
+                <div>
+                    {{$person->first_name}} {{$person->last_name}} 
+                </div>
+                <div>
+                    @foreach($person->tags as $tag)
+                    <span class="badge badge-primary">{{$tag->name}}</span>
+                        
+                    @endforeach
+                </div>
+            </div>
+          </li>
 
 
 

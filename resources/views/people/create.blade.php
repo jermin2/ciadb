@@ -38,7 +38,7 @@
         </div>
 
           <!-- Tags -->
-          @component('components.tagpicker', ['tags' => $tags])
+          @component('components.tagpicker', ['tagtypes' => $tagtypes])
         
           @endcomponent
 

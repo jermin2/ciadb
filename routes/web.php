@@ -38,5 +38,7 @@ Route::get('/events/{event}', 'EventController@show')->name('events.show');
 Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
 Route::put('/events/{event}', 'EventController@update')->name('events.update');
 
+Route::delete('/events/{event}', 'EventController@delete')->name('events.delete');
+
 Route::get('/events/tags/{tag}', 'EventTagController@show')->name('event-tag.show');
 Route::get('/events/people/{person}', 'EventPersonController@show')->name('event-person.show');

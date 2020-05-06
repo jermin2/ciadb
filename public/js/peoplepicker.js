@@ -65,7 +65,7 @@
                         var url = "{{route('event-person.show', ':id')}}";
                         url = url.replace(':id', id);
                         aElement.setAttribute("href", url );
-                        var a_html = '<input type="hidden" name="peopleid[]" value=';
+                        var a_html = '<input type="hidden" name="people[]" value=';
                         aElement.innerHTML = a_html.concat(id,'>', name);
                         divElement.appendChild(aElement);
                     people_div.appendChild(divElement);

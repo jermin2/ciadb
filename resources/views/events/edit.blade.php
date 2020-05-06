@@ -50,7 +50,7 @@
                 <div id="people" class="d-flex flex-wrap">
                     @foreach ($event->people as $person)
                     <div class="p-1">
-                        <a href="{{route('event-person.show',$person->id)}}"><input type="hidden" name="peopleid[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
+                        <a href="{{route('event-person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
                     </div>
                     @endforeach
                 </div>
@@ -74,8 +74,19 @@
 
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
+        <div class="row">
+            <div class="col-md-6">
+                <form method="POST" action="{{route('events.delete', $event->id)}}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Delete</button>
+                </form>
+            </div>
 
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
+            </div>
+        </div>
         </form>
     </div>
 
@@ -83,5 +94,5 @@
 @endsection
 
 @section('footer')
-<script src="{{ asset('js/peoplepicker.js') }}"></script>
+<script src="{{ asset('js/peoplepicker.js') }}?1"></script>
 @endsection

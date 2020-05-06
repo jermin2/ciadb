@@ -78,5 +78,5 @@
 @endsection
 
 @section('footer')
-<script src="{{ asset('js/peoplepicker.js') }}"></script>
+<script src="{{ asset('js/peoplepicker.js') }}?1"></script>
 @endsection

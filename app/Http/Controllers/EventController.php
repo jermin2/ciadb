@@ -37,6 +37,7 @@ class EventController extends Controller
         $event->save();
 
         $event->tags()->attach(request('tags'));
+        $event->people()->attach(request('people'));
 
         return redirect(route('events.index'));
     }
@@ -106,11 +107,24 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        dd($request);
         $event->update($this->validateEvent());
         $event->tags()->sync(request('tags'));
+        $event->people()->sync(request('people'));
 
         return redirect(route('events.show', $event->id));        
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Person  $person
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Event $event)
+    {
+        $event->delete();
+
+        return redirect(route('events.index'));
     }
 
 
@@ -122,7 +136,8 @@ class EventController extends Controller
             'location' => 'nullable',
             'time'     => 'nullable',
             'notes'    => 'nullable',
-            'tags'      => 'exists:tags,id'
+            'tags'      => 'exists:tags,id',
+            'people'    => 'exists:people,id'
         ]);
     }
 }

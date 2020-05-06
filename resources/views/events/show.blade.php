@@ -44,16 +44,12 @@
             <div class="col-md-12 mb-3">
                 <label class="label" for="notes">Attendees</label>
 
-                <ul name="people" class="list-group list-group-horizontal">
-                <li class="list-group-item">Cras justo odio</li>
-                <li class="list-group-item">Dapibus ac facilisis in</li>
-                <li class="list-group-item">Morbi leo risus</li>
-                </ul>
-
-                <div class="list-group list-group-horizontal">
-                @foreach ($event->people as $person)
-                    <a href="{{route('event-person.show',$person->id)}}" class="list-group-item"> {{$person->first_name}} {{$person->last_name }} </a>
-                @endforeach
+                <div id="people" class="d-flex flex-wrap">
+                    @foreach ($event->people as $person)
+                    <div class="p-1">
+                        <a href="{{route('event-person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
+                    </div>
+                    @endforeach
                 </div>
 
             </div>

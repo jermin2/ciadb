@@ -3,8 +3,6 @@
     {
         $(function() {
             $('#people-list li').on("click",function(e) {
-                console.log(e);
-                console.log(this);
                 this.classList.toggle("active");
             });
         });

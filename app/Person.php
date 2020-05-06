@@ -18,4 +18,14 @@ class Person extends Model
         return $this->belongsToMany(Event::class);
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    public function name()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
 }

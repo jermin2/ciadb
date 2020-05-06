@@ -3,7 +3,8 @@
 @section ('content')
     <div class="d-flex justify-content-center col-md-12 col-lg-10 mx-auto">
 
-    <form method="POST" action="{{ route('events.update', $event->id) }}" class="needs-validation w-100" novalidate>
+    <div class="col-md-12">
+    <form method="POST" action="{{ route('events.update', $event->id) }}" class="needs-validation col-md-12" novalidate>
         @csrf 
         @method('PUT')
     
@@ -68,27 +69,24 @@
             </div>
         </div>
 
-
-
-
-
-
         <hr class="mb-4">
         <div class="row">
-            <div class="col-md-6">
-                <form method="POST" action="{{route('events.delete', $event->id)}}">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-primary btn-lg btn-block" type="submit">Delete</button>
-                </form>
-            </div>
-
             <div class="col-md-6">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
             </div>
         </div>
-        </form>
+    </form>
+
+    <div class="row col-md-12 mt-4">
+        <div class="col-md-12">
+            <form method="POST" action="{{route('events.delete', $event->id)}}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger btn-lg btn-block col-md-6 p-auto" type="submit">Delete</button>
+            </form>
+        </div>
     </div>
+</div>
 
 
 @endsection

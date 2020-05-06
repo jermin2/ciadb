@@ -7,18 +7,15 @@
         <h2>{{$tag->name}}</h2>
     </div>
     @endisset
+
     <div class="row justify-content-between">
         <h2> People </h2>
-        <select id="tags" name="tags[]" class="selectpicker" multiple> 
-
-            @foreach ($tagtypes as $tagtype)
-                <optgroup label="{{ $tagtype->name }}">
-                @foreach ($tagtype->tags as $tag)
-                    <option value="{{ $tag->id }}" selected> {{ $tag->name }} </option>
-                @endforeach
-            @endforeach
-        </select>
+        <div>
+            @component('components.tagpicker', ['tagtypes' => $tagtypes])
+            @endcomponent
+        </div>
     </div>
+
     <div class="table-responsive">
     <table class="table table-striped table-sm" >
         <thead>
@@ -37,7 +34,11 @@
                 <td> {{ $person->last_name }} </td>
                 <td> 
                 @foreach ($person->tags as $tag)
-                    <a href="{{route('tag.show', $tag->id)}}">{{$tag->name}}</a>
+                <a href="{{route('event-tag.show', $tag->id)}}">
+                        <span class="badge" 
+                            style="color:#fff; background-color:{{$tag->color}}" >
+                        {{$tag->name}}
+                    </span> </a>
                 @endforeach
                  </td>
             </tr>

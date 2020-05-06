@@ -47,7 +47,12 @@
           @endcomponent
         </div>
 
-
+        @isset($user)
+        <div class="mb-3">
+        <label> Associated with a user </label>
+          <a href="{{ route('user.edit') }}"> Edit Login details </a>
+        </div>
+        @endisset
 
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>

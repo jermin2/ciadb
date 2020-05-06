@@ -19,8 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('person_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('person_id')->references('id')->on('people')->onDelete('set null');
         });
     }
 

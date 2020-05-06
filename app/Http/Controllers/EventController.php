@@ -116,7 +116,7 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Person  $person
+     * @param  \App\Event  $event
      * @return \Illuminate\Http\Response
      */
     public function delete(Event $event)

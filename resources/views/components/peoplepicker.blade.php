@@ -12,7 +12,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#peoplepickermodal">
-  Attendees
+  {{$btn_name ?? "Attendees"}}
 </button>
 
 <!-- Modal -->
@@ -31,6 +31,10 @@
         @component('components.tagpicker', ['tagtypes' => $tagtypes])
             @slot('pickername')
                 peoplepicker_tag
+            @endslot
+
+            @slot('tagname')
+                pp_tags
             @endslot
         @endcomponent
 

@@ -32,6 +32,7 @@ class CreateTagsTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('tagtype_id');
+            $table->string('color')->default('#0000F0');
             $table->timestamps();
 
             $table->foreign('tagtype_id')
@@ -43,16 +44,16 @@ class CreateTagsTable extends Migration
         
         DB::table('tags')->insert([
             [
-                'name' => 'hall1', 'tagtype_id' => '1'
+                'name' => 'hall1', 'tagtype_id' => '1', 'color' => '#0000F0',
             ],
             [
-                'name' => 'hall2', 'tagtype_id' => '1'
+                'name' => 'hall2', 'tagtype_id' => '1', 'color' => '#E00000',
             ],
             [
-                'name' => 'hs', 'tagtype_id' => '2'
+                'name' => 'hs', 'tagtype_id' => '2', 'color' => '#00C000',
             ],
             [
-                'name' => 'int', 'tagtype_id' => '2'
+                'name' => 'int', 'tagtype_id' => '2', 'color' => '#FF00FF',
             ]
         ]);
     }

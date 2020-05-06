@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'PersonController@index')->name('home');
 
 Route::get('/people', 'PersonController@index')->name('people.index');
 Route::post('/people', 'PersonController@store')->name('people.store');
@@ -42,3 +42,8 @@ Route::delete('/events/{event}', 'EventController@delete')->name('events.delete'
 
 Route::get('/events/tags/{tag}', 'EventTagController@show')->name('event-tag.show');
 Route::get('/events/people/{person}', 'EventPersonController@show')->name('event-person.show');
+
+Route::get('/users', 'UserController@index')->name('users.index');
+Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
+Route::put('/users/{user}', 'UserController@update')->name('users.update');
+Route::delete('/users/{user}', 'UserController@delete')->name('users.delete');

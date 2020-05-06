@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Person;
 use App\Tag;
 use App\TagType;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
@@ -78,10 +79,22 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        return view('people/edit', [
-            'person' => $person,
+        $data = [
+            'person' =>$person,
             'tagtypes' => Tagtype::all(),
-        ]);
+        ];
+
+        if($person->user_id ==  Auth::id())
+        {
+            $data = [
+                'person' =>$person,
+                'tagtypes' => Tagtype::all(),
+                'user' => Auth::user()
+            ];
+        }
+        
+
+        return view('people/edit', $data);
     }
 
     /**

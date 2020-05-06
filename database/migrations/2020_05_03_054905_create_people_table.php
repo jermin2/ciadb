@@ -32,6 +32,8 @@ class CreatePeopleTable extends Migration
 
             $table->foreign('person_id')->references('id')->on('people')->onDelete('cascade');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+
+            
         });
     }
 

@@ -17,4 +17,9 @@ class Event extends Model
     {
         return $this->belongsToMany(Person::class);
     }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'PersonController@index')->name('home');
+Route::get('/home', 'UserController@home')->name('home');
 
 Route::get('/people', 'PersonController@index')->name('people.index');
 Route::post('/people', 'PersonController@store')->name('people.store');

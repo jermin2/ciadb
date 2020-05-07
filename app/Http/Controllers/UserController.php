@@ -6,10 +6,25 @@ use App\User;
 use App\Person;
 use App\Tagtype;
 
+use App\Event;
+
+
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function home()
+    {
+        $user = auth()->user();
+
+        return view('users/home', [
+            'events' => Event::where('author_id', $user->id)->latest('time')->take(5)->get()
+        ]);
+
+
+
+    }
     /**
      * Display the specified resource.
      *
@@ -72,6 +87,11 @@ class UserController extends Controller
         $validation = request()->validate([
             'email' => 'email',
             'person' => 'nullable|exists:people,id'
+        ]);
+
+        $person = $user->person;
+        $person->update( [
+            'email' => request('email')
         ]);
 
         $user->person()->associate( Person::find(request('person')) );

@@ -16,7 +16,7 @@ $tagname - tags is reserved, don't use this name for anything other than applyin
         @foreach ($tagtype->tags as $tag)
             
             @isset($selectedTagList)
-                <option value="{{ $tag->id }}"  data-content='<span class="badge" style="color:#fff; background-color:{{$tag->color}} >{{$tag->name}}</span>' @if($selectedTagList->contains($tag)) selected @endif  >{{$tag->name}}</span> </option>
+                <option value="{{ $tag->id }}"  data-content='<span class="badge" style="color:#fff; background-color:{{$tag->color}} ">{{$tag->name}}</span>' @if($selectedTagList->contains($tag)) selected @endif  >{{$tag->name}}</span> </option>
             @else
                 <option value="{{ $tag->id }}" class="tag" data-content='<span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span>'>{{$tag->name}} </option>
             @endisset

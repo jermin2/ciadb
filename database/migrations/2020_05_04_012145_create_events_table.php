@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\User;
+
 class CreateEventsTable extends Migration
 {
     /**
@@ -19,7 +21,10 @@ class CreateEventsTable extends Migration
             $table->string('location')->nullable();
             $table->text('notes')->nullable();
             $table->timestamp('time')->nullable();
+            $table->string('author_id')->default('1');
             $table->timestamps();
+
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::create('event_person', function (Blueprint $table) {

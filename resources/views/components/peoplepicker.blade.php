@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     @foreach($person->tags as $tag)
-                    <span class="badge badge-primary">{{$tag->name}}</span>
+                    <span class="badge" style="color:#fff; background-color:{{$tag->color}}">{{$tag->name}}</span>
                         
                     @endforeach
                 </div>

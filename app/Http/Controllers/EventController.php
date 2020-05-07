@@ -32,7 +32,16 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        $event = new Event($this->validateEvent());
+        $validate = $this->validateEvent();
+        $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
+
+        $event = new Event([
+            'name' => $request->name,
+            'location' =>$request->location,
+            'time'     => $formattime->toDateTimeString(),
+            'notes'    => $request->notes,
+        ]);
+
         $event->save();
 
         $event->tags()->attach(request('tags'));
@@ -106,7 +115,20 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $event->update($this->validateEvent());
+        dump($request);
+        dump($event);
+        $validate = $this->validateEvent();
+        //dd($event);
+        $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
+
+        
+        $event->update([
+            'name' => $request->name,
+            'location' =>$request->location,
+            'time'     => $formattime->toDateTimeString(),
+            'notes'    => $request->notes,
+        ]);
+
         $event->tags()->sync(request('tags'));
         $event->people()->sync(request('people'));
 
@@ -133,7 +155,7 @@ class EventController extends Controller
         return request()->validate([
             'name' => 'required',
             'location' => 'nullable',
-            'time'     => 'nullable',
+            'time'     => 'date_format:"D, jS M H:i Y"',
             'notes'    => 'nullable',
             'tags'      => 'exists:tags,id',
             'people'    => 'exists:people,id'

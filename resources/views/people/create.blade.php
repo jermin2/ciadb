@@ -1,7 +1,7 @@
 @extends ('layouts/main')
 
 @section ('content')
-    <div class="col-md-8 col-lg-6">
+    <div class="col-md-12 col-lg-10 m-auto">
 
     <form method="POST" action="{{ route('people.store') }}" class="needs-validation" novalidate>
         @csrf 
@@ -49,3 +49,5 @@
     </div>
 
 @endsection
+
+

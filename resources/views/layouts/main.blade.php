@@ -19,6 +19,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 
+    <script src="https://use.fontawesome.com/fc7fae72fc.js"></script>
+
     @yield('header')
 </head>
 <body>

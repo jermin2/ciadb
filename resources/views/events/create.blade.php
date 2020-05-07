@@ -1,6 +1,14 @@
 @extends ('layouts/main')
 
+
+@section ('header')
+
+@endsection
+
+
+
 @section ('content')
+
     <div class="d-flex justify-content-center col-md-12 col-lg-10 mx-auto">
     <form method="POST" action="{{ route('events.store') }}" class="needs-validation w-100" novalidate>
         @csrf 
@@ -13,10 +21,15 @@
                 <div class="invalid-feedback">Valid event name is required. </div>
             </div>
 
+            @error('time')
+                @message
+            @enderror
+
             <div class="col-md-6 mb-3">
                 <label class="label" for="time">Time</label>
 
-                <input class="form-control" type="text" name="time" id="time" placeholder="Time"> 
+                @component('components.timepicker')
+                @endcomponent
             </div>
         </div>
 
@@ -78,5 +91,21 @@
 @endsection
 
 @section('footer')
+
 <script src="{{ asset('js/peoplepicker.js') }}?19"></script>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
+<script type="text/javascript">
+$(document).ready( function() {
+    $('#datetimepicker1').datetimepicker({
+    format: "ddd, Do MMM HH:mm Y",
+    debug: true,
+    } );
+});
+
+</script>
 @endsection

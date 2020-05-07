@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('name');
             $table->string('location')->nullable();
             $table->text('notes')->nullable();
-            $table->timestamp('time')->nullable();
+            $table->dateTime('time')->nullable();
             $table->string('author_id')->default('1');
             $table->timestamps();
 

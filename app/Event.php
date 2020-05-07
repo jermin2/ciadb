@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    protected $fillable = ['name', 'location' , 'notes'];
+    protected $fillable = ['name', 'location' , 'time', 'notes'];
 
     public function tags()
     {
@@ -21,5 +21,9 @@ class Event extends Model
     public function author()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getTimeAttribute( $value ) {
+        return (new \Carbon\Carbon($value))->format('D, jS M H:i Y');
     }
 }

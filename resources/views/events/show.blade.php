@@ -32,11 +32,9 @@
             <div class="mb-3">
                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
 
-                <div>
-                @foreach ($event->tags as $tag)
-                    <a href="{{route('event-tag.show', $tag->id)}}"> {{$tag->name}} </a>
-                @endforeach
-                </div>
+                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
+                @endcomponent
+
             </div>
         </div>
 

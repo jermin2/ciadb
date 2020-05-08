@@ -44,8 +44,8 @@
             <!-- Tags -->
             <div class="col-md-6 mb-3">
                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-
-                @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                
+                @component('components.tagpicker', ['tagtypes' => $tagtypes] )
                     @slot('pickername')
                         event_tag
                     @endslot
@@ -56,10 +56,16 @@
         <div class="row">
             <div class="col-md-12 mb-3">
                 <div>
-                @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people])
+                @component('components.peoplepicker', [
+                    'tagtypes' => $tagtypes, 
+                    'people' => $people, 
+                    'selectedperson' => $user->person
+                    ])
+                 
                 @endcomponent
                 </div>
                 <div id="people" class="d-flex flex-wrap">
+                {{ $user->person->name() }}
                     <!--The peoplepicker will create components in here-->
                 </div>
             </div>

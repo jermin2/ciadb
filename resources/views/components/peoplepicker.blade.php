@@ -40,10 +40,14 @@
 
         <input type="text" class="form-control" id="myInput" placeholder="Search for names..">
         <div id="people-list" class="list-group">
+
+
         @foreach ($people as $person)
             <li 
 
             @if(isset($selectedpeople) && $selectedpeople->contains($person))
+                class="list-group-item list-group-item-action active"
+            @elseif(isset($selectedperson) && $selectedperson == $person)
                 class="list-group-item list-group-item-action active"
             @else
                 class="list-group-item list-group-item-action"

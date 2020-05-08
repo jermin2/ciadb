@@ -6,7 +6,9 @@ use App\Event;
 use App\Tagtype;
 use App\Tag;
 use App\Person;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -17,10 +19,11 @@ class EventController extends Controller
      */
     public function create()
     {
-
         return view('events/create', [
             'tagtypes' => Tagtype::all(),
-            'people' => Person::all()
+            'people' => Person::all(),
+            'user' => Auth::user(),
+
         ]);
     }
 
@@ -115,10 +118,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        dump($request);
-        dump($event);
         $validate = $this->validateEvent();
-        //dd($event);
         $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
 
         

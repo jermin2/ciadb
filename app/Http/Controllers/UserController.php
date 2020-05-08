@@ -85,17 +85,19 @@ class UserController extends Controller
     {
 
         $validation = request()->validate([
-            'email' => 'email',
-            'person' => 'nullable|exists:people,id'
-        ]);
-
-        $person = $user->person;
-        $person->update( [
-            'email' => request('email')
+            'email' => 'email|required',
+            'person' => 'unique:users,person_id|required|exists:people,id'
+            
         ]);
 
         $user->person()->associate( Person::find(request('person')) );
+        
+
+        $validation['name'] = $user->person->name();
         $user->update( $validation);
+        $user->person->update( [
+            'email' => request('email')
+        ]);
 
 
         return redirect(route('users.index'));

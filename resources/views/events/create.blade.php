@@ -98,7 +98,7 @@
 
 @section('footer')
 
-<script src="{{ asset('js/peoplepicker.js') }}?19"></script>
+<script src="{{ asset('js/peoplepicker.js') }}?41"></script>
 
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js"></script>

@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +25,7 @@ class PersonController extends Controller
         //Show a list of all the people
         return view('people/index', [
             'people' => $people ,
-            'tagtypes' => Tagtype::all()
+            'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
         ]
         
         );
@@ -36,7 +40,7 @@ class PersonController extends Controller
     {
 
         return view('people/create', [
-            'tagtypes' => Tagtype::all(),
+            'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
         ]);
     }
 
@@ -66,7 +70,7 @@ class PersonController extends Controller
     {
         return view('people/show', [
             'person' => $person,
-            'tagtypes' => Tagtype::all(),
+            'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
         ]);
         
     }
@@ -81,14 +85,14 @@ class PersonController extends Controller
     {
         $data = [
             'person' =>$person,
-            'tagtypes' => Tagtype::all(),
+            'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
         ];
 
         if($person->user_id ==  Auth::id())
         {
             $data = [
                 'person' =>$person,
-                'tagtypes' => Tagtype::all(),
+                'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
                 'user' => Auth::user()
             ];
         }

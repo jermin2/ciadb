@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        //Requires Login to access anything
+        $this->middleware('auth');
+    }
 
     public function home()
     {

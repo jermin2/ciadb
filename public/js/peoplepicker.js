@@ -63,9 +63,10 @@
                     var divElement = document.createElement("div");
                         divElement.classList.add("p-1");
                     var aElement = document.createElement("a");
-                        var url = "{{route('event-person.show', ':id')}}";
+                        var url = "/people/:id";
                         url = url.replace(':id', id);
-                        aElement.setAttribute("href", url );
+                        aElement.href = url;
+                        aElement.target= "_blank";
                         var a_html = '<input type="hidden" name="people[]" value=';
                         aElement.innerHTML = a_html.concat(id,'>', name);
                         divElement.appendChild(aElement);

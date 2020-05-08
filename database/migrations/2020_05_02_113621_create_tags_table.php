@@ -25,6 +25,9 @@ class CreateTagsTable extends Migration
             ],
             [
                 'name' => 'age_group'
+            ],
+            [
+                'name' => 'event_type'
             ]
         ]);
 
@@ -43,18 +46,16 @@ class CreateTagsTable extends Migration
 
         
         DB::table('tags')->insert([
-            [
-                'name' => 'hall1', 'tagtype_id' => '1', 'color' => '#0000F0',
-            ],
-            [
-                'name' => 'hall2', 'tagtype_id' => '1', 'color' => '#E00000',
-            ],
-            [
-                'name' => 'hs', 'tagtype_id' => '2', 'color' => '#00C000',
-            ],
-            [
-                'name' => 'int', 'tagtype_id' => '2', 'color' => '#FF00FF',
-            ]
+            [ 'name' => 'hall1', 'tagtype_id' => '1', 'color' => '#808000'],
+            [ 'name' => 'hall3', 'tagtype_id' => '1', 'color' => '#000000'],
+            [ 'name' => 'hall4', 'tagtype_id' => '1', 'color' => '#0000FF'],
+            [ 'name' => 'hall5', 'tagtype_id' => '1', 'color' => '#E00000'],
+            [ 'name' => 'hs', 'tagtype_id' => '2', 'color' => '#00C000'],
+            [ 'name' => 'int', 'tagtype_id' => '2', 'color' => '#FF00FF'],
+            [ 'name' => 'yp', 'tagtype_id' => '2', 'color' => '#008000'],
+            [ 'name' => 'meet', 'tagtype_id' => '3', 'color' => '#800080'],
+            [ 'name' => 'apt', 'tagtype_id' => '3', 'color' => '#800000'],
+            [ 'name' => 'church', 'tagtype_id' => '3', 'color' => '#006000']
         ]);
     }
 

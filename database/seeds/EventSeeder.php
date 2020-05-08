@@ -14,7 +14,9 @@ class EventSeeder extends Seeder
         factory(App\Event::class, 10)->create()->each(function($u) {
 
             //Add some random tags
-            $tag_ids = \App\Tag::all()->random(rand(1,4));
+            $tag_ids = array(\App\Tag::where('tagtype_id', 1)->get()->random());
+            $tag_ids[] = \App\Tag::where('tagtype_id', 2)->get()->random();
+            $tag_ids[] = \App\Tag::where('tagtype_id', 3)->get()->random();
             
             foreach($tag_ids as $tag_id)
             {

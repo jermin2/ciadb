@@ -84,6 +84,17 @@
         </div>
     </form>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @can ('delete-event', $event)
     <div class="row col-md-12 mt-4">
         <div class="col-md-12">
             <form method="POST" action="{{route('events.delete', $event->id)}}">
@@ -93,6 +104,7 @@
             </form>
         </div>
     </div>
+    @endcan
 </div>
 
 
@@ -109,7 +121,7 @@
 <script type="text/javascript">
 $(document).ready( function() {
     $('#datetimepicker1').datetimepicker({
-    format: "ddd, Do MMM H:m Y",
+    format: "ddd, Do MMM HH:mm Y",
     debug: true,
     } );
 });

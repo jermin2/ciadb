@@ -106,6 +106,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
+        $this->authorize('update', $event);
+
         return view('events/edit', [
             'event' => $event,
             'tagtypes' => Tagtype::all(),
@@ -122,6 +124,8 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
+        $this->authorize('update', $event);
+
         $validate = $this->validateEvent();
         $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
 
@@ -147,6 +151,8 @@ class EventController extends Controller
      */
     public function delete(Event $event)
     {
+        $this->authorize('delete', $event);
+
         $event->delete();
 
         return redirect(route('events.index'));

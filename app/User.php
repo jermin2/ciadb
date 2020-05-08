@@ -46,4 +46,21 @@ class User extends Authenticatable
     {
         return $this->hasMany(Event::class);
     }
+
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function assignRole($role)
+    {
+        if(is_string($role)){
+            $role = Role::whereName($role)->firstOrFail();
+        }
+        $this->roles()->sync($role, false);
+    }
+
+    public function permissions()
+    {
+        return $user->roles->map->permissions->flatten()->pluck('name')->unique();
+    }
 }

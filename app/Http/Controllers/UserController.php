@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Person;
 use App\Tagtype;
+use App\Role;
 
 use App\Event;
 
@@ -38,7 +39,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        $this->authorize('show_users', $user);
+        
         return view('user/show', [
             'user' => $user,
             'tagtypes' => Tagtype::all()
@@ -54,7 +56,8 @@ class UserController extends Controller
      */
     public function index(User $user)
     {
-        //
+        $this->authorize('show_users', $user);
+        
         return view('users/index', [
             'users' => User::all(),
             'tagtypes' => Tagtype::all()
@@ -70,11 +73,13 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $this->authorize('edit_users', $user);
+
         return view('users/edit', [
             'user' => $user,
             'people' => Person::all(),
-            'tagtypes' => Tagtype::all()
+            'tagtypes' => Tagtype::all(),
+            'roles'     => Role::all(),
         ]);
         
     }
@@ -88,12 +93,14 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('edit_users', $user);
 
         $validation = request()->validate([
             'email' => 'email|required',
             'person' => 'unique:users,person_id|required|exists:people,id'
             
         ]);
+        $user->roles()->sync(request('roles'));
 
         $user->person()->associate( Person::find(request('person')) );
         
@@ -117,6 +124,8 @@ class UserController extends Controller
      */
     public function delete(User $user)
     {
+        $this->authorize('delete_users', $user);
+
         $user->delete();
 
         return redirect(route('users.index'));

@@ -45,11 +45,13 @@
             <div class="col-md-6 mb-3">
                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
                 
+                <div>
                 @component('components.tagpicker', ['tagtypes' => $tagtypes] )
                     @slot('pickername')
                         event_tag
                     @endslot
                 @endcomponent
+                </div>
             </div>
         </div>
 
@@ -65,7 +67,9 @@
                 @endcomponent
                 </div>
                 <div id="people" class="d-flex flex-wrap">
-                {{ $user->person->name() }}
+                @if(isset($user->person))
+                    <a href="{{route('people.show', $user->person->id)}}"> {{ $user->person->name() }} </a>
+                @endif
                     <!--The peoplepicker will create components in here-->
                 </div>
             </div>

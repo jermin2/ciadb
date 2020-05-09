@@ -23,6 +23,8 @@ class EventController extends Controller
      */
     public function create()
     {
+        $this->authorize('create_events');
+
         return view('events/create', [
             'tagtypes' => Tagtype::all(),
             'people' => Person::all(),
@@ -39,6 +41,8 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create_events');
+
         $validate = $this->validateEvent();
         $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
 
@@ -64,6 +68,8 @@ class EventController extends Controller
      */
     public function index()
     {
+        $this->authorize('view_events');
+
         if(request('tag')){
             $events = Tag::where('name', request('tag'))->firstOrFail()->events;
         } elseif(request('person'))
@@ -91,6 +97,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        $this->authorize('view_events', $event);
+
         return view('events/show', [
             'event' => $event,
             'tagtypes' => Tagtype::all()
@@ -106,7 +114,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        $this->authorize('update', $event);
+        $this->authorize('edit_events', $event);
 
         return view('events/edit', [
             'event' => $event,
@@ -124,7 +132,7 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        $this->authorize('update', $event);
+        $this->authorize('edit_events', $event);
 
         $validate = $this->validateEvent();
         $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
@@ -151,7 +159,7 @@ class EventController extends Controller
      */
     public function delete(Event $event)
     {
-        $this->authorize('delete', $event);
+        $this->authorize('delete_events', $event);
 
         $event->delete();
 

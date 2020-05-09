@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
 
             $table->foreign('person_id')->references('id')->on('people')->onDelete('set null');
         });
+
+
     }
 
     /**

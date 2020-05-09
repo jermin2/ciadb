@@ -8,6 +8,7 @@
         <tr>
           <th> User email </th>
           <th> Associated person </th>
+          <th> Role </th>
           <th> Actions  </th>
         </tr>
       </thead>
@@ -23,6 +24,11 @@
             @else
               <span class="text-muted">Not associated</span>
             @endisset
+          </td>
+          <td>
+            @foreach($user->roles as $role)
+              {{ $role->name }}
+            @endforeach
           </td>
           <td>
             <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm">Edit</a>

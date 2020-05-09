@@ -17,9 +17,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Event' => 'App\Policies\EventPolicy',
     ];
 
-    /**
+    /*
      * Register any authentication / authorization services.
      *
      * @return void
@@ -29,10 +30,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function (User $user, $permission){
-            if($user->id == 1) { // Admin
+            if($user->roles->map->name->contains('admin')) { // Admin
                 return true;
             }
+        });
 
+        Gate::after(function (User $user, $permission){
+            //Handle user ownership permissions before roles (e.g Author permissions)
             return $user->permissions()->contains($permission);
         });
     }

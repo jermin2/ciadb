@@ -35,7 +35,7 @@ Route::get('/events', 'EventController@index')->name('events.index');
 Route::get('/events/create', 'EventController@create')->name('events.create');
 Route::post('/events', 'EventController@store')->name('events.store');
 Route::get('/events/{event}', 'EventController@show')->name('events.show');
-Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit')->middleware('can:edit_events');
+Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
 Route::put('/events/{event}', 'EventController@update')->name('events.update');
 
 Route::delete('/events/{event}', 'EventController@delete')->name('events.delete');
@@ -45,5 +45,5 @@ Route::get('/events/people/{person}', 'EventPersonController@show')->name('event
 
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
-Route::put('/users/{user}', 'UserController@update')->name('users.update');
+Route::put('/users/{user}', 'UserController@update')->name('users.update')->middleware('can:edit_events');;
 Route::delete('/users/{user}', 'UserController@delete')->name('users.delete');

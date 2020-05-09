@@ -45,6 +45,20 @@
 
         </div>
 
+        <div class="mb-3">
+            <label class="label" for="roles">Roles</label>
+
+            <select class="selectpicker border w-100" name="roles[]" id="roles" title="Select a person" multiple >
+            @foreach ($roles as $role)
+                @if($user->roles->contains($role))
+                    <option value="{{ $role->id }}" class="tag" selected >{{$role->name}} </option>
+                @else
+                    <option value="{{ $role->id }}" class="tag" >{{$role->name}} </option>
+                @endif
+            @endforeach
+            </select>
+        </div>
+
 
         <hr class="mb-4">
 

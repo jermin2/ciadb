@@ -61,6 +61,6 @@ class User extends Authenticatable
 
     public function permissions()
     {
-        return $user->roles->map->permissions->flatten()->pluck('name')->unique();
+        return $this->roles->map->permissions->flatten()->pluck('name')->unique();
     }
 }

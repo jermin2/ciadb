@@ -21,6 +21,8 @@ class PersonController extends Controller
      */
     public function index()
     {
+        $this->authorize('view_people');
+
         $people = Person::all();
         //Show a list of all the people
         return view('people/index', [
@@ -38,6 +40,7 @@ class PersonController extends Controller
      */
     public function create()
     {
+        $this->authorize('create_people');
 
         return view('people/create', [
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
@@ -52,6 +55,8 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create_people');
+
         $person = new Person($this->validatePerson());
         $person->save();
 
@@ -68,6 +73,8 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
+        $this->authorize('view_people');
+
         return view('people/show', [
             'person' => $person,
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
@@ -83,6 +90,8 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
+        $this->authorize('edit_people');
+
         $data = [
             'person' =>$person,
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
@@ -110,6 +119,8 @@ class PersonController extends Controller
      */
     public function update(Request $request, Person $person)
     {
+        $this->authorize('edit_people');
+
         $person->update($this->validatePerson());
         $person->tags()->sync(request('tags'));
 
@@ -124,7 +135,8 @@ class PersonController extends Controller
      */
     public function destroy(Person $person)
     {
-        //
+        $this->authorize('delete_people');
+        return "Not yet implemented";
     }
 
     protected function validatePerson()

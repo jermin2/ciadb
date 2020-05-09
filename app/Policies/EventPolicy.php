@@ -51,10 +51,12 @@ class EventPolicy
      * @param  \App\Event  $event
      * @return mixed
      */
-    public function update(User $user, Event $event)
+    public function edit_events(User $user, Event $event)
     {
-
-        return $event->author->is($user);
+        //Allow author to edit their own events
+        if( $event->author->is($user) ) {
+            return true;
+        }
     }
 
     /**

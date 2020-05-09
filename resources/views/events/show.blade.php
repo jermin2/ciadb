@@ -1,8 +1,9 @@
 @extends ('layouts/main')
 
 @section ('content')
-    <div class="col-md-8 col-lg-6">
+    <div class="d-flex justify-content-center col-md-12 col-lg-10 mx-auto">
 
+    <div class="col-md-12">
     <form method="POST" action="{{ route('events.store') }}" class="needs-validation" novalidate>
         @csrf 
     
@@ -29,17 +30,15 @@
                 <div class="invalid-feedback">Valid first name is required. </div>
             </div>
 
-            <div class="mb-3">
-                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-
-                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
-                @endcomponent
-
+            <div class="col-md-6 mb-3">
+                <label class="label" for="author">Author</label>
+                <input class="form-control" value="{{$event->author->name}}" readonly/>
             </div>
+            
         </div>
 
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-6 mb-3">
                 <label class="label" for="notes">Attendees</label>
 
                 <div id="people" class="d-flex flex-wrap">
@@ -49,8 +48,15 @@
                     </div>
                     @endforeach
                 </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+
+                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
+                @endcomponent
 
             </div>
+
         </div>
 
         <div class="row">
@@ -62,15 +68,11 @@
             </div>
         </div>
 
-
-
-
-
-
         <hr class="mb-4">
         <a href="{{ route('events.index') }}" class="btn btn-primary btn-lg btn-block" >Back</a>
 
         </form>
+    </div>
     </div>
 
 

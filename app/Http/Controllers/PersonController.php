@@ -21,7 +21,7 @@ class PersonController extends Controller
      */
     public function index()
     {
-        $this->authorize('view_people');
+        $this->authorize('show_people');
 
         $people = Person::all();
         //Show a list of all the people
@@ -73,7 +73,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        $this->authorize('view_people');
+        $this->authorize('show_people');
 
         return view('people/show', [
             'person' => $person,

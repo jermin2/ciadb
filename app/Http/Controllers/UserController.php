@@ -6,7 +6,6 @@ use App\User;
 use App\Person;
 use App\Tagtype;
 use App\Role;
-
 use App\Event;
 
 
@@ -75,11 +74,19 @@ class UserController extends Controller
     {
         $this->authorize('edit_users', $user);
 
+        if(auth()->user()->roles->contains(Role::find(1))){
+            $roles = Role::all();
+        }
+        else{
+            $roles = Role::whereNotIn('name', array('admin'))->get();
+        }
+        
+
         return view('users/edit', [
             'user' => $user,
             'people' => Person::all(),
             'tagtypes' => Tagtype::all(),
-            'roles'     => Role::all(),
+            'roles'     => $roles,
         ]);
         
     }

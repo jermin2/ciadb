@@ -35,21 +35,16 @@
                 <div class="invalid-feedback">Valid first name is required. </div>
             </div>
 
-            <div class="mb-3">
-                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-
-                <div>
-                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
-                @endcomponent
-                @error('time')
-                <p class="help is-danger">{{ $errors->first('title') }}</p>
-                @enderror
-                </div>
+            <div class="col-md-6 mb-3">
+                <label class="label" for="author">Author</label>
+                <input class="form-control" value="{{$event->author->name}}" readonly/>
             </div>
+
+            
         </div>
 
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-6 mb-3">
                 <label class="label" for="notes">Attendees</label>
                 <div>
                 @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people, 'selectedpeople' => $event->people])
@@ -62,9 +57,19 @@
                     </div>
                     @endforeach
                 </div>
-
-
             </div>
+            <div class="col-md-6 mb-3">
+                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+
+                <div>
+                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
+                @endcomponent
+                @error('time')
+                <p class="help is-danger">{{ $errors->first('title') }}</p>
+                @enderror
+                </div>
+            </div>
+
         </div>
 
         <div class="row">
@@ -94,7 +99,7 @@
         </div>
     @endif
 
-    @can ('delete-event', $event)
+    @can ('delete_event', $event)
     <div class="row col-md-12 mt-4">
         <div class="col-md-12">
             <form method="POST" action="{{route('events.delete', $event->id)}}">

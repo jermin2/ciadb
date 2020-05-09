@@ -94,6 +94,7 @@
                         Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
+                    @can('show_people')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('people.index') }}">
                         <svg class="bi bi-people" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -102,6 +103,8 @@
                         People
                         </a>
                     </li>
+                    @endcan
+                    @can('create_people')
                     <li class="nav-item ml-2">
                         <a class="nav-link  text-muted" href=" {{ route('people.create') }}">
                         <svg class="bi bi-person-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -111,6 +114,8 @@
                         Add People
                         </a>
                     </li>
+                    @endcan
+                    @can('show_events')
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('events.index')}}">
                         <svg class="bi bi-calendar" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -120,6 +125,8 @@
                         Events
                         </a>
                     </li>
+                    @endcan
+                    @can('create_events')
                     <li class="nav-item ml-2">
                         <a class="nav-link text-muted" href="{{route('events.create')}}">
                         <svg class="bi bi-bookmark-plus" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -129,6 +136,8 @@
                         Add Event
                         </a>
                     </li>
+                    @endcan
+                    @can('show_users')
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('users.index')}}">
                         <svg class="bi bi-at" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -137,8 +146,10 @@
                         Users
                         </a>
                     </li>
+                    @endcan
                     </ul>
 
+                    @can('show_reports')
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Saved reports</span>
                     <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
@@ -171,6 +182,7 @@
                         </a>
                     </li>
                     </ul>
+                    @endcan
                 </div>
                 </nav>
                 <!-- Sidebar End -->

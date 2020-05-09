@@ -37,17 +37,42 @@ class AssignPermissionRole extends Migration
         $roles = [
             ['name' => 'admin'],
             ['name' => 'serving_one'],
-            ['name' => 'guest'],           
+            ['name' => 'guest'],  
+            ['name' => 'event_manager'],
+            ['name' => 'people_manager'],
+            ['name' => 'user_manager'],
+            ['name' => 'event_admin'],
+            ['name' => 'people_admin']         
         ];
         DB::table('roles')->insert($roles);
 
         //We don't need to assign admin, they can see everything
         $role_permissions = [
-            $this->getIds('serving_one', 'edit_events'),
+
             $this->getIds('serving_one', 'create_events'),
             $this->getIds('serving_one', 'show_events'),
 
-            $this->getIds('guest', 'show_events'),
+            $this->getIds('serving_one', 'create_people'),
+            $this->getIds('serving_one', 'show_people'),
+            $this->getIds('serving_one', 'edit_people'),
+
+            $this->getIds('guest', 'show_people'),
+
+            $this->getIds('event_manager', 'edit_events'),
+            $this->getIds('event_manager', 'create_events'),
+            $this->getIds('event_manager', 'show_events'),
+
+            $this->getIds('event_admin', 'delete_events'),
+
+            $this->getIds('people_manager', 'create_people'),
+            $this->getIds('people_manager', 'show_people'),
+            $this->getIds('people_manager', 'edit_people'),
+
+            $this->getIds('people_admin', 'delete_people'),
+
+            $this->getIds('user_manager', 'show_users'),
+            $this->getIds('user_manager', 'edit_users'),
+            
         ];
 
         DB::table('permission_role')->insert($role_permissions);

@@ -40,23 +40,16 @@
                 <input class="form-control" type="text" name="location" id="location" placeholder="Location">
                 <div class="invalid-feedback">Valid first name is required. </div>
             </div>
-            
-            <!-- Tags -->
+
             <div class="col-md-6 mb-3">
-                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-                
-                <div>
-                @component('components.tagpicker', ['tagtypes' => $tagtypes] )
-                    @slot('pickername')
-                        event_tag
-                    @endslot
-                @endcomponent
-                </div>
+                <label class="label" for="author">Author</label>
+                <input class="form-control" value="{{Auth::user()->name}}" readonly/>
             </div>
+            
         </div>
 
         <div class="row">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-6 mb-3">
                 <div>
                 @component('components.peoplepicker', [
                     'tagtypes' => $tagtypes, 
@@ -71,6 +64,19 @@
                     <a href="{{route('people.show', $user->person->id)}}"> {{ $user->person->name() }} </a>
                 @endif
                     <!--The peoplepicker will create components in here-->
+                </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="col-md-6 mb-3">
+                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                
+                <div>
+                @component('components.tagpicker', ['tagtypes' => $tagtypes] )
+                    @slot('pickername')
+                        event_tag
+                    @endslot
+                @endcomponent
                 </div>
             </div>
         </div>

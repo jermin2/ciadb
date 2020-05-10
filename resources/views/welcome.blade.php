@@ -147,7 +147,7 @@
                         </p>
                      </div>
                      <div class="form-group">
-                        <p class="text-center">Don't have account? <a href="#" id="signup">Sign up here</a></p>
+                        <p class="text-center">Don't have account? <a class="nav-link" href="{{ route('register') }}">Sign up here</a></p>
                      </div>
                      <div class="form-group">
                         <p class="text-center">By signing up you accept our <a href="#">Terms Of Use</a></p>

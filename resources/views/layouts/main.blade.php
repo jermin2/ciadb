@@ -204,7 +204,7 @@
                         <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 008 15a6.987 6.987 0 005.468-2.63z"/>
                         <path fill-rule="evenodd" d="M8 9a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M8 1a7 7 0 100 14A7 7 0 008 1zM0 8a8 8 0 1116 0A8 8 0 010 8z" clip-rule="evenodd"/>
-                        </svg>My User Profile</a>
+                        </svg>{{ Auth::user()->name }}</a>
                         <ul class="collapse list-unstyled subnav show" id="profileSubmenu">
                             <li class="profile my-profile">
                                 <a href="#">My Profile</a>
@@ -222,7 +222,7 @@
 
                     <hr class="navbar-divider my-2"/>
 
-                    <li class="dashboard"> <a href="#"><svg class="bi bi-house-door icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <li> <a href="#" class="dashboard"><svg class="bi bi-house-door icon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 01.708 0l6 6a.5.5 0 01.146.354v7a.5.5 0 01-.5.5H9.5a.5.5 0 01-.5-.5v-4H7v4a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-7a.5.5 0 01.146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 01.5-.5h3a.5.5 0 01.5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" clip-rule="evenodd"/>
                             <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
                         </svg>Dashboard</a> 
@@ -313,15 +313,24 @@
                 $('#sidebar').toggleClass('active');
             });
 
+            //Highlight the Menu based on what was pushed
+            //Highlight the 'a' elements (main menu)
             var selector1 = "";
             if(location.href.includes("people")){
                 selector1 = ".people";
             }
-            if(location.href.includes("events")){
+            else if(location.href.includes("events")){
                 selector1 = ".events";
+            } else if(location.href.includes("users")){
+                selector1 = ".users";
+            } else if(location.href.includes("home")){
+                selector1 = ".dashboard";
+            } else {
+                selector1 = "adadadadadadadadad"; //If it doesn't match one of the above, make it gibberish so nothing matches
             }
             $('a'+selector1).toggleClass("active");
 
+            //Highlight the li elements (submenus)
             var selector2 = ""
             if(location.href.includes("create")){
                 selector2 = ".create";

@@ -11,6 +11,8 @@ class EventPersonController extends Controller
 {
     public function show(Person $person)
     {
+        $this->authorize('show_events');
+        
         $events = $person->events;
 
         //Show a list of the people

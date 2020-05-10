@@ -16,6 +16,8 @@ class PersonTagController extends Controller
      */
     public function show(Tag $tag)
     {
+        $this->authorize('show_people');
+        
         return view('people/index', [
             'people' => $tag->people,
             'tag'   => $tag,

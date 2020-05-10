@@ -12,7 +12,7 @@
         <h2>{{$person->first_name}} {{$person->last_name}}</h2>
         <h2>
             @foreach($person->tags as $tag)
-                <span  class="badge badge-primary">{{$tag->name}}</span>
+                <span  class="badge badge-primary" style="color:#fff; background-color:{{$tag->color}}">{{$tag->name}}</span>
             @endforeach
         </h2>
     </div>

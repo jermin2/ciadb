@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('people')->onDelete('set null');
+            
         });
 
 

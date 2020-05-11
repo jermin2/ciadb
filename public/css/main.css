@@ -1,17 +1,35 @@
-   /*
-    * Sidebar
-    */
-    .sidebar {
-      position: fixed;
-      height: 100vh;
-      min-width: 260px;
-      max-width: 260px;
-      background-color: #66615b;
-      transition: all 0.3s;
+  /*
+  * Sidebar
+  */
+  .sidebar {
+    position: fixed;
+    height: 100vh;
+    min-width: 260px;
+    max-width: 260px;
+    background-color: #66615b;
+    transition: all 0.3s;
+    overflow: hidden;
   }
 
+  /* ACTIVE MEANS HIDDEN. Main Panel is OPPOSITE of sidepanel. If sidepanel is active, mainpanel IS NOT */
   .sidebar.active {
-      margin-left: -260px;
+      min-width: 80px;
+      max-width: 80px;
+      text-align: center;
+  }
+
+  .sidebar.active span{
+    display: none;
+    transition: all 0.6s;
+  }
+
+  .sidebar span{
+    transition: all 0.6s;
+    white-space: nowrap;
+  }
+
+  .sidebar.active a.dropdown-toggle::after{
+    display:none;
   }
 
   .sidebar .logo {
@@ -48,6 +66,7 @@
       font-size: 16px;
       padding: 10px 23px;
       line-height: 20px;
+      white-space: nowrap;
       
   }
 
@@ -58,7 +77,7 @@
       font-size: 14px;
       padding: 10px 23px;
       line-height: 30px;
-      padding-left: 60px;
+      white-space: nowrap;
   }
 
   a.active, li.active {
@@ -66,13 +85,20 @@
       color: #fff
   }
 
+  .sidebar .nav .icon.icon-header {
+    color: #fff;
+    font-size: 25px;
+  }
+
   .sidebar .nav .icon {
       margin-right: 12px;
-      font-size: 25px;
+      font-size: 15px;
       width: 34px;
       text-align: center;
       color: hsla(0,0%,100%,.5);
   }
+
+
 
   .sidebar .nav .photo {
       margin-right: 12px;
@@ -125,7 +151,7 @@
   */
 
   #main-panel {
-      width: 100%;
+      width: calc(100% - 80px);
       background-color: #f4f3ef;
       top: 0;
       right: 0;
@@ -148,17 +174,30 @@
   }
 
   @media (max-width: 768px) {
+    /* ACTIVE MEANS SHOW in media mode. Main Panel is Opposite of sidebar. If sidebar is active, mainpanel is inactive */
+    #sidebar.active {
+      min-width: 260px;
+      max-width: 260px;
+    }
       #sidebar {
-          margin-left: -260px;
+        min-width: 80px;
+        max-width: 80px;
       }
-      #sidebar.active {
-          margin-left: 0;
-      }
+
       #main-panel {  
         width: calc(100% - 260px);
       }
       #main-panel.active {
-        width: 100%;
+        width: calc(100% - 80px);
+      }
+
+      .sidebar span{
+        white-space: nowrap;
+        display: none;
+      }
+
+      .sidebar a.dropdown-toggle::after{
+        display:none;        
       }
   }
 

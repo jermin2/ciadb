@@ -8,7 +8,7 @@
 
     <div class="card-body d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
 
-      <form method="POST" action="{{ route('people.update', $person->id) }}" class="needs-validation" novalidate>
+      <form method="POST" action="{{ route('people.update', $person->id) }}" class="needs-validation col-md-12" novalidate>
         @csrf 
         @method('PUT')
     

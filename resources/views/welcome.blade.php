@@ -87,7 +87,7 @@
 <body>
     <div class="container">
         <div class="row">
-			<div class="col-md-5 mx-auto">
+			<div class="col-md-9 col-sm-12 mx-auto">
 			<div id="first">
 				<div class="myform form ">
 					 <div class="logo mb-3">

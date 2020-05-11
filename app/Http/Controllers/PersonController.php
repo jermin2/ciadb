@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use App\Tag;
-use App\TagType;
+use App\Tagtype;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 

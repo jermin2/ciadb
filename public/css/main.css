@@ -9,6 +9,7 @@
     background-color: #66615b;
     transition: all 0.6s; /*Coming back transition */
     overflow: hidden;
+    z-index: 9999;
   }
 
   /* ACTIVE MEANS HIDDEN. Main Panel is OPPOSITE of sidepanel. If sidepanel is active, mainpanel IS NOT */
@@ -22,11 +23,13 @@
     /*display: none;*/
     opacity: 0;
     transition: all 0.6s;
+    
   }
 
   .sidebar span{
     transition: all 0.6s;
     white-space: nowrap;
+
   }
 
   .sidebar.active a.dropdown-toggle::after{
@@ -133,7 +136,7 @@
       display: flex;
       justify-content: space-between;
       width: 100%;
-      z-index: 1029;
+      z-index: 929;
 
       border-bottom:1px solid #ddd;
       min-height: 53px;
@@ -187,43 +190,42 @@
     #sidebar.active {
       min-width: 260px;
       max-width: 260px;
+
+      position: fixed;
     }
       #sidebar {
         min-width: 0px;
         max-width: 0px;
       }
 
-      #main-panel {  
-        width: calc(100% - 260px);
-      }
-      #main-panel.active {
-        width: calc(100% - 0px);
+      #main-panel,
+      #main-panel.active {  
+        width: 100%;
       }
 
       .sidebar span{
         white-space: nowrap;
       }
 
-      .sidebar a.dropdown-toggle::after{
-        display:none;        
+      .sidebar.active a.dropdown-toggle::after{
+        opacity: 1;       
       }
-
-      .sidebar span{
-        opacity: 1;
+      .sidebar a.dropdown-toggle::after{
+        opacity: 0;       
       }
 
       .sidebar.active span{
         opacity: 1;
       }
-    
-      .sidebar a.dropdown-toggle::after{
-        opacity: 1;
-      }
 
-      .sidebar.active a.dropdown-toggle::after{
+      /* display .overlay when it has the .active class */
+      .overlay.active {
+        display: block;
         opacity: 1;
       }
   }
+
+
 
   a, a:hover, a:focus {
   color: inherit;
@@ -235,3 +237,18 @@
   color: #7386D5;
   background: #fff;
   }
+
+  .overlay {
+    display: none;
+    position: fixed;
+    /* full screen */
+    width: 100vw;
+    height: 100vh;
+    /* transparent black */
+    background: rgba(0, 0, 0, 0.7);
+    /* middle layer, i.e. appears below the sidebar */
+    z-index: 9998;
+    opacity: 0;
+    /* animate the transition */
+    transition: all 0.5s ease-in-out;
+}

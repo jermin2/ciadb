@@ -30,6 +30,7 @@
 
         <!-- Sidebar Start -->
         <div id="sidebar" onmouseenter="sidebarMouseenter()" onmouseleave="sidebarMouseleave()" class="sidebar">
+            
             <div class="logo mt-2">
                 <div class="simple-text">
                     <a href="#" class="row p-0"><label class="icon text-center">C</label><span>hurch in Auckland<span></a>
@@ -162,6 +163,8 @@
 
             </div>
         </div>
+
+        <div class="overlay"></div>
     </div>
 
     <!-- Scripts -->
@@ -172,19 +175,19 @@
         var mouseOver = false;
         function sidebarMouseenter(){
             
+            //Only do mouse over if NOT in media mode
             if( $('#sidebar').hasClass("active") && !x.matches){
+                
+                //Mouse over only affects sidebar, not mainpanel
                 $('#sidebar').toggleClass('active');
-                $('#main-panel').toggleClass('active');
                 mouseOver = true;
             }
-            
-
         }
-        function sidebarMouseleave(){
 
+
+        function sidebarMouseleave(){
             if(mouseOver){
                 $('#sidebar').toggleClass('active');
-                $('#main-panel').toggleClass('active');
                 mouseOver = false;
             }
         }
@@ -211,13 +214,24 @@
         $(document).ready(function() {
 
 
-
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
                 $('#main-panel').toggleClass('active');
+
+                //Overlay only has affect when in media mode
+                $('.overlay').addClass('active');
             });
 
-            //Highlight the Menu based on what was pushed
+            $('#dismiss, .overlay').on('click', function () {
+                // hide sidebar
+                $('#sidebar').removeClass('active');
+                $('#main-panel').addClass('active');
+                // hide overlay
+                $('.overlay').removeClass('active');
+            });
+
+
+            //Highlight the Menu based on what was pushed============
             //Highlight the 'a' elements (main menu)
             var selector1 = "";
             if(location.href.includes("people")){
@@ -243,10 +257,13 @@
             }
 
             $('li'+selector1+selector2).toggleClass("active");
-            
+            //=====================================================
+
+
 
         });
     </script>
+
 
 @yield('footer')
 

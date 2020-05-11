@@ -35,7 +35,7 @@
                 <table class="table table-striped table-sm" >
                     <thead>
                         <tr>
-                            <th>id</th>
+                            <th>#</th>
                             <th>Time</th>
                             <th>Name</th>
                             <th>Location</th>
@@ -47,7 +47,7 @@
                         <tr>       
                             <td> <a href="{{route('events.edit', $event->id)}}"  >{{ $event->id }} </a> </td>
                             <td> {{ $event->time }} </td>
-                            <td> <a href="{{route('events.show', $event->id)}}" >{{ $event->name }}</a> </td>
+                            <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>
                             <td> {{ $event->location }} </td>
                             <td> 
                                 @foreach ($event->tags as $tag)

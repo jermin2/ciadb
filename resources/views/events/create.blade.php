@@ -49,6 +49,7 @@
                         <div class="col-md-6 mb-3">
                             <label class="label" for="author">Author</label>
                             <input class="form-control" value="{{Auth::user()->name}}" readonly/>
+                            <input type="hidden" name="author_id" class="form-control" value="{{Auth::user()->id}}" readonly/>
                         </div>   
                     </div>
 

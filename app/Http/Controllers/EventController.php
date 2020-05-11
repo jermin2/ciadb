@@ -9,6 +9,7 @@ use App\Person;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class EventController extends Controller
 {
@@ -44,6 +45,7 @@ class EventController extends Controller
         $this->authorize('create_events');
 
         $validate = $this->validateEvent();
+
         $formattime = \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $request->time);
 
         $event = new Event([
@@ -51,6 +53,7 @@ class EventController extends Controller
             'location' =>$request->location,
             'time'     => $formattime->toDateTimeString(),
             'notes'    => $request->notes,
+            'author_id' => $request->author_id,
         ]);
 
         $event->save();
@@ -114,7 +117,11 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        $this->authorize('edit_events', $event);
+        $response = Gate::inspect('edit_events', $event);
+        if(!$response->allowed()){
+            //If not allowed, then just show
+            return redirect(route('events.show', $event));   
+        }
 
         return view('events/edit', [
             'event' => $event,
@@ -143,6 +150,7 @@ class EventController extends Controller
             'location' =>$request->location,
             'time'     => $formattime->toDateTimeString(),
             'notes'    => $request->notes,
+            
         ]);
 
         $event->tags()->sync(request('tags'));
@@ -176,7 +184,8 @@ class EventController extends Controller
             'time'     => 'date_format:"D, jS M H:i Y"',
             'notes'    => 'nullable',
             'tags'      => 'exists:tags,id',
-            'people'    => 'exists:people,id'
+            'people'    => 'exists:people,id',
+            'author_id' => 'exists:users,id'
         ]);
     }
 }

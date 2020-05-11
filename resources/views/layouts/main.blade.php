@@ -16,9 +16,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/main.css?36') }}" rel="stylesheet">
-    <link href="{{ asset('css/content.css?4') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css?') }}{{date('l jS \of F Y h:i:s A')}}" rel="stylesheet">
+    <link href="{{ asset('css/main.css?') }}{{date('l jS \of F Y h:i:s A')}}" rel="stylesheet">
+    <link href="{{ asset('css/content.css?') }}{{date('l jS \of F Y h:i:s A')}}" rel="stylesheet">
 
     <script src="https://use.fontawesome.com/fc7fae72fc.js"></script>
 
@@ -29,10 +29,10 @@
     <div id="app" class="wrapper"> 
 
         <!-- Sidebar Start -->
-        <div id="sidebar" class="sidebar">
+        <div id="sidebar" onmouseenter="sidebarMouseenter()" onmouseleave="sidebarMouseleave()" class="sidebar">
             <div class="logo mt-2">
-                <div class="simple-text text-center">
-                    C<span>hurch in Auckland<span>
+                <div class="simple-text">
+                    <a href="#" class="row p-0"><label class="icon text-center">C</label><span>hurch in Auckland<span></a>
                 </div>
             </div>
             <hr class="navbar-divider my-2"/>
@@ -168,7 +168,50 @@
     <script src="{{ asset('js/app.js?1') }}"></script>
 
     <script>
+
+        var mouseOver = false;
+        function sidebarMouseenter(){
+            
+            if( $('#sidebar').hasClass("active") && !x.matches){
+                $('#sidebar').toggleClass('active');
+                $('#main-panel').toggleClass('active');
+                mouseOver = true;
+            }
+            
+
+        }
+        function sidebarMouseleave(){
+
+            if(mouseOver){
+                $('#sidebar').toggleClass('active');
+                $('#main-panel').toggleClass('active');
+                mouseOver = false;
+            }
+        }
+
+
+        function myFunction(x) {
+            if (x.matches) { // If media query matches
+                document.body.style.backgroundColor = "yellow";
+            } else {
+                document.body.style.backgroundColor = "pink";
+            }
+        }
+
+        var x = window.matchMedia("(max-width: 768px)")
+        myFunction(x) // Call listener function at run time
+        x.addListener(myFunction) // Attach listener function on state changes
+
+
+
+    </script>
+
+
+    <script>
         $(document).ready(function() {
+
+
+
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
                 $('#main-panel').toggleClass('active');

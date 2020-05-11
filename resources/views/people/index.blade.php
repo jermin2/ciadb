@@ -1,41 +1,5 @@
 @extends ('layouts/main')
 
-@section('header')
-<style>
-.card .card-header {
-    padding: 15px 15px 0;
-    border: 0;
-    background-color: #fff;
-
-}
-
-.card .card-header::not([data-bakground-color]){
-    background-color: transparent;
-}
-
-.card {
-    border-radius: 14px;
-    box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
-    margin-bottom: 20px;
-    border: 0 none;
-}
-
-.table>thead>tr>th {
-    font-size:16px;
-    text-transform: uppercase;
-    border: 0;
-}
-
-.table>tbody>tr>td {
-    font-size:16px;
-    padding: 5px 5px;
-    box-sizing: border-box;
-    border-top: 1px solid #dee2e6;
-}
-
-</style>
-@endsection
-
 @section ('content')
     <div class="card">
         <div class="card-header">
@@ -44,9 +8,9 @@
                 <h2>{{$tag->name}}</h2>
             </div>
             @endisset
-            <div class="row justify-content-between m-auto">
-                <h2 class="p-2"> People </h2>
-                <div class="p-2">
+            <div class="row justify-content-between m-auto p-2">
+                <h2> People </h2>
+                <div>
                     @component('components.tagpicker', ['tagtypes' => $tagtypes])
                     @endcomponent
                 </div>
@@ -55,7 +19,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-            <table class="table table-sm" >
+            <table class="table table-striped table-sm" >
                 <thead>
                     <tr>
                         <th>id</th>

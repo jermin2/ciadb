@@ -1,25 +1,30 @@
 @extends ('layouts/main')
 
 @section ('content')
-    <div class="col-md-8 col-lg-6">
+<div class="card col-lg-7 col-md-9 col-sm-12 mx-auto">
+  <div class="card-header">
+    <div class="card-title text-center"><h2>Edit: {{$person->name()}}</h2> </div>
+  </div>
+
+    <div class="card-body d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
 
       <form method="POST" action="{{ route('people.update', $person->id) }}" class="needs-validation" novalidate>
         @csrf 
         @method('PUT')
     
         <div class="row">
-            <div class="col-md-6 mb-3">
-                <label class="label" for="first_name"> First Name</label>
+          <div class="col-md-6 mb-3">
+            <label class="label" for="first_name"> First Name</label>
 
-                <input class="form-control" type="text" name="first_name" id="first_name" value="{{ $person->first_name }}" >
-                <div class="invalid-feedback">Valid first name is required. </div>
-            </div>
+            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ $person->first_name }}" >
+            <div class="invalid-feedback">Valid first name is required. </div>
+          </div>
 
-            <div class="col-md-6 mb-3">
-                <label class="label" for="last_name"> Last Name</label>
+          <div class="col-md-6 mb-3">
+            <label class="label" for="last_name"> Last Name</label>
 
-                <input class="form-control" type="text" name="last_name" id="last_name" value="{{$person->last_name}}"> 
-            </div>
+            <input class="form-control" type="text" name="last_name" id="last_name" value="{{$person->last_name}}"> 
+          </div>
         </div>
 
         <div class="mb-3">
@@ -49,16 +54,17 @@
 
         @isset($user)
         <div class="mb-3">
-        <label> Associated with a user </label>
+          <label> Associated with a user </label>
           <a href="{{ route('user.edit') }}"> Edit Login details </a>
         </div>
         @endisset
 
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Save</button>
+        <button class="btn btn-success btn-lg btn-round" type="submit">Save</button>
 
       </form>
     </div>
 
+</div>
 
 @endsection

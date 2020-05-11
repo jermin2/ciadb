@@ -11,7 +11,7 @@
 
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#peoplepickermodal">
+<button type="button" class="btn btn-primary btn-round col-md-6" data-toggle="modal" data-target="#peoplepickermodal">
   {{$btn_name ?? "Attendees"}}
 </button>
 

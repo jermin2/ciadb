@@ -2,11 +2,13 @@
 
 @section ('content')
 
-  
-  <div class="col-md-8 col-lg-6">
-    <div class="card">
-      <div class="card-body">
-        <form method="POST" action="{{ route('people.store') }}" class="needs-validation" novalidate>
+  <div class="card col-lg-7 col-md-9 col-sm-12 mx-auto">
+    <div class="card-header">
+        <div class="card-title text-center"><h2>Viewing: {{$person->name()}}</h2> </div>
+    </div>
+    <div class="card-body">
+      <div class="d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
+        <form method="POST" action="{{ route('people.store') }}" class="needs-validation col-md-12" novalidate>
           @csrf 
         
           <div class="row">
@@ -49,7 +51,8 @@
           </div>
 
           <hr class="mb-4">
-          <a href="{{ route('people.index') }}" class="btn btn-primary btn-lg btn-block" >Back</a>
+
+          <a href="{{ route('people.index') }}" class="col-md-6 btn btn-primary btn-lg btn-round" >Back</a>
 
         </form>
       </div>

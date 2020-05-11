@@ -17,173 +17,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/main.css?2') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css?4') }}" rel="stylesheet">
+    <link href="{{ asset('css/content.css?4') }}" rel="stylesheet">
 
     <script src="https://use.fontawesome.com/fc7fae72fc.js"></script>
 
     @yield('header')
 
-
-<style>
-
-    /*
-    * Sidebar
-    */
-    .sidebar {
-        min-height: 100vh;
-        min-width: 260px;
-        max-width: 260px;
-        background-color: #66615b;
-        transition: all 0.3s;
-    }
-
-    .sidebar.active {
-        margin-left: -260px;
-    }
-
-    .sidebar .logo {
-        position: relative;
-        padding: 7px .7rem;
-        z-index: 4;
-        font-size: 24px;
-        
-    }
-
-    .sidebar .simple-text {
-        color: #fff;
-        line-height: 40px;
-    }
-
-    .wrapper {
-        align-items: stretch;
-        display: flex;
-    }
-
-    .sidebar .nav {
-        display: block;
-    }
-
-    .sidebar .nav li {
-        display: list-item;
-    }
-
-    .sidebar li>a {
-        display: list-item;
-        color: #fff;
-        margin: 0px;
-        font-size: 16px;
-        padding: 10px 23px;
-        line-height: 20px;
-        
-    }
-
-    .subnav li>a {
-        display: list-item;
-        color: #fff;
-        margin: 0px;
-        font-size: 14px;
-        padding: 10px 23px;
-        line-height: 30px;
-        padding-left: 60px;
-    }
-
-    a.active, li.active {
-        background-color: green; 
-        color: 
-    }
-
-    .sidebar .nav .icon {
-        margin-right: 12px;
-        font-size: 25px;
-        width: 34px;
-        text-align: center;
-        color: hsla(0,0%,100%,.5);
-    }
-
-    .sidebar .nav .photo {
-        margin-right: 12px;
-        font-size: 25px;
-        width: 34px;
-        text-align: center;
-    }
-
-    /*
-    * Sidebar -> Navbar
-    */
-    .navbar-divider {
-        background-color: hsla(0, 0%, 71%, .2);
-        border:solid;
-        border-width: thin 1px 1px 1px;
-        border-color: hsla(0, 0%, 71%, .2);
-        width: 70%;
-        margin: auto;
-    }
-
-    .navbar {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        z-index: 1029;
-
-        border-bottom:1px solid #ddd;
-        min-height: 53px;
-    }
-
-    .navbar-toggle-icon {
-        font-size: 25px;
-    }
-
-    a[data-toggle="collapse"] {
-        position: relative;
-    }
-
-    .dropdown-toggle::after {
-        display:block;
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-    }
-
-    /*
-    * Main Panel
-    */
-
-    .main-panel {
-        width: 100%;
-        background-color: #f4f3ef;
-    }
-
-    .main-panel>.content {
-        padding: 0 30px 30px;
-        min-height: calc(100vh -160px);
-        margin-top: 30px;
-    }
-
-    @media (max-width: 768px) {
-        #sidebar {
-            margin-left: -260px;
-        }
-        #sidebar.active {
-            margin-left: 0;
-        }
-    }
-
-    a, a:hover, a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-    }
-
-    #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
-    }
-}
-
-
-</style>
 </head>
 <body>
     <div id="app" class="wrapper"> 
@@ -207,7 +47,7 @@
                         </svg>{{ Auth::user()->name }}</a>
                         <ul class="collapse list-unstyled subnav show" id="profileSubmenu">
                             <li class="profile my-profile">
-                                <a href="#">My Profile</a>
+                                <a href="{{route('people.show', App\User::find(Auth::user()->id)->person->id)}}">My Profile</a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -278,7 +118,7 @@
             </div>
         </div>
         <!-- Main Panel Start -->
-        <div class="main-panel">
+        <div class="main-panel active" id="main-panel">
 
             <!--  Navbar Start -->
             <div class="navbar fixed-top">
@@ -311,6 +151,7 @@
         $(document).ready(function() {
             $('#sidebarCollapse').on('click', function() {
                 $('#sidebar').toggleClass('active');
+                $('#main-panel').toggleClass('active');
             });
 
             //Highlight the Menu based on what was pushed

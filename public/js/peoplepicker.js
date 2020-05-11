@@ -18,6 +18,10 @@
         //Filter list based on Tag selection
         $('#peoplepicker_tag').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
 
+            //Toggle selection based on optgroups (only one from each optgroup is allowed to be selected)
+            console.log($(this));
+
+
             //Find the values of the tags
             var values = [$(this).find("option:selected").text()];
             values = values.join(" ").split(' ').filter(Boolean);

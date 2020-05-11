@@ -1,0 +1,44 @@
+.card .card-header {
+  padding: 15px 15px 0;
+  border: 0;
+  background-color: #fff;
+
+}
+
+.card .card-header .card-title {
+  margin-top: 10px;
+}
+
+.card .card-header::not([data-bakground-color]){
+  background-color: transparent;
+}
+
+.card {
+  border-radius: 14px;
+  box-shadow: 0 6px 10px -4px rgba(0,0,0,.15);
+  margin-bottom: 20px;
+  border: 0 none;
+}
+
+.table>thead>tr>th {
+  font-size:16px;
+  text-transform: uppercase;
+  border: 0;
+}
+
+.table>tbody>tr>td {
+  font-size:14px;
+  padding: 5px 5px;
+  box-sizing: border-box;
+  border-top: 1px solid #dee2e6;
+}
+
+.btn-round {
+  border-radius: 30px;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #51bcda;
+  color: #fff;
+}

@@ -2,11 +2,15 @@
 
 @section ('content')
 
-<div class="d-flex justify-content-center col-md-12 mx-auto">
-
-<div class="col-md-12">
+<div class="card d-flex justify-content-center col-md-8 mx-auto">
+<div class="card-header">
+            <div class="card-title">
+                <h2>User: {{$user->email}}</h2>
+            </div>
+        </div>
+<div class="card-body col-md-12">
     <div class="row" >
-    <form method="POST" class="col-md-8 m-auto" action="{{route('users.update', $user->id) }}">
+    <form method="POST" class="col-md-12 m-auto" action="{{route('users.update', $user->id) }}">
         @csrf
         @method('PUT')
 
@@ -62,16 +66,16 @@
 
         <hr class="mb-4">
 
-        <button class="btn btn-primary btn-lg btn-block " type="submit">Save</button>
+        <button class="btn btn-success btn-lg btn-round col-md-6 " type="submit">Save</button>
     </form>
     </div>
 
     <div class="row mt-4" >
-    <form method="POST" class="col-md-8 m-auto" action="{{route('users.delete', $user->id)}}">
-    @csrf
-    @method('DELETE')
-        <button class="btn btn-danger btn-lg btn-block" type="submit">Delete</button>
-    </form>
+        <form method="POST" class="col-md-12 m-auto" action="{{route('users.delete', $user->id)}}">
+        @csrf
+        @method('DELETE')
+            <button class="btn btn-danger btn-lg btn-round col-md-6" type="submit">Delete</button>
+        </form>
     </div>
 </div>
 </div>

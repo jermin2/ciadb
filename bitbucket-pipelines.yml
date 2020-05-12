@@ -16,5 +16,5 @@ pipelines:
               variables:
                 USER: $USER
                 SERVER: $SERVER
-                REMOTE_PATH: '/site_files/db2/'
+                REMOTE_PATH: 'site_files/db2/'
                 LOCAL_PATH: '${BITBUCKET_CLONE_DIR}/*'

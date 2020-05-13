@@ -49,7 +49,7 @@
                         <ul class="collapse list-unstyled subnav show" id="profileSubmenu">
                             <li class="profile my-profile">
                                 @if(isset( App\User::find(Auth::user()->id)->person))
-                                <a href="{{ route('people.show', App\User::find(Auth::user()->id)->person->id) }}">
+                                <a href="{{ route('people.edit', App\User::find(Auth::user()->id)->person->id) }}">
                                 @else
                                 <a href="">
                                 @endif

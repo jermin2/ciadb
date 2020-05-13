@@ -73,7 +73,7 @@ class PersonController extends Controller
      */
     public function show(Person $person)
     {
-        $this->authorize('show_people');
+        $this->authorize('show_people', $person);
 
         return view('people/show', [
             'person' => $person,
@@ -90,7 +90,7 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        $this->authorize('edit_people');
+        $this->authorize('edit_people', $person);
 
         $data = [
             'person' =>$person,

@@ -32,7 +32,7 @@
                 @foreach($people as $person)
                     <tr>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
-                        <td> <a href="{{ route('people.show' , $person->id) }}" >{{ $person->first_name }}</a> </td>
+                        <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->first_name }}</a> </td>
                         <td> {{ $person->last_name }} </td>
                         <td> 
                         @foreach ($person->tags as $tag)

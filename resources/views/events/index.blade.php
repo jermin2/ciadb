@@ -39,7 +39,9 @@
                             <th>Time</th>
                             <th>Name</th>
                             <th>Location</th>
+                            <th>Notes</th>
                             <th>Tags</th>
+                            
                         </tr>
                     </thead>
                     <tbody id="event-table">
@@ -49,6 +51,7 @@
                             <td> {{ $event->time }} </td>
                             <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>
                             <td> {{ $event->location }} </td>
+                            <td> {{ $event->notes }} </td>
                             <td> 
                                 @foreach ($event->tags as $tag)
                                     <a href="{{route('event-tag.show', $tag->id)}}">

@@ -28,9 +28,11 @@ class PersonPolicy
      * @param  \App\Person  $person
      * @return mixed
      */
-    public function view(User $user, Person $person)
+    public function show_people(User $user, Person $person)
     {
-        //
+        if (isset($user->person) && $user->person->is($person)){
+            return true;
+        }
     }
 
     /**

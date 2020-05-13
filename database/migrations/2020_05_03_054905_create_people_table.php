@@ -20,6 +20,7 @@ class CreatePeopleTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('number')->nullable();
             $table->string('email')->nullable();
+            $table->text('notes')->nullable();
         });
 
         Schema::create('person_tag', function (Blueprint $table) {

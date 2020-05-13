@@ -24,7 +24,9 @@
                     <tr>
                         <th>id</th>
                         <th>First Name</th>
-                        <th>Actions</th>
+                        @can ('show_events')
+                            <th>Actions</th>
+                        @endcan
                         <th>Tags</th>
                     </tr>
                 </thead>
@@ -33,7 +35,11 @@
                     <tr>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->name() }}</a> </td>
-                        <td> <a href="{{ route('event.person.show', $person->id) }}" class="col-md-4 btn btn-primary btn-round">events</td>
+                        @can ('show_events')
+                        <td>                      
+                            <a href="{{ route('event.person.show', $person->id) }}" class="col-md-4 btn btn-primary btn-round">events
+                        </td>
+                        @endcan
                         <td> 
                         @foreach ($person->tags as $tag)
                         <a href="{{route('event-tag.show', $tag->id)}}">

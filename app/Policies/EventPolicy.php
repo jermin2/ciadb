@@ -28,9 +28,17 @@ class EventPolicy
      * @param  \App\Event  $event
      * @return mixed
      */
-    public function view(User $user, Event $event)
+    public function show_events(User $user, Event $event)
     {
-        //
+        //Allow author to edit their own events
+        if( $event->author->is($user) ) {
+            return true;
+        }
+        
+        //If its private, return false (i.e no one apart from author can view)
+        if( $event->private ){
+            return false;
+        }
     }
 
     /**
@@ -56,6 +64,11 @@ class EventPolicy
         //Allow author to edit their own events
         if( $event->author->is($user) ) {
             return true;
+        }
+
+        //If its private, return false (i.e no one apart from author can view)
+        if( $event->private ){
+            return false;
         }
     }
 

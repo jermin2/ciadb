@@ -26,4 +26,5 @@ class Event extends Model
     public function getTimeAttribute( $value ) {
         return (new \Carbon\Carbon($value))->format('D, jS M H:i Y');
     }
+
 }

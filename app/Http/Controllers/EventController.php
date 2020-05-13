@@ -84,6 +84,21 @@ class EventController extends Controller
             $events = Event::all();
         }
 
+        
+        $events = $events->filter( function($event) 
+        {
+            //If its private don't return it
+            if($event->private){
+                //Unless the user is the author
+                $user = User::find(Auth::user()->id);
+                if($event->author_id == $user->person->id ){
+                    return true;
+                }
+                return false;
+            }
+            return true;
+        });
+
         //Show a list of all the people
         return view('events/index', [
             'events' => $events,

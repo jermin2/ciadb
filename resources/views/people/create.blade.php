@@ -54,12 +54,23 @@
           
         </div>
       </div>
+
+
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label class="label" for="notes">Notes</label>
+
+          <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes"></textarea>
+          <div class="invalid-feedback">Valid first name is required. </div>
+        </div>
+      </div>
       <hr class="mb-4">
       <div class="row">
         <div class="col-md-12">
           <button class="col-md-6 btn btn-primary btn-lg btn-round" type="submit">Save</button>
         </div>
       </div>
+
     </form>
   </div>
 </div>

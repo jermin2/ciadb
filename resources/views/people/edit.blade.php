@@ -52,6 +52,16 @@
           @endcomponent
         </div>
 
+
+        <div class="mb-3">
+          <label class="label" for="notes">Notes</label>
+
+          <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes">{{$person->notes}}</textarea>
+          <div class="invalid-feedback">Valid first name is required. </div>
+        </div>
+
+
+
         @isset($user)
         <div class="mb-3">
           <label> Associated with a user </label>

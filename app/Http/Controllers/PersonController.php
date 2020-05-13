@@ -146,7 +146,8 @@ class PersonController extends Controller
             'last_name' => 'nullable',
             'email'     => 'nullable|email',
             'number'    => 'nullable',
-            'tags'      => 'exists:tags,id'
+            'tags'      => 'exists:tags,id',
+            'notes'     => 'nullable'
         ]);
     }
 }

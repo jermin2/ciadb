@@ -22,8 +22,8 @@
             <table class="table table-striped table-sm" >
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>First Name</th>
+                        <th class="d-none d-md-block">id</th>
+                        <th>Name</th>
                         @can ('show_events')
                             <th>Actions</th>
                         @endcan
@@ -33,11 +33,11 @@
                 <tbody id="people-table">
                 @foreach($people as $person)
                     <tr>
-                        <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
+                        <td class="d-none d-md-block"> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->name() }}</a> </td>
                         @can ('show_events')
                         <td>                      
-                            <a href="{{ route('event.person.show', $person->id) }}" class="col-md-4 btn btn-primary btn-round">events
+                            <a href="{{ route('event.person.show', $person->id) }}" class="col-lg-6 col-md-12  btn btn-primary btn-round">events
                         </td>
                         @endcan
                         <td> 

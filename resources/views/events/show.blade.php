@@ -67,7 +67,13 @@
                     <div class="col-md-12 mb-3">
                         <label class="label" for="notes">Notes</label>
 
-                        <textarea class="form-control" type="text" name="notes" id="notes" rows=5 readonly>{{ $event->notes }}</textarea>
+                        <textarea class="form-control" type="text" name="notes" id="notes" rows=5 readonly>
+@if(!$event->private || ($event->author_id == App\User::find(Auth::user()->id)->person->id))
+{{ $event->notes }} 
+@else
+*Contents Hidden by Author*
+@endif                    
+                        </textarea>
                         <div class="invalid-feedback">Valid first name is required. </div>
                     </div>
                 </div>

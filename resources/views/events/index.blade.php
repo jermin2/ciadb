@@ -35,10 +35,10 @@
                 <table class="table table-striped table-sm" >
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th class="d-none d-md-block">#</th>
                             <th>Time</th>
                             <th>Name</th>
-                            <th>Location</th>
+                            <th class="d-none d-md-block">Location</th>
                             <th>Notes</th>
                             <th>Tags</th>
                             
@@ -47,11 +47,17 @@
                     <tbody id="event-table">
                         @foreach($events as $event)
                         <tr>       
-                            <td> <a href="{{route('events.edit', $event->id)}}"  >{{ $event->id }} </a> </td>
+                            <td class="d-none d-md-block"> <a href="{{route('events.edit', $event->id)}}"  >{{ $event->id }} </a> </td>
                             <td> {{ $event->time }} </td>
                             <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>
-                            <td> {{ $event->location }} </td>
-                            <td> {{ $event->notes }} </td>
+                            <td class="d-none d-md-block"> {{ $event->location }} </td>
+                                <!-- If event is NOT private OR it is private, but author is current user -->
+                            <td> @if(!$event->private || ($event->author_id == App\User::find(Auth::user()->id)->person->id))
+                                    {{ $event->notes }} 
+                                @else
+                                    <span class="text-muted">*Private*</span>
+                                @endif
+                                    </td>
                             <td> 
                                 @foreach ($event->tags as $tag)
                                     <a href="{{route('event-tag.show', $tag->id)}}">

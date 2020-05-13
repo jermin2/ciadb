@@ -37,7 +37,7 @@ Route::put('/events/{event}', 'EventController@update')->name('events.update');
 Route::delete('/events/{event}', 'EventController@delete')->name('events.delete');
 
 Route::get('/events/tags/{tag}', 'EventTagController@show')->name('event-tag.show');
-Route::get('/events/people/{person}', 'EventPersonController@show')->name('event-person.show');
+Route::get('/events/people/{person}', 'EventPersonController@show')->name('event.person.show');
 
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');

@@ -54,6 +54,7 @@ class EventController extends Controller
             'time'     => $formattime->toDateTimeString(),
             'notes'    => $request->notes,
             'author_id' => $request->author_id,
+            'private'   => $request->private == "on" ? '1' : '0' ,
         ]);
 
         $event->save();
@@ -150,6 +151,7 @@ class EventController extends Controller
             'location' =>$request->location,
             'time'     => $formattime->toDateTimeString(),
             'notes'    => $request->notes,
+            'private'   => $request->private == "on" ? '1' : '0' ,
             
         ]);
 

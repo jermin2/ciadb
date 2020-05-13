@@ -94,6 +94,10 @@
 
                             <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes"></textarea>
                             <div class="invalid-feedback">Valid first name is required. </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="private">
+                                <label class="form-check-label" for="private">Make these notes private</label>
+                            </div>
                         </div>
                     </div>
 

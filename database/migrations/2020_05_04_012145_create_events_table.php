@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('location')->nullable();
+            $table->boolean('private')->default(false);
             $table->text('notes')->nullable();
             $table->dateTime('time')->nullable();
             $table->unsignedBigInteger('author_id')->default('1');

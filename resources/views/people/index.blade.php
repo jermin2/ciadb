@@ -24,7 +24,7 @@
                     <tr>
                         <th>id</th>
                         <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>Actions</th>
                         <th>Tags</th>
                     </tr>
                 </thead>
@@ -32,8 +32,8 @@
                 @foreach($people as $person)
                     <tr>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
-                        <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->first_name }}</a> </td>
-                        <td> {{ $person->last_name }} </td>
+                        <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->name() }}</a> </td>
+                        <td> <a href="{{ route('event.person.show', $person->id) }}" class="col-md-4 btn btn-primary btn-round">events</td>
                         <td> 
                         @foreach ($person->tags as $tag)
                         <a href="{{route('event-tag.show', $tag->id)}}">

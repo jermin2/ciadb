@@ -48,7 +48,7 @@
                         <div id="people" class="d-flex flex-wrap">
                             @foreach ($event->people as $person)
                             <div class="p-1">
-                                <a href="{{route('event-person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
+                                <a href="{{route('event.person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
                             </div>
                             @endforeach
                         </div>

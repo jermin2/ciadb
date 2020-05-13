@@ -90,7 +90,7 @@
                 var tog = true;
                 for(i = 0;i < values.length;i++)
                 {
-                    if( !row.children().eq(4).text().includes(values[i]) )
+                    if( !row.children().eq(5).text().includes(values[i]) )
                         tog = false;
                 }
 

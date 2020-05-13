@@ -60,7 +60,7 @@
                         <div id="people" class="d-flex flex-wrap">
                             @foreach ($event->people as $person)
                             <div class="p-1">
-                                <a href="{{route('event-person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
+                                <a href="{{route('event.person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
                             </div>
                             @endforeach
                         </div>
@@ -85,6 +85,10 @@
 
                         <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5>{{ $event->notes }}</textarea>
                         <div class="invalid-feedback">Valid first name is required. </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="private">
+                            <label class="form-check-label" for="private">Make these notes private</label>
+                        </div>
                     </div>
                 </div>
 

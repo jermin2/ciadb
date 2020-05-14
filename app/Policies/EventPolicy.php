@@ -35,10 +35,6 @@ class EventPolicy
             return true;
         }
         
-        //If its private, return false (i.e no one apart from author can view)
-        if( $event->private ){
-            return false;
-        }
     }
 
     /**

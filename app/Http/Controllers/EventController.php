@@ -72,6 +72,8 @@ class EventController extends Controller
      */
     public function index()
     {
+        //
+
         $this->authorize('show_events');
 
         if(request('tag')){

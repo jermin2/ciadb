@@ -26,6 +26,12 @@
                 <div>
                     @component('components.tagpicker', ['tagtypes' => $tagtypes])
                     @endcomponent
+
+                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                        @slot('pickername')
+                            tagss
+                        @endslot
+                    @endcomponent
                 </div>
             </div>
         </div>
@@ -52,7 +58,7 @@
                             <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>
                             <td class="d-none d-md-block"> {{ $event->location }} </td>
                                 <!-- If event is NOT private OR it is private, but author is current user -->
-                            <td> @if(!$event->private || ($event->author_id == App\User::find(Auth::user()->id)->person->id))
+                            <td> @if(!$event->private || ($event->author_id == Auth::user()->id) )
                                     {{ $event->notes }} 
                                 @else
                                     <span class="text-muted">*Private*</span>
@@ -104,6 +110,29 @@
             });
 
         });
+
+        $('#tagss').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
+
+console.log(e);
+console.log($(this));
+var values = [$(select).find("option:selected").text()];
+values = values.join(" ").split(' ').filter(Boolean);
+
+$("#event-table tr").filter(function() 
+{
+    var row = $(this);
+    var tog = true;
+    for(i = 0;i < values.length;i++)
+    {
+        if( !row.children().eq(5).text().includes(values[i]) )
+            tog = false;
+    }
+
+    row.toggle(tog);    
+});
+
+});
+
     }
 </script>
 

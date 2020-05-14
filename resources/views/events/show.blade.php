@@ -68,7 +68,7 @@
                         <label class="label" for="notes">Notes</label>
 
                         <textarea class="form-control" type="text" name="notes" id="notes" rows=5 readonly>
-@if(!$event->private || ($event->author_id == App\User::find(Auth::user()->id)->person->id))
+@if(!$event->private || ($event->author_id == Auth::user->id) )
 {{ $event->notes }} 
 @else
 *Contents Hidden by Author*

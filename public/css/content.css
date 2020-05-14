@@ -2,6 +2,7 @@
   padding: 15px 15px 0;
   border: 0;
   background-color: #fff;
+  border-radius: 14px;
 
 }
 
@@ -41,4 +42,12 @@
 .btn-primary {
   background-color: #51bcda;
   color: #fff;
+}
+
+.tag {
+  color: #fff;
+}
+
+.tag-header {
+  font-size: 17px;
 }

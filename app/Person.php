@@ -28,4 +28,9 @@ class Person extends Model
         return $this->first_name.' '.$this->last_name;
     }
 
+    public function usertags()
+    {
+        return $this->belongsToMany(Usertag::class);
+    }
+
 }

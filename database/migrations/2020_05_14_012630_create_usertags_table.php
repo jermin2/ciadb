@@ -16,19 +16,28 @@ class CreateUsertagsTable extends Migration
         Schema::create('usertags', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('color')->default('#848686');
             $table->unsignedBigInteger('user_id');
         });
 
-        Schema::create('event_usertags', function (Blueprint $table) {
+        Schema::create('event_usertag', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_id');
             $table->unsignedBigInteger('usertag_id');
+
+            //If event_id gets deleted, delete this relationship
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('usertag_id')->references('id')->on('usertags')->onDelete('cascade');
         });
 
-        Schema::create('person_usertags', function (Blueprint $table) {
+        Schema::create('person_usertag', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('usertag_id');
+
+            //If person gets deleted, delete this relationship
+            $table->foreign('person_id')->references('id')->on('people')->onDelete('cascade');
+            $table->foreign('usertag_id')->references('id')->on('usertags')->onDelete('cascade');
         });
 
     }

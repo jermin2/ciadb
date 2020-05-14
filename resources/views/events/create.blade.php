@@ -75,14 +75,31 @@
 
                         <!-- Tags -->
                         <div class="col-md-6 mb-3">
-                            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-                            
-                            <div>
-                            @component('components.tagpicker', ['tagtypes' => $tagtypes] )
-                                @slot('pickername')
-                                    event_tag
-                                @endslot
-                            @endcomponent
+                            <div class="col-md-6 mb-3">
+                                <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                                
+                                <div>
+                                @component('components.tagpicker', ['tagtypes' => $tagtypes] )
+                                    @slot('pickername')
+                                        event_tag
+                                    @endslot
+                                @endcomponent
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="tags">User tags <span class="text-muted">(Optional)</span></label>
+                                
+                                <div>
+                                @component('components.tagpicker', ['tags' => $usertags] )
+                                    @slot('pickername')
+                                        event_usertag
+                                    @endslot
+                                    @slot('tagname')
+                                        usertags[]
+                                    @endslot
+                                @endcomponent
+                                </div>
                             </div>
                         </div>
                     </div>

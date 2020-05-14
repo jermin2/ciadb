@@ -27,9 +27,9 @@
                     @component('components.tagpicker', ['tagtypes' => $tagtypes])
                     @endcomponent
 
-                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                    @component('components.tagpicker', ['tags' => $usertags])
                         @slot('pickername')
-                            tagss
+                            usertagpicker
                         @endslot
                     @endcomponent
                 </div>
@@ -47,6 +47,7 @@
                             <th class="d-none d-md-block">Location</th>
                             <th>Notes</th>
                             <th>Tags</th>
+                            <th>User Tags</th>
                             
                         </tr>
                     </thead>
@@ -66,6 +67,15 @@
                                     </td>
                             <td> 
                                 @foreach ($event->tags as $tag)
+                                    <a href="{{route('event-tag.show', $tag->id)}}">
+                                        <span class="badge" 
+                                            style="color:#fff; background-color:{{$tag->color}}" >
+                                        {{$tag->name}}
+                                        </span> </a>
+                                @endforeach
+                            </td>
+                            <td> 
+                                @foreach ($event->usertags as $tag)
                                     <a href="{{route('event-tag.show', $tag->id)}}">
                                         <span class="badge" 
                                             style="color:#fff; background-color:{{$tag->color}}" >
@@ -111,27 +121,28 @@
 
         });
 
-        $('#tagss').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
+        $('#usertagpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
 
-console.log(e);
-console.log($(this));
-var values = [$(select).find("option:selected").text()];
-values = values.join(" ").split(' ').filter(Boolean);
+            console.log(e);
+            console.log($(this));
+            //var values = [$('select').find("option:selected").text()]; //Handle multiple tag filters
+            var values = [$(this).find("option:selected").text()];
+            values = values.join(" ").split(' ').filter(Boolean);
 
-$("#event-table tr").filter(function() 
-{
-    var row = $(this);
-    var tog = true;
-    for(i = 0;i < values.length;i++)
-    {
-        if( !row.children().eq(5).text().includes(values[i]) )
-            tog = false;
-    }
+            $("#event-table tr").filter(function() 
+            {
+                var row = $(this);
+                var tog = true;
+                for(i = 0;i < values.length;i++)
+                {
+                    if( !row.children().eq(6).text().includes(values[i]) )
+                        tog = false;
+                }
 
-    row.toggle(tog);    
-});
+                row.toggle(tog);    
+            });
 
-});
+        });
 
     }
 </script>

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\usertags;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\User;
+use App\Usertag;
 
-class UsertagsController extends Controller
+class UsertagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,11 @@ class UsertagsController extends Controller
      */
     public function index()
     {
-        //
+        return view('tags/index', [
+            'user' => Auth::user(),
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),
+        ]);
+        
     }
 
     /**
@@ -35,7 +41,17 @@ class UsertagsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $this->validateUsertag();
+
+        $usertag = new Usertag([
+            'name' => $request->name,
+            'user_id' => Auth::user()->id,
+            'color' => $request->color
+        ]);
+
+        $usertag->save();
+
+        return redirect(route('usertags.index'));
     }
 
     /**
@@ -81,5 +97,13 @@ class UsertagsController extends Controller
     public function destroy(usertags $usertags)
     {
         //
+    }
+
+    protected function validateUsertag()
+    {
+        return request()->validate([
+            'name'  => 'required',
+            'color' => 'nullable'
+        ]);
     }
 }

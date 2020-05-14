@@ -59,7 +59,7 @@
                                 <span>My Profile</span></a>
                             </li>
                             <li>
-                                <a href="#"><label class="icon">T</label><span>My tags</span></a>
+                                <a href="/tags"><label class="icon">T</label><span>My tags</span></a>
 
                             </li>
                             <li>

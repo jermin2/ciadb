@@ -65,15 +65,38 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
 
-                        <div>
-                        @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
-                        @endcomponent
-                        @error('time')
-                        <p class="help is-danger">{{ $errors->first('title') }}</p>
-                        @enderror
+                    <div class="col-md-6 mb-3">
+                        <div class="col-md-6 mb-3">
+                            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+
+                            <div>
+                            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
+                            @slot('pickername')
+                                        event_tag
+                                    @endslot
+                            @endcomponent
+                            @error('time')
+                            <p class="help is-danger">{{ $errors->first('title') }}</p>
+                            @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+
+                            <div>
+                            @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList' => $event->usertags])
+                                @slot('pickername')
+                                    event_usertag
+                                @endslot
+                                @slot('tagname')
+                                    usertags[]
+                                @endslot
+                            @endcomponent
+                            @error('time')
+                            <p class="help is-danger">{{ $errors->first('title') }}</p>
+                            @enderror
+                            </div>
                         </div>
                     </div>
 

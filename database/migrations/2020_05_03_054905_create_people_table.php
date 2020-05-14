@@ -39,7 +39,7 @@ class CreatePeopleTable extends Migration
             $table->foreign('person_id')->references('id')->on('people')->onDelete('set null');
         });
 
-        DB::table('tags')->insert([
+        DB::table('people')->insert([
             [ 'first_name' => 'guest', 'last_name' => 'user'],
         ]);
 

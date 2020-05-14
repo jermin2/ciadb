@@ -7,6 +7,7 @@ use App\Tagtype;
 use App\Tag;
 use App\Person;
 use App\User;
+use App\Usertag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -30,6 +31,7 @@ class EventController extends Controller
             'tagtypes' => Tagtype::all(),
             'people' => Person::all(),
             'user' => Auth::user(),
+            'usertags' => Usertag::where('id', Auth::user()->id)->get()
 
         ]);
     }
@@ -59,6 +61,7 @@ class EventController extends Controller
 
         $event->save();
 
+        $event->usertags()->attach(request('usertags'));
         $event->tags()->attach(request('tags'));
         $event->people()->attach(request('people'));
 
@@ -89,7 +92,8 @@ class EventController extends Controller
         //Show a list of all the people
         return view('events/index', [
             'events' => $events,
-            'tagtypes' => Tagtype::all()
+            'tagtypes' => Tagtype::all(),
+            'usertags' => Usertag::where('id', Auth::user()->id)->get()
         ]
         
         );
@@ -107,7 +111,8 @@ class EventController extends Controller
 
         return view('events/show', [
             'event' => $event,
-            'tagtypes' => Tagtype::all()
+            'tagtypes' => Tagtype::all(),
+            'usertags' => Usertag::where('id', Auth::user()->id)->get()
         ]);
         
     }
@@ -129,7 +134,8 @@ class EventController extends Controller
         return view('events/edit', [
             'event' => $event,
             'tagtypes' => Tagtype::all(),
-            'people' => Person::all()
+            'people' => Person::all(),
+            'usertags' => Usertag::where('id', Auth::user()->id )->get()
         ]);
     }
 
@@ -156,7 +162,7 @@ class EventController extends Controller
             'private'   => $request->private == "on" ? '1' : '0' ,
             
         ]);
-
+        $event->usertags()->sync(request('usertags'));
         $event->tags()->sync(request('tags'));
         $event->people()->sync(request('people'));
 

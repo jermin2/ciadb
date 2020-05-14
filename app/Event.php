@@ -27,4 +27,9 @@ class Event extends Model
         return (new \Carbon\Carbon($value))->format('D, jS M H:i Y');
     }
 
+    public function usertags()
+    {
+        return $this->belongsToMany(Usertag::class);
+    }
+
 }

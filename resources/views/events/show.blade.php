@@ -53,14 +53,18 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-
-                        @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
-                        @endcomponent
-
+                    <div class="col-md-6">
+                        <div class="col-md-6 mb-3">
+                            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
+                            @endcomponent
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="tags">User Tags <span class="text-muted">(Optional)</span></label>
+                            @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList' => $event->usertags])
+                            @endcomponent
+                        </div>
                     </div>
-
                 </div>
 
                 <div class="row">
@@ -68,7 +72,7 @@
                         <label class="label" for="notes">Notes</label>
 
                         <textarea class="form-control" type="text" name="notes" id="notes" rows=5 readonly>
-@if(!$event->private || ($event->author_id == Auth::user->id) )
+@if(!$event->private || ($event->author_id == Auth::user()->id) )
 {{ $event->notes }} 
 @else
 *Contents Hidden by Author*

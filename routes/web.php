@@ -43,3 +43,6 @@ Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::put('/users/{user}', 'UserController@update')->name('users.update')->middleware('can:edit_events');;
 Route::delete('/users/{user}', 'UserController@delete')->name('users.delete');
+
+Route::get('/tags', 'UsertagController@index')->name('usertags.index');
+Route::post('/tags', 'UsertagController@store')->name('usertags.store');

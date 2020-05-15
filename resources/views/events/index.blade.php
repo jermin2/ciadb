@@ -49,7 +49,7 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table id="main-table" class="table-hover" style="width:100%">
+                <table id="main-table" class="table-hover table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -148,7 +148,6 @@
                     searchable: false,
                 }
             ]
-
         });
 
 

@@ -10,7 +10,7 @@ $tagname - tags is reserved, don't use this name for anything other than applyin
     @endif
 
 
-    <select class="selectpicker border" data-width="fit" name="{{ $tagname ?? 'tags[]' }}" id="{{$pickername}}" title="Tag Filter" multiple >
+    <select class="selectpicker border" data-width="fit" name="{{ $tagname ?? 'tags[]' }}" id="{{$pickername}}" title="{{ $text ?? 'Tag Filter'}}" multiple >
     
     <!--If tag types are defined -->
     @isset($tagtypes)

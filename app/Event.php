@@ -32,4 +32,10 @@ class Event extends Model
         return $this->belongsToMany(Usertag::class);
     }
 
+    public function shortdate()
+    {
+        $date = \Carbon\Carbon::createFromFormat('D, jS M H:i Y',$this->time);
+        return $date->format('jS M');
+    }
+
 }

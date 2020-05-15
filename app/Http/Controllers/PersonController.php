@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Person;
 use App\Tag;
 use App\Tagtype;
+use App\Usertag;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,7 @@ class PersonController extends Controller
         return view('people/index', [
             'people' => $people ,
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),
         ]
         
         );
@@ -44,6 +46,7 @@ class PersonController extends Controller
 
         return view('people/create', [
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),
         ]);
     }
 
@@ -61,6 +64,7 @@ class PersonController extends Controller
         $person->save();
 
         $person->tags()->attach(request('tags'));
+        $person->usertags()->attach(request('usertags'));
 
         return redirect(route('people.index'));
     }
@@ -78,6 +82,7 @@ class PersonController extends Controller
         return view('people/show', [
             'person' => $person,
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),
         ]);
         
     }
@@ -95,16 +100,9 @@ class PersonController extends Controller
         $data = [
             'person' =>$person,
             'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
-        ];
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),
 
-        if($person->user_id ==  Auth::id())
-        {
-            $data = [
-                'person' =>$person,
-                'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
-                'user' => Auth::user()
-            ];
-        }
+        ];
         
 
         return view('people/edit', $data);
@@ -123,7 +121,7 @@ class PersonController extends Controller
 
         $person->update($this->validatePerson());
         $person->tags()->sync(request('tags'));
-
+        $person->usertags()->sync(request('usertags'));
         return redirect(route('people.show', $person->id));        
     }
 

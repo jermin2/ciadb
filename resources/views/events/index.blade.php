@@ -1,6 +1,12 @@
 @extends ('layouts/main')
 
+@section ('header')
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/rr-1.2.7/sc-2.0.2/sp-1.1.0/sl-1.3.1/datatables.min.css"/>
+@endsection
+
 @section ('content')
+
 
     <div class="card">
         <div class="card-header">
@@ -22,42 +28,49 @@
             @endisset
 
             <div class="row justify-content-between m-auto p-2">
-                <h2> Events </h2>
-                <div>
-                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
-                    @endcomponent
-
-                    @component('components.tagpicker', ['tags' => $usertags])
-                        @slot('pickername')
-                            usertagpicker
-                        @endslot
-                    @endcomponent
+                <h2 class="col-md-8"> Events </h2>
+                <div class="col-md-4">
+                    <div class="d-flex justify-content-between ">
+                        System Tags
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                        @endcomponent
+                    </div>
+                    <div class="d-flex justify-content-between ">
+                        User Tags
+                        @component('components.tagpicker', ['tags' => $usertags])
+                            @slot('pickername')
+                                usertagpicker
+                            @endslot
+                        @endcomponent
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-sm" >
+                <table id="main-table" class="table-hover" style="width:100%">
                     <thead>
                         <tr>
-                            <th class="d-none d-md-block">#</th>
-                            <th>Time</th>
-                            <th>Name</th>
-                            <th class="d-none d-md-block">Location</th>
-                            <th>Notes</th>
-                            <th>Tags</th>
-                            <th>User Tags</th>
+                            <th>ID</th>
+                            <th>url</th>
+                            <th scope="col" data-priority="1">Time</th>
+                            <th scope="col" data-priority="1">Name</th>                          
+                            <th scope="col" data-priority="3">Location</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col" data-priority="2">Tags</th>
+                            <th scope="col" data-priority="2">User Tags</th>
                             
                         </tr>
                     </thead>
                     <tbody id="event-table">
                         @foreach($events as $event)
-                        <tr>       
-                            <td class="d-none d-md-block"> <a href="{{route('events.edit', $event->id)}}"  >{{ $event->id }} </a> </td>
-                            <td> {{ $event->time }} </td>
-                            <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>
-                            <td class="d-none d-md-block"> {{ $event->location }} </td>
+                        <tr>   
+                            <td>{{ $event->id }} </td>
+                            <td>{{route('events.edit', $event->id)}}</td>
+                            <td> {{ $event->time }} </td>    
+                            <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>                           
+                            <td class=""> {{ $event->location }} </td>
                                 <!-- If event is NOT private OR it is private, but author is current user -->
                             <td> @if(!$event->private || ($event->author_id == Auth::user()->id) )
                                     {{ $event->notes }} 
@@ -95,56 +108,72 @@
 @endsection
 
 @section ('footer')
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/rr-1.2.7/sc-2.0.2/sp-1.1.0/sl-1.3.1/datatables.min.js"></script>
 
 <script>
-    $(document).ready()
-    {
-
-        $('#tags').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
-
-            console.log(e);
-            var values = [$(this).find("option:selected").text()];
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var values = [$('select').find("option:selected").text()];
             values = values.join(" ").split(' ').filter(Boolean);
 
-            $("#event-table tr").filter(function() 
+            var tags = data[6] + " " + data[7]; // use data for the tag column
+            
+            for(i = 0;i < values.length;i++)
             {
-                var row = $(this);
-                var tog = true;
-                for(i = 0;i < values.length;i++)
-                {
-                    if( !row.children().eq(5).text().includes(values[i]) )
-                        tog = false;
+                if( !tags.includes(values[i])){
+                    return false;
                 }
+            }
+            return true;
+        }
+    );
 
-                row.toggle(tog);    
-            });
 
+    $(document).ready(function()
+    {
+        var table = $('#main-table').DataTable( { 
+            select: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'colvis', 'excel'
+            ],
+
+            colReorder: true,
+            responsive: true,
+
+            columnDefs:[
+                {
+                    targets: [0,1],
+                    visible: false,
+                    searchable: false,
+                }
+            ]
+
+        });
+
+
+        table
+        .on( 'select', function ( e, dt, type, indexes ) {
+            var rowData = table.rows( indexes ).data().toArray();
+            var id= rowData[0][1];
+            console.log(rowData[0][0]);
+            window.location.href = id;
+            
+        } )
+
+
+
+
+        $('#tags').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
+            $('#main-table').DataTable().draw();
         });
 
         $('#usertagpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
 
-            console.log(e);
-            console.log($(this));
-            //var values = [$('select').find("option:selected").text()]; //Handle multiple tag filters
-            var values = [$(this).find("option:selected").text()];
-            values = values.join(" ").split(' ').filter(Boolean);
-
-            $("#event-table tr").filter(function() 
-            {
-                var row = $(this);
-                var tog = true;
-                for(i = 0;i < values.length;i++)
-                {
-                    if( !row.children().eq(6).text().includes(values[i]) )
-                        tog = false;
-                }
-
-                row.toggle(tog);    
-            });
-
+            $('#main-table').DataTable().draw();
         });
 
-    }
+    });
 </script>
 
 @endsection

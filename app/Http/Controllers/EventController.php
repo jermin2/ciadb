@@ -31,7 +31,7 @@ class EventController extends Controller
             'tagtypes' => Tagtype::all(),
             'people' => Person::all(),
             'user' => Auth::user(),
-            'usertags' => Usertag::where('id', Auth::user()->id)->get()
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get()
 
         ]);
     }
@@ -93,7 +93,7 @@ class EventController extends Controller
         return view('events/index', [
             'events' => $events,
             'tagtypes' => Tagtype::all(),
-            'usertags' => Usertag::where('id', Auth::user()->id)->get()
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get()
         ]
         
         );
@@ -112,7 +112,7 @@ class EventController extends Controller
         return view('events/show', [
             'event' => $event,
             'tagtypes' => Tagtype::all(),
-            'usertags' => Usertag::where('id', Auth::user()->id)->get()
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get()
         ]);
         
     }
@@ -135,7 +135,7 @@ class EventController extends Controller
             'event' => $event,
             'tagtypes' => Tagtype::all(),
             'people' => Person::all(),
-            'usertags' => Usertag::where('id', Auth::user()->id )->get()
+            'usertags' => Usertag::where('user_id', Auth::user()->id )->get()
         ]);
     }
 

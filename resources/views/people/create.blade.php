@@ -45,11 +45,22 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-6 mb-3">
           <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
           <!-- Tags -->
           
           @component('components.tagpicker', ['tagtypes' => $tagtypes])   
+          @endcomponent
+          
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="tags">User tags <span class="text-muted">(Optional)</span></label>
+          <!-- Tags -->
+          
+          @component('components.tagpicker', ['tags' => $usertags])
+          @slot('tagname')
+              usertags[]
+          @endslot
           @endcomponent
           
         </div>

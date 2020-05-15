@@ -44,13 +44,31 @@
           </div>
         </div>
 
+        <div class="row">
         <!-- Tags -->
-        <div class="mb-3">
+        <div class="col-md-6 mb-3">
           <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
            
           @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])
           @endcomponent
         </div>
+
+        <!-- Tags -->
+        <div class="col-md-6 mb-3">
+          <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+           
+          @component('components.tagpicker', ['tags' => $usertags])
+          @slot('tagname')
+              usertags[]
+          @endslot
+          @endcomponent
+        </div>
+
+        </div>
+
+
+                  
+
 
 
         <div class="mb-3">
@@ -61,13 +79,14 @@
         </div>
 
 
-
-        @isset($user)
-        <div class="mb-3">
-          <label> Associated with a user </label>
-          <a href="{{ route('user.edit') }}"> Edit Login details </a>
-        </div>
-        @endisset
+        @can('show_users')
+          @isset($person->user)
+          <div class="mb-3">
+            <label> Associated with a user </label>
+            <a href="{{ route('users.edit', $person->user->id) }}"> Edit Login details </a>
+          </div>
+          @endisset
+        @endcan
 
         <hr class="mb-4">
         <button class="btn btn-success btn-lg btn-round" type="submit">Save</button>

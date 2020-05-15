@@ -43,13 +43,20 @@
           </div>
 
           <!-- Tags -->
-          <div class="mb-3">
-            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-              @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])
 
-              @endcomponent
+                @endcomponent
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList' => $person->usertags])
+
+                @endcomponent
+            </div>
           </div>
-
           <hr class="mb-4">
 
           <a href="{{ route('people.index') }}" class="col-md-6 btn btn-primary btn-lg btn-round" >Back</a>

@@ -28,6 +28,7 @@
                             <th>Actions</th>
                         @endcan
                         <th>Tags</th>
+                        <th>User Tags</th>
                     </tr>
                 </thead>
                 <tbody id="people-table">
@@ -42,6 +43,15 @@
                         @endcan
                         <td> 
                         @foreach ($person->tags as $tag)
+                        <a href="{{route('event-tag.show', $tag->id)}}">
+                                <span class="badge" 
+                                    style="color:#fff; background-color:{{$tag->color}}" >
+                                {{$tag->name}}
+                            </span> </a>
+                        @endforeach
+                        </td>
+                        <td> 
+                        @foreach ($person->usertags as $tag)
                         <a href="{{route('event-tag.show', $tag->id)}}">
                                 <span class="badge" 
                                     style="color:#fff; background-color:{{$tag->color}}" >

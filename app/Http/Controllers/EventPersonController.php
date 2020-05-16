@@ -21,7 +21,7 @@ class EventPersonController extends Controller
         return view('events/index', [
             'events' => $events,
             'person' => $person,
-            'tagtypes' => Tagtype::all()
+            'tagtypes' => Tagtype::all()->latest()
         ]);
     }
 

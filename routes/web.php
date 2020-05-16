@@ -27,7 +27,7 @@ Route::put('/people/{person}', 'PersonController@update')->name('people.update')
 
 Route::get('/people/tags/{tag}', 'PersonTagController@show')->name('tag.show');
 
-Route::get('/events/people', 'EventPersonController@index')->name('event.person.index');
+Route::get('/pivot', 'EventPersonController@index')->name('event.person.index');
 Route::get('/events/people/{person}', 'EventPersonController@show')->name('event.person.show');
 
 

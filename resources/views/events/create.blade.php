@@ -79,7 +79,7 @@
                                 <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
                                 
                                 <div>
-                                @component('components.tagpicker', ['tagtypes' => $tagtypes] )
+                                @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => Auth::user()->person->tags] )
                                     @slot('pickername')
                                         event_tag
                                     @endslot

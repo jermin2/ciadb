@@ -51,3 +51,6 @@ Route::delete('/users/{user}', 'UserController@delete')->name('users.delete');
 Route::get('/tags', 'UsertagController@index')->name('usertags.index');
 Route::post('/tags', 'UsertagController@store')->name('usertags.store');
 
+Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
+Route::post('ajaxRequest', 'EventPersonController@ajaxRequestPost')->name('ajaxRequest.post');
+

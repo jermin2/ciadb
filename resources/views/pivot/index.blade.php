@@ -112,6 +112,16 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/rr-1.2.7/sc-2.0.2/sp-1.1.0/sl-1.3.1/datatables.min.js"></script>
 
 <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+
+
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
             var values = [$('.people-filters select').find("option:selected").text()];
@@ -167,12 +177,21 @@
             var rowData = table.rows( indexes ).data().toArray();
             var row =  indexes[0].row;
             var column = indexes[0].column;
-            console.log(row + " " + column);  
+
             var event_id = table.column(column).header().getAttribute("data-id"); 
             var person_id = table.row(row).data()[0];
-            var c = table.cell(indexes).data();
-            console.log(c);
-            //JSON, add
+            var state = table.cell(indexes).data() != "Yes"; //New state
+
+            $.ajax({
+                type:'POST',
+                url:"{{ route('ajaxRequest.post') }}",
+                data:{event_id:event_id, person_id:person_id, state:state},
+                success:function(data){
+                    console.log(data.message);
+                    var newstate = state ? "Yes": "-" ;
+                    table.cell(indexes).data(newstate) ;
+                },
+            });
         } )
 
 

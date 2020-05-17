@@ -37,4 +37,27 @@ class EventPersonController extends Controller
             'usertags' => Usertag::all()
         ]);
     }
+
+    /**
+     * Based on request, will add a person or remove a person from an event
+     *
+     * @return void
+     */
+    public function ajaxRequestPost(Request $request)
+    {
+        $msg = $request->all();
+
+        if($request->state == "true"){
+            //add
+            Event::find($request->event_id)->people()->attach($request->person_id);
+            $msg = "Attached user id:".$request->person_id." to event_id:".$request->event_id;
+        }
+        else{
+            //add
+            Event::find($request->event_id)->people()->detach($request->person_id);
+            $msg = "Removed user id:".$request->person_id." to event_id:".$request->event_id;
+        }
+   
+        return response()->json(['success'=>$msg, 'message'=>$msg]);
+    }
 }

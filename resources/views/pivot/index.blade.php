@@ -254,6 +254,19 @@
         $('#main-table').DataTable().draw();
         $('.event-filters select').trigger('changed.bs.select',  ["", "", "", ""]);
 
+        echo table.columns([0,1,2]).visible(false);
+
+        //tableVis = t.columns().visible().join(",")
+        /*
+        for(x=0; x < tableVis.length; x++){
+            if([tableVis[x]])
+            {
+                tableVisX = table.array.push(x)...
+            }
+        }
+
+        */
+        //t.columns(tableVis).setVisible(false))
     });
 </script>
 

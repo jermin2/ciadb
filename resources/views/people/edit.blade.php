@@ -1,99 +1,62 @@
 @extends ('layouts/main')
 
 @section ('content')
-<div class="card col-lg-7 col-md-9 col-sm-12 mx-auto">
-  <div class="card-header">
-    <div class="card-title text-center"><h2>Edit: {{$person->name()}}</h2> </div>
-  </div>
 
-    <div class="card-body d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
+  @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
+    @section('header')
       <form method="POST" action="{{ route('people.update', $person->id) }}" class="needs-validation col-md-12" novalidate>
-        @csrf 
-        @method('PUT')
+      @method('PUT')
+      @csrf 
+    @endsection
+
+    @section('first_name')
+    <input class="form-control" type="text" name="first_name" id="first_name" value="{{$person->first_name}}">
+    @endsection
+
+    @section('last_name')
+    <input class="form-control" type="text" name="last_name" id="last_name" value="{{$person->last_name}}">
+    @endsection
+
+    @section('email')
+    <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{$person->email}}">
+    @endsection
+
+    @section('number')
+    <input type="email" class="form-control" id="number" placeholder="022123456" value="{{$person->number}}">
+    @endsection
+
+    @section('tags')
+      @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])   
+      @endcomponent
+    @endsection
+
+    @section('usertags')
+      @component('components.tagpicker', ['tags' => $usertags, 'tagname' => "usertags[]", 'selectedTagList' => $person->usertags ])
+      @endcomponent
+    @endsection
+
+    @section('notes')
+      <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes">{{$person->notes}}</textarea>
+    @endsection
     
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label class="label" for="first_name"> First Name</label>
 
-            <input class="form-control" type="text" name="first_name" id="first_name" value="{{ $person->first_name }}" >
-            <div class="invalid-feedback">Valid first name is required. </div>
-          </div>
-
-          <div class="col-md-6 mb-3">
-            <label class="label" for="last_name"> Last Name</label>
-
-            <input class="form-control" type="text" name="last_name" id="last_name" value="{{$person->last_name}}"> 
-          </div>
-        </div>
-
+    @section('footer')
+      @can('show_users')
+        @isset($person->user)
         <div class="mb-3">
-          <label for="email">Email <span class="text-muted">(Optional)</span></label>
-
-          <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" value="{{$person->email}}">
-          <div class="invalid-feedback">
-            Please enter a valid email address.
-          </div>
+          <label> Associated with a user </label>
+          <a href="{{ route('users.edit', $person->user->id) }}"> Edit Login details </a>
         </div>
+        @endisset
+      @endcan
+    @endsection
 
-        <div class="mb-3">
-          <label for="number">Phone Number <span class="text-muted">(Optional)</span></label>
-          <input type="text" class="form-control" name="number" id="number" placeholder="022123456" value="{{$person->number}}">
-          <div class="invalid-feedback">
-            Please enter a valid phone number.
-          </div>
-        </div>
+    @section('buttons')
+      <button class="col-md-6 btn btn-primary btn-lg btn-round" type="submit">Save</button>
+    @endsection
 
-        <div class="row">
-        <!-- Tags -->
-        <div class="col-md-6 mb-3">
-          <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-           
-          @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])
-          @endcomponent
-        </div>
-
-        <!-- Tags -->
-        <div class="col-md-6 mb-3">
-          <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
-           
-          @component('components.tagpicker', ['tags' => $usertags])
-          @slot('tagname')
-              usertags[]
-          @endslot
-          @endcomponent
-        </div>
-
-        </div>
-
-
-                  
-
-
-
-        <div class="mb-3">
-          <label class="label" for="notes">Notes</label>
-
-          <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes">{{$person->notes}}</textarea>
-          <div class="invalid-feedback">Valid first name is required. </div>
-        </div>
-
-
-        @can('show_users')
-          @isset($person->user)
-          <div class="mb-3">
-            <label> Associated with a user </label>
-            <a href="{{ route('users.edit', $person->user->id) }}"> Edit Login details </a>
-          </div>
-          @endisset
-        @endcan
-
-        <hr class="mb-4">
-        <button class="btn btn-success btn-lg btn-round" type="submit">Save</button>
-
-      </form>
-    </div>
-
-</div>
-
+  @endcomponent
 @endsection
+
+

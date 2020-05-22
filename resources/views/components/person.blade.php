@@ -1,4 +1,4 @@
-<div class="card col-lg-8 col-md-11 col-sm-12 mx-auto">
+<div class="card">
   <div class="card-header">
     <div class="card-title text-center">
       @yield('content-title')
@@ -7,46 +7,92 @@
   <div class="card-body d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
 
     @yield('content-header')
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          
-          <label class="label" for="first_name"> First Name</label>
+    <div class="row">
+      <div class="input-group col-md-6 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="first_name"> First Name</span>
+        </div>
+        @yield('first_name')
+      </div>
 
-          @yield('first_name')
-          <div class="invalid-feedback">Valid first name is required. </div>
+      <div class="input-group col-md-6 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="last_name"> Last Name</span>
+        </div>
+        @yield('last_name')
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" for="email"> Email</span>
+      </div>
+      @yield('email')
+    </div>
+
+    <div class="row">
+      <div class="input-group col-md-6 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="number"> Number</span>
+        </div>
+        @yield('number')
+      </div>
+
+      <div class="input-group col-md-6  mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="number">Year Group</span>
+        </div>
+        @yield('year')
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group col-md-6 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="tags">Tags</span>
+        </div>
+        @yield('tags')
+      </div>
+
+      <div class="input-group col-md-6 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="user_tags">User tags</span>
+        </div>
+        @yield('tags')
+      </div>
+    </div>
+
+    <a class="dropdown-toggle" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Additional Information</a>
+    <div class="collapse multi-collapse" id="multiCollapseExample1">
+    
+      <div class="row">
+        <div class="input-group col-md-6 mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="dob">Date of Birth</span>
+          </div>
+          @yield('dob')
         </div>
 
-        <div class="col-md-6 mb-3">
-          <label class="label" for="last_name"> Last Name</label>
-
-          @yield('last_name')
+        <div class="input-group col-md-6 mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" for="baptism">Baptism</span>
+          </div>
+          @yield('baptism')
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-12 mb-3">
-          <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          @yield('email')
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="parents">Parents</span>
         </div>
+        @yield('parents')
       </div>
 
-      <div class="row">
-        <div class="col-md-12 mb-3">
-          <label for="number">Phone Number <span class="text-muted">(Optional)</span></label>
-          @yield('number')
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="school">School</span>
         </div>
-      </div>
-      <div class="row col-md-12">
-        <div class="col-md-6 mb-3">
-          <label for="tags">Tags </label>
-          <!-- Tags -->
-          @yield('tags')
-        </div>
-        <div class="col-md-6 mb-3">
-          <label for="tags">User tags </label>
-          <!-- Tags -->
-          @yield('usertags')         
-        </div>
+        @yield('school')
       </div>
 
       <div class="row">
@@ -55,13 +101,18 @@
           @yield('notes')
         </div>
       </div>
-      @yield('content-footer')
-      <hr class="mb-4">
-      <div class="row">
-        <div class="col-md-12">
-        @yield('buttons')
-        </div>
+
+      @yield('additional-footer')
+    </div>
+      
+    <hr class="mb-4">
+    @yield('content-footer')
+    
+    <div class="row">
+      <div class="col-md-12">
+      @yield('buttons')
       </div>
+    </div>
 
     </form>
   </div>

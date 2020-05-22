@@ -59,7 +59,6 @@ class PersonController extends Controller
     public function store(Request $request)
     {
         $this->authorize('create_people');
-
         $person = new Person($this->validatePerson());
         $person->save();
 
@@ -144,7 +143,12 @@ class PersonController extends Controller
             'last_name' => 'nullable',
             'email'     => 'nullable|email',
             'number'    => 'nullable',
+            'year'      => 'nullable', 
             'tags'      => 'exists:tags,id',
+            'dob'       => 'nullable|date_format:"d-m-Y"',
+            'baptism'   => 'nullable|date_format:"d-m-Y"',
+            'parents'   => 'nullable',
+            'school'    => 'nullable',
             'notes'     => 'nullable'
         ]);
     }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'email', 'number', 'notes'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'number', 'year', 'dob', 'baptism', 'parents', 'school', 'notes'];
 
     public function tags()
     {
@@ -36,6 +36,23 @@ class Person extends Model
     public function goals()
     {
         return $this->hasMany(Goal::class);
+    }
+
+    public function getDobAttribute( $value ) {
+        return (new \Carbon\Carbon($value))->format('d-m-Y');
+    }
+
+    public function getBaptismAttribute( $value ) {
+        return (new \Carbon\Carbon($value))->format('d-m-Y');
+    }
+
+    
+    public function setDobAttribute($value) {
+        $this->attributes['dob'] =  \Carbon\Carbon::createFromFormat('d-m-Y', $value);
+    }
+
+    public function setBaptismAttribute($value) {
+        $this->attributes['baptism'] =  \Carbon\Carbon::createFromFormat('d-m-Y', $value);
     }
 
 }

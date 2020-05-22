@@ -21,6 +21,12 @@ class CreatePeopleTable extends Migration
             $table->string('number')->nullable();
             $table->string('email')->nullable();
             $table->text('notes')->nullable();
+            $table->date('dob')->nullable();
+            $table->date('baptism')->nullable();
+            $table->string('parents')->nullable();
+            $table->string('school')->nullable();
+            $table->string('year')->nullable();
+
         });
 
         Schema::create('person_tag', function (Blueprint $table) {

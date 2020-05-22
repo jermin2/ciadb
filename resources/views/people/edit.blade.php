@@ -2,6 +2,8 @@
 
 @section ('content')
 
+<div class="row">
+  <div class="col-lg-6 col-md-12  col-sm-12 mx-auto">
   @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
     @section('content-header')
@@ -23,11 +25,21 @@
     @endsection
 
     @section('email')
-    <input type="email" class="form-control" id="email" placeholder="you@example.com" value="{{$person->email}}">
+    <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" value="{{$person->email}}">
     @endsection
 
     @section('number')
-    <input type="text" class="form-control" id="number" placeholder="022123456" value="{{$person->number}}">
+    <input type="text" class="form-control" name="number" id="number" placeholder="022123456" value="{{$person->number}}">
+    @endsection
+
+    @section('year')
+    <select class="custom-select" name="year" id="year">
+    <option selected>Choose...</option>
+    @for($i=1; $i < 14; $i++)
+      <option value="{{$i}}" @if($i==$person->year) selected @endif>Year {{$i}}</option> 
+    @endfor
+    </select>
+    
     @endsection
 
     @section('tags')
@@ -40,10 +52,37 @@
       @endcomponent
     @endsection
 
+    @section('parents')
+    <input type="text" class="form-control" name="parents" id="parents" placeholder="Mr and Mrs Smith" value="{{$person->parents}}">
+    @endsection
+
+    @section('school')
+    <input type="text" class="form-control" name="school" id="school" placeholder="Mt Roskill Primary" value="{{$person->school}}">
+    @endsection
+
+    @section('baptism')
+      @component('components.timepicker', ['pickername'=>'baptism'])
+        @slot('currentTime')
+          {{$person->baptism}}
+        @endslot
+      @endcomponent
+    @endsection
+
+    @section('dob')
+      @component('components.timepicker', ['pickername'=>'dob'])
+        @slot('currentTime')
+          {{$person->dob}}
+        @endslot
+      @endcomponent
+    @endsection
+
     @section('notes')
       <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes">{{$person->notes}}</textarea>
     @endsection
     
+    @section('additional-footer')
+      <span class="text-muted">Last updated at: {{$person->updated_at}}</span>
+    @endsection
 
     @section('content-footer')
       @can('show_users')
@@ -58,28 +97,17 @@
 
     @section('buttons')
       <button class="col-md-6 btn btn-primary btn-lg btn-round" type="submit">Save</button>
+      
     @endsection
 
   @endcomponent
+  </div>
 
-  @component('components.goals')
-    @section('goals')
-      @foreach($person->goals as $goal)
-        @if(!$goal->private || $goal->author_id == Auth::user()->id)
-        <tr>
-          <td>{{$goal->goal}}</td>
-          <td>{{$goal->start_date}}</td>
-          <td>{{$goal->end_date}}</td>
-          <td><input type="checkbox" @if($goal->private) checked @endif></td>
-          <td>
-              <a href="{{route('goals.edit', [ 'goal' => $goal, 'person'=> $person ]) }}" class="btn btn-info">E </a>
-              <a href="{{route('goals.delete', [ 'goal' => $goal, 'person'=> $person ]) }}" class="btn btn-danger">D </a>
-          </td>
-        </tr>
-        @endif
-      @endforeach
-    @endsection
+  <div class=" col-lg-6 col-md-12 col-sm-12 mx-auto">
+  @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
   @endcomponent
+  </div>
+</div>
 @endsection
 
 @section('footer')

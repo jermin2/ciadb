@@ -2,7 +2,7 @@
 
 @section ('content')
 
-<div class="card">
+<div class="card col-md-6 mx-auto">
   <div class="card-header">
     <div class="card-title">
       <h2>Edit Goal</h2>
@@ -13,20 +13,45 @@
     <form method="POST" action="{{ route('goals.update', ['person' => $person->id, 'goal' => $goal->id] ) }}">
       @csrf
       @method('PUT')
-      <div class="row">
-      
-      <input type="text" name="goal" value="{{$goal->goal}}">
-      @component('components.timepicker', ['pickername'=>'start_date'])
-      @slot('currentTime')
-      {{$goal->start_date}}
-      @endslot
-
-      @endcomponent
-      @component('components.timepicker', ['pickername'=>'end_date'])
-      @endcomponent
-      <input type="checkbox" name="private" @if($goal->private) checked @endif >
-
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Goal</span>
+        </div>
+        <input type="text" class="form-control" name="goal" value="{{$goal->goal}}">
       </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Start date</span>
+        </div>
+        @component('components.timepicker', ['pickername'=>'start_date'])
+        @slot('currentTime')
+          {{$goal->start_date}}
+        @endslot
+        @endcomponent
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">End date</span>
+        </div>
+        @component('components.timepicker', ['pickername'=>'end_date'])
+        @slot('currentTime')
+          {{$goal->end_date}}
+        @endslot
+        @endcomponent
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Make private</span>
+        <div class="input-group-append">
+          <div class="input-group-text">
+            <input type="checkbox"  name="private" @if($goal->private) checked @endif >
+          </div>
+        </div>
+        
+      </div>
+
 
       <button class="btn btn-success" type="submit">Save</button>
     </form>

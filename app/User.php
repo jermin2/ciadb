@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->roles->map->permissions->flatten()->pluck('name')->unique();
     }
+
+    public function goals()
+    {
+        return $this->belongsToMany(Goal::class);
+    }
 }

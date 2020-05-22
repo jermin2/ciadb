@@ -4,11 +4,11 @@
 
   @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
-    @section('title')
+    @section('content-title')
     <h2>Viewing: {{$person->name()}}</h2>
     @endsection
 
-    @section('header')
+    @section('content-header')
       <form class=" col-md-12">
     @endsection
 
@@ -43,7 +43,7 @@
     @endsection
     
 
-    @section('footer')
+    @section('content-footer')
       @can('show_users')
         @isset($person->user)
         <div class="mb-3">

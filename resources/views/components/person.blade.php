@@ -1,14 +1,15 @@
 <div class="card col-lg-8 col-md-11 col-sm-12 mx-auto">
   <div class="card-header">
     <div class="card-title text-center">
-      @yield('title')
+      @yield('content-title')
     </div>
   </div>
   <div class="card-body d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
 
-    @yield('header')
+    @yield('content-header')
       <div class="row">
         <div class="col-md-6 mb-3">
+          
           <label class="label" for="first_name"> First Name</label>
 
           @yield('first_name')
@@ -35,14 +36,14 @@
           @yield('number')
         </div>
       </div>
-      <div class="row">
+      <div class="row col-md-12">
         <div class="col-md-6 mb-3">
-          <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+          <label for="tags">Tags </label>
           <!-- Tags -->
           @yield('tags')
         </div>
         <div class="col-md-6 mb-3">
-          <label for="tags">User tags <span class="text-muted">(Optional)</span></label>
+          <label for="tags">User tags </label>
           <!-- Tags -->
           @yield('usertags')         
         </div>
@@ -54,7 +55,7 @@
           @yield('notes')
         </div>
       </div>
-      @yield('footer')
+      @yield('content-footer')
       <hr class="mb-4">
       <div class="row">
         <div class="col-md-12">

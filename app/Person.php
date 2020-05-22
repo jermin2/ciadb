@@ -33,4 +33,9 @@ class Person extends Model
         return $this->belongsToMany(Usertag::class);
     }
 
+    public function goals()
+    {
+        return $this->hasMany(Goal::class);
+    }
+
 }

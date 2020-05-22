@@ -54,3 +54,8 @@ Route::post('/tags', 'UsertagController@store')->name('usertags.store');
 Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 Route::post('ajaxRequest', 'EventPersonController@ajaxRequestPost')->name('ajaxRequest.post');
 
+
+Route::get('people/{person}/goals/{goal}', 'PersonGoalController@delete')->name('goals.delete');
+Route::put('people/{person}/goals/{goal}/update', 'PersonGoalController@update')->name('goals.update');
+Route::get('people/{person}/goals/{goal}/edit', 'PersonGoalController@edit')->name('goals.edit');
+Route::post('people/{person}/goals', 'PersonGoalController@store')->name('goals.store');

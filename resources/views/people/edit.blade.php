@@ -34,7 +34,7 @@
 
     @section('year')
     <select class="custom-select" name="year" id="year">
-    <option selected>Choose...</option>
+    <option value="" selected>Choose...</option>
     @for($i=1; $i < 14; $i++)
       <option value="{{$i}}" @if($i==$person->year) selected @endif>Year {{$i}}</option> 
     @endfor
@@ -97,7 +97,6 @@
 
     @section('buttons')
       <button class="col-md-6 btn btn-primary btn-lg btn-round" type="submit">Save</button>
-      
     @endsection
 
   @endcomponent

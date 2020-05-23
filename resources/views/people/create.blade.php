@@ -1,83 +1,87 @@
 @extends ('layouts/main')
 
 @section ('content')
-
-<div class="col-lg-6 col-md-12  col-sm-12 mx-auto">
+<div class="row">
+  <div class="col-lg-8 col-md-12  col-sm-12 mx-auto">
   @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
-    @section('content-title')
-      <h2>Add a person</h2>
-    @endsection
 
-    @section('content-header')
-      <form method="POST" action="{{ route('people.store') }}" class="needs-validation col-md-12" novalidate>
-      @csrf 
-    @endsection
 
-    @section('first_name')
-    <input class="form-control" type="text" name="first_name" id="first_name" >
-    @error('first_name')
-      <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-    @endsection
+      @section('content-header')
+        <form method="POST" action="{{ route('people.store') }}" class="needs-validation col-md-12" novalidate>
+        @csrf 
+      @endsection
 
-    @section('last_name')
-    <input class="form-control" type="text" name="last_name" id="last_name"  >
-    @endsection
+      @section('content-title')
+        <h2>Add a person</h2>
+      @endsection
 
-    @section('email')
-    <input type="email" class="form-control" id="email" placeholder="you@example.com"  >
-    @endsection
+      @section('first_name')
+        <input class="form-control" type="text" name="first_name" id="first_name" >
+        @error('first_name')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+      @endsection
 
-    @section('number')
-    <input type="email" class="form-control" id="number" placeholder="022123456"  >
-    @endsection
+      @section('last_name')
+        <input class="form-control" type="text" name="last_name" id="last_name"  >
+      @endsection
 
-    @section('year')
-    <select class="custom-select" name="year" id="year">
-    <option selected>Choose...</option>
-    @for($i=1; $i < 14; $i++)
-      <option value="{{$i}}">Year {{$i}}</option> 
-    @endfor
-    </select>
+      @section('email')
+        <input type="email" class="form-control" id="email" placeholder="you@example.com"  >
+      @endsection
 
-    @section('tags')
-      @component('components.tagpicker', ['tagtypes' => $tagtypes, ])   
-      @endcomponent
-    @endsection
+      @section('number')
+        <input type="email" class="form-control" id="number" placeholder="022123456"  >
+      @endsection
 
-    @section('usertags')
-      @component('components.tagpicker', ['tags' => $usertags, 'tagname' => "usertags[]" ])
-      @endcomponent
-    @endsection
+      @section('year')
+        <select class="custom-select" name="year" id="year">
+          <option value="" selected>Choose...</option>
+          @for($i=1; $i < 14; $i++)
+            <option value="{{$i}}">Year {{$i}}</option> 
+          @endfor
+        </select>
+      @endsection
 
-    @section('parents')
-    <input type="text" class="form-control" id="parents" placeholder="Mr and Mrs Smith" name="parents">
-    @endsection
+      @section('tags')
+        @component('components.tagpicker', ['tagtypes' => $tagtypes, ])   
+        @endcomponent
+      @endsection
 
-    @section('school')
-    <input type="text" class="form-control" id="school" placeholder="Mt Roskill Primary" name="school">
-    @endsection
+      @section('usertags')
+        @component('components.tagpicker', ['tags' => $usertags, 'tagname' => "usertags[]" ])
+        @endcomponent
+      @endsection
 
-    @section('baptism')
-      @component('components.timepicker', ['pickername'=>'baptism'])
-      @endcomponent
-    @endsection
+      @section('parents')
+        <input type="text" class="form-control" id="parents" placeholder="Mr and Mrs Smith" name="parents">
+      @endsection
 
-    @section('dob')
-      @component('components.timepicker', ['pickername'=>'dob'])
-      @endcomponent
-    @endsection
+      @section('school')
+        <input type="text" class="form-control" id="school" placeholder="Mt Roskill Primary" name="school">
+      @endsection
 
-    @section('notes')
-      <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes"></textarea>
-    @endsection
+      @section('baptism')
+        @component('components.timepicker', ['pickername'=>'baptism'])
+        @endcomponent
+      @endsection
 
-    @section('buttons')
-      <button class="col-md-6 btn btn-primary btn-lg btn-round" type="submit">Save</button>
-    @endsection
+      @section('dob')
+        @component('components.timepicker', ['pickername'=>'dob'])
+        @endcomponent
+      @endsection
 
-  @endcomponent
+      @section('notes')
+        <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5 placeholder="Notes"></textarea>
+      @endsection
+
+      @section('buttons')
+        <button class="col-md-6 btn btn-primary btn-lg btn-round" type="submit">Save</button>
+      @endsection
+
+    @endcomponent
+  </div>
 </div>
 @endsection
 
@@ -100,7 +104,5 @@ $(document).ready( function() {
 });
 
 </script>
-
-
 
 @endsection

@@ -42,12 +42,17 @@
                     <tr>
                         <th>id</th>
                         <th>Name</th>
-                        
-                        @can ('show_events')
-                            <th>Actions</th>
-                        @endcan
+                        <th>Email</th>
+                        <th>Number</th>
+                        <th>Year</th>
+                        <th>DOB</th>
+                        <th>Baptism</th>
+                        <th>Parents</th>
+                        <th>School</th>
+                        <th>Notes</th>
                         <th>Tags</th>
                         <th>User Tags</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="people-table">
@@ -55,11 +60,14 @@
                     <tr>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->name() }}</a> </td>
-                        @can ('show_events')
-                        <td>                      
-                            <a href="{{ route('event.person.show', $person->id) }}" class="col-lg-8  btn btn-primary btn-round">events
-                        </td>
-                        @endcan
+                        <td> {{ $person->email}}</td>
+                        <td> {{$person->number }} </td>
+                        <td> {{ $person->year }} </td>
+                        <td> {{ $person->dob }} </td>
+                        <td> {{ $person->baptism }} </td>
+                        <td> {{ $person->parents }} </td>
+                        <td> {{ $person->school }} </td>
+                        <td> {{ $person->notes }} </td>
                         <td> 
                         @foreach ($person->tags as $tag)
                         <a href="{{route('event-tag.show', $tag->id)}}">
@@ -69,6 +77,7 @@
                             </span> </a>
                         @endforeach
                         </td>
+
                         <td> 
                         @foreach ($person->usertags as $tag)
                         <a href="{{route('event-tag.show', $tag->id)}}">
@@ -78,6 +87,24 @@
                             </span> </a>
                         @endforeach
                         </td>
+
+                        <td>
+                            <div class="input-class-append row">
+                                <a href="{{ route('event.person.show', $person->id) }}" class="btn btn-outline-secondary">Events</a>    
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">View</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div role="separator" class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                </div> 
+                            </div>                 
+                            
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>
@@ -98,7 +125,7 @@
             var values = [$('select').find("option:selected").text()];
             values = values.join(" ").split(' ').filter(Boolean);
 
-            var tags = data[3] + " " + data[4]; // use data for the tag column
+            var tags = data[10] + " " + data[11]; // use data for the tag column
             
             for(i = 0; i < values.length;i++)
             {
@@ -124,7 +151,7 @@
 
             columnDefs:[
                 {
-                    targets: [],
+                    targets: [0,5,6,7,8],
                     visible: false,
                     searchable: false,
                 },

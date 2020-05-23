@@ -151,7 +151,7 @@
       position: relative;
   }
 
-  .dropdown-toggle::after {
+  #sidebar .dropdown-toggle::after {
       display:block;
       position: absolute;
       top: 50%;
@@ -252,5 +252,3 @@
     /* animate the transition */
     transition: all 0.5s ease-in-out;
 }
-
-.dropdown-toggle:after { content: none }

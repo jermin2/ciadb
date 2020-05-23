@@ -48,11 +48,13 @@ class Person extends Model
 
     
     public function setDobAttribute($value) {
-        $this->attributes['dob'] =  \Carbon\Carbon::createFromFormat('d-m-Y', $value);
+        if($value != null)
+            $this->attributes['dob'] =  \Carbon\Carbon::createFromFormat('d-m-Y', $value);
     }
 
     public function setBaptismAttribute($value) {
-        $this->attributes['baptism'] =  \Carbon\Carbon::createFromFormat('d-m-Y', $value);
+        if($value != null)
+            $this->attributes['baptism'] =  \Carbon\Carbon::createFromFormat('d-m-Y', $value);
     }
 
 }

@@ -252,3 +252,8 @@
     /* animate the transition */
     transition: all 0.5s ease-in-out;
 }
+
+td {
+  width:0.1%;
+  white-space: nowrap;
+  } 

@@ -95,11 +95,10 @@
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">View</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item" href="{{ route('people.show', $person->id ) }}">View</a>
+                                    <a class="dropdown-item" href="{{ route('people.edit', $person->id ) }}">Edit</a>
                                     <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="{{ route('people.delete', $person->id ) }}">Delete</a>
                                 </div> 
                             </div>                 
                             
@@ -140,7 +139,7 @@
     $(document).ready(function() 
     {
         var table = $('#main-table').DataTable( { 
-            select: true,
+            "paging":false,
             dom: 'Bfrtip',
             buttons: [
                 'colvis', 'excel'

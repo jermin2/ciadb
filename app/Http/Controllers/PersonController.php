@@ -58,6 +58,7 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $this->authorize('create_people');
         $person = new Person($this->validatePerson());
         $person->save();
@@ -130,10 +131,13 @@ class PersonController extends Controller
      * @param  \App\Person  $person
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Person $person)
+    public function delete(Person $person)
     {
         $this->authorize('delete_people');
-        return "Not yet implemented";
+        
+        $person->delete();
+
+        return redirect(route('people.index'));
     }
 
     protected function validatePerson()
@@ -144,7 +148,7 @@ class PersonController extends Controller
             'email'     => 'nullable|email',
             'number'    => 'nullable',
             'year'      => 'nullable', 
-            'tags'      => 'exists:tags,id',
+            'tags'      => 'nullable|exists:tags,id',
             'dob'       => 'nullable|date_format:"d-m-Y"',
             'baptism'   => 'nullable|date_format:"d-m-Y"',
             'parents'   => 'nullable',

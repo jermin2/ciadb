@@ -23,6 +23,7 @@ Route::get('/people/create', 'PersonController@create')->name('people.create');
 Route::get('/people/{person}', 'PersonController@show')->name('people.show');
 Route::get('/people/{person}/edit', 'PersonController@edit')->name('people.edit');
 Route::put('/people/{person}', 'PersonController@update')->name('people.update');
+Route::get('people/{person}/delete', 'PersonController@delete')->name('people.delete');
 
 
 Route::get('/people/tags/{tag}', 'PersonTagController@show')->name('tag.show');

@@ -1,152 +1,81 @@
 @extends ('layouts/main')
 
 @section ('content')
-<div class="card d-flex justify-content-center col-md-12 col-lg-10 mx-auto">
+<div class=" col-md-12 col-lg-10 mx-auto">
+    @component('components.event')
+        @slot('title')
+            Edit Event
+        @endslot
 
-    <div class="card-header">
-        <div class="card-title">
-            <h2>Edit Event</h2>
-        </div>
-    </div>
-
-    <div class="card-body">
-        <div class="col-md-12">
-            <form method="POST" action="{{ route('events.update', $event->id) }}" class="needs-validation col-md-12" novalidate>
+        @slot('event_content_header')
+        <form method="POST" action="{{ route('events.update', $event->id) }}" class="needs-validation col-md-12" novalidate>
                 @csrf 
                 @method('PUT')
-            
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="label" for="name">Name</label>
+        @endslot
 
-                        <input class="form-control" type="text" name="name" id="name" value="{{ $event->name }}">
-                        <div class="invalid-feedback">Valid event name is required. </div>
-                    </div>
+        @slot('name')
+            <input class="form-control" type="text" name="name" id="name" value="{{ $event->name }}">
+        @endslot
 
-                    <div class="col-md-6 mb-3">
-                        <label class="label" for="time">Time</label>
+        @slot('time')
+        @component('components.timepicker')
+            @slot('currentTime')
+                {{$event->time}}
+            @endslot
+        @endcomponent
+        @endslot
 
-                        @component('components.timepicker')
-                        @slot('currentTime')
-                            {{$event->time}}
-                        @endslot
-                        @endcomponent
-                    </div>
-                </div>
+        @slot('location')
+            <input class="form-control" type="text" name="location" id="location" value="{{ $event->location }}">
+        @endslot
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="label" for="location">Location</label>
+        @slot('author')
+            <input class="form-control" value="{{$event->author->name}}" readonly/>
+        @endslot
 
-                        <input class="form-control" type="text" name="location" id="location" value="{{ $event->location }}">
-                        <div class="invalid-feedback">Valid first name is required. </div>
-                    </div>
+        @slot('tags')
+            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
+                @slot('pickername')
+                    event_tag
+                @endslot
+            @endcomponent
+        @endslot
 
-                    <div class="col-md-6 mb-3">
-                        <label class="label" for="author">Author</label>
-                        <input class="form-control" value="{{$event->author->name}}" readonly/>
-                    </div>
+        @slot('usertags')
+            @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList' => $event->usertags])
+                @slot('pickername')
+                    event_usertag
+                @endslot
+                @slot('tagname')
+                    usertags[]
+                @endslot
+            @endcomponent
+        @endslot
 
-                    
-                </div>
+        @slot('attendee_button')
+            @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people, 'selectedpeople' => $event->people])
+            @endcomponent
+        @endslot
+        @slot('attendees')
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="label" for="notes">Attendees</label>
-                        <div>
-                        @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people, 'selectedpeople' => $event->people])
-                        @endcomponent
-                        </div>
-                        <div id="people" class="d-flex flex-wrap">
-                            @foreach ($event->people as $person)
-                            <div class="p-1">
-                                <a href="{{route('event.person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
+                @foreach ($event->people as $person)
 
-                    <div class="col-md-6 mb-3">
-                        <div class="col-md-6 mb-3">
-                            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                    <a class="px-1" href="{{route('event.person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
 
-                            <div>
-                            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
-                            @slot('pickername')
-                                        event_tag
-                                    @endslot
-                            @endcomponent
-                            @error('time')
-                            <p class="help is-danger">{{ $errors->first('title') }}</p>
-                            @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="tags">Tags <span class="text-muted">(Optional)</span></label>
+                @endforeach
 
-                            <div>
-                            @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList' => $event->usertags])
-                                @slot('pickername')
-                                    event_usertag
-                                @endslot
-                                @slot('tagname')
-                                    usertags[]
-                                @endslot
-                            @endcomponent
-                            @error('time')
-                            <p class="help is-danger">{{ $errors->first('title') }}</p>
-                            @enderror
-                            </div>
-                        </div>
-                    </div>
+        @endslot
 
-                </div>
+        @slot('notes')
+            <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5>{{ $event->notes }}</textarea>
+        @endslot
 
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label class="label" for="notes">Notes</label>
+        @slot('buttons')
+            <button class="btn btn-success btn-lg btn-round col-md-6 p-auto" type="submit">Save</button>
+        @endslot
 
-                        <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5>{{ $event->notes }}</textarea>
-                        <div class="invalid-feedback">Valid first name is required. </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="private" @if($event->private) checked @endif>
-                            <label class="form-check-label" for="private">Make these notes private</label>
-                        </div>
-                    </div>
-                </div>
 
-                <hr class="mb-4">
-
-                <div class="row col-md-12 mt-4">
-
-                        <button class="btn btn-success btn-lg btn-round col-md-6 p-auto" type="submit">Save</button>
-
-                </div>
-            </form>
-
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
-
-            @can ('delete_event', $event)
-            <div class="row col-md-12 mt-4">
-
-                    <form method="POST" class="col-md-12" action="{{route('events.delete', $event->id)}}">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger btn-lg btn-round col-md-6 p-auto" type="submit">Delete</button>
-                    </form>
-
-            </div>
-            @endcan
-        </div>
-    </div>
+    @endcomponent
 </div>
 
 @endsection

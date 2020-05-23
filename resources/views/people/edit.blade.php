@@ -103,10 +103,20 @@
   @endcomponent
   </div>
 
-  <div class=" col-lg-6 col-md-12 col-sm-12 mx-auto">
-  @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
-  @endcomponent
+  <div class="col col-lg-6 col-md-12 col-sm-12 mx-auto">
+    <div class=" ">
+    @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
+    @endcomponent
+    </div>
+
+    <div class=" ">
+    @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
+    @endcomponent
+    </div>
   </div>
+
+
+
 </div>
 @endsection
 

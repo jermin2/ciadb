@@ -73,8 +73,9 @@
                         aElement.target= "_blank";
                         var a_html = '<input type="hidden" name="people[]" value=';
                         aElement.innerHTML = a_html.concat(id,'>', name);
+                        aElement.classList.add("p-1");
                         divElement.appendChild(aElement);
-                    people_div.appendChild(divElement);
+                    people_div.appendChild(aElement);
                     
                 }
 

@@ -42,6 +42,7 @@
                     <tr>
                         <th>id</th>
                         <th>Name</th>
+                        
                         @can ('show_events')
                             <th>Actions</th>
                         @endcan

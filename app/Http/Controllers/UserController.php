@@ -23,9 +23,15 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
-        return view('users/home', [
-            'events' => Event::where('author_id', $user->id)->latest('time')->take(5)->get()
+        //dd(Person::all());
+
+        return view('dashboard',[
+            'person' => $user->person,
+            'user'  => $user,
+            'people' => Person::all(),
+            'tagtypes' => Tagtype::whereIn('id', [1, 2])->get(),
         ]);
+        
 
 
 

@@ -253,7 +253,14 @@
     transition: all 0.5s ease-in-out;
 }
 
-td {
+td, th {
   width:0.1%;
   white-space: nowrap;
+  
   } 
+
+td.notes {
+  white-space: normal;
+  width: 100%;
+}
+

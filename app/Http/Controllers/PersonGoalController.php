@@ -15,22 +15,25 @@ class PersonGoalController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Person $person)
+    public function store(Request $request)
     {
+
         $param = $this->validateGoal();
+
         $param['start_date']  = \Carbon\Carbon::createFromFormat('d-m-Y', $request->start_date);
 
-        $param['person_id']  = $person->id;
         $param['author_id'] = Auth::user()->id;
         $param['private'] = request()->private == "on" ? true : false;
         $goal = new Goal($param);
         $goal->save();
-        return redirect(route('people.edit', $person->id));
+
+        return redirect(route('people.edit', $request->person_id));
     }
 
     public function validateGoal()
     {
         return request()->validate([
+            'person_id' => 'required',
             'goal' => 'required',
             'start_date' => 'date_format:"d-m-Y"',
             'end_date' => 'nullable|date_format:"d-m-Y"',
@@ -47,7 +50,11 @@ class PersonGoalController extends Controller
 
     public function update(Request $request, Person $person, Goal $goal)
     {
-        $param = $this->validateGoal();
+        $param = request()->validate([
+            'goal' => 'required',
+            'start_date' => 'date_format:"d-m-Y"',
+            'end_date' => 'nullable|date_format:"d-m-Y"',
+        ]);
 
         $param['private'] = request()->private == "on" ? true : false;
         $param['start_date']  = \Carbon\Carbon::createFromFormat('d-m-Y', $request->start_date);

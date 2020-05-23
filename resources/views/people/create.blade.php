@@ -31,6 +31,14 @@
         <input type="email" class="form-control" id="email" placeholder="you@example.com"  >
       @endsection
 
+      @section('gender')
+        <select class="custom-select" name="gender" id="year">
+          <option value="" selected>..</option>
+          <option value="m">M</option> 
+          <option value="f">F</option> 
+        </select>
+      @endsection
+
       @section('number')
         <input type="email" class="form-control" id="number" placeholder="022123456"  >
       @endsection

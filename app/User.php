@@ -66,6 +66,6 @@ class User extends Authenticatable
 
     public function goals()
     {
-        return $this->belongsToMany(Goal::class);
+        return $this->hasMany(Goal::class, 'author_id');
     }
 }

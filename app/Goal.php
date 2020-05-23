@@ -13,6 +13,11 @@ class Goal extends Model
         return $this->belongsTo(Person::class);
     }
 
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
     public function getStartDateAttribute( $value ) {
         return (new \Carbon\Carbon($value))->format('d-m-Y');
     }

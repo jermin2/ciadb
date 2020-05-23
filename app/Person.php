@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    protected $fillable = ['first_name', 'last_name', 'email', 'number', 'year', 'dob', 'baptism', 'parents', 'school', 'notes'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'number', 'year', 'dob', 'baptism', 'parents', 'school', 'notes', 'gender'];
 
     public function tags()
     {
@@ -16,6 +16,13 @@ class Person extends Model
     public function events()
     {
         return $this->belongsToMany(Event::class);
+    }
+
+    public function lastTenEvents()
+    {
+        if($this->events != null)
+            return $this->events->take(10)->sort();
+        return null;
     }
 
     public function user()

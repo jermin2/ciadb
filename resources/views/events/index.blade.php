@@ -27,27 +27,26 @@
             </div>
             @endisset
 
-            <div class="row justify-content-between m-auto p-2">
-                <h2 class="col-md-8"> Events </h2>
-                <div class="col-md-4">
-                    <div class="d-flex justify-content-between ">
-                        System Tags
-                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
-                        @endcomponent
-                    </div>
-                    <div class="d-flex justify-content-between ">
-                        User Tags
-                        @component('components.tagpicker', ['tags' => $usertags])
-                            @slot('pickername')
-                                usertagpicker
-                            @endslot
-                        @endcomponent
-                    </div>
-                </div>
-            </div>
+            <h2 class="col-md-8"> Events </h2>
         </div>
 
         <div class="card-body">
+            <div class="row">
+                <div class="input-group col-md-6 mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" for="tags">Filter</span>
+                    </div>
+                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                        @slot('text') System Tags @endslot
+                    @endcomponent
+                    @component('components.tagpicker', ['tags' => $usertags])
+                        @slot('text') User Tags @endslot
+                        @slot('pickername')
+                            usertagpicker
+                        @endslot
+                    @endcomponent
+                </div>
+            </div>
             <div class="table-responsive">
                 <table id="main-table" class="table-hover table-striped" style="width:100%">
                     <thead>
@@ -60,6 +59,7 @@
                             <th scope="col">Notes</th>
                             <th scope="col" data-priority="2">Tags</th>
                             <th scope="col" data-priority="2">User Tags</th>
+                            <th scope="col" data-priority="0">Actions</th>
                             
                         </tr>
                     </thead>
@@ -72,7 +72,7 @@
                             <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>                           
                             <td class=""> {{ $event->location }} </td>
                                 <!-- If event is NOT private OR it is private, but author is current user -->
-                            <td> @if(!$event->private || ($event->author_id == Auth::user()->id) )
+                            <td class="notes"> @if(!$event->private || ($event->author_id == Auth::user()->id) )
                                     {{ $event->notes }} 
                                 @else
                                     <span class="text-muted">*Private*</span>
@@ -95,6 +95,25 @@
                                         {{$tag->name}}
                                         </span> </a>
                                 @endforeach
+                            </td>
+                            <td>
+                                <div class="input-class-append row">
+                                    <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-outline-secondary">View</a>  
+                                    @can('edit_events')  
+                                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        
+                                        <a class="dropdown-item" href="{{ route('events.edit', $event->id ) }}">Edit</a>
+                                        
+                                        @can('delete_events')
+                                        <div role="separator" class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="{{ route('events.delete', $event->id ) }}">Delete</a>
+                                        @endcan
+                                    </div> 
+                                    @endcan
+                                </div>
                             </td>
                         </tr>
                         @endforeach
@@ -132,7 +151,7 @@
     $(document).ready(function()
     {
         var table = $('#main-table').DataTable( { 
-            select: true,
+            pageLength:50,
             dom: 'Bfrtip',
             buttons: [
                 'colvis', 'excel'
@@ -155,8 +174,8 @@
         .on( 'select', function ( e, dt, type, indexes ) {
             var rowData = table.rows( indexes ).data().toArray();
             var id= rowData[0][1];
-            console.log(rowData[0][0]);
-            window.location.href = id;
+            //console.log(rowData[0][0]);
+            //window.location.href = id;
             
         } )
 

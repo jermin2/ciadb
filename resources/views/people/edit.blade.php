@@ -28,6 +28,15 @@
     <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com" value="{{$person->email}}">
     @endsection
 
+    @section('gender')
+        <select class="custom-select" name="gender" id="year">
+          <option value="" selected>..</option>
+          <option value="m" @if($person->gender == "m") selected @endif >M</option> 
+          <option value="f" @if($person->gender == "f") selected @endif >F</option> 
+        </select>
+      @endsection
+
+
     @section('number')
     <input type="text" class="form-control" name="number" id="number" placeholder="022123456" value="{{$person->number}}">
     @endsection
@@ -107,14 +116,52 @@
     @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
     @endcomponent
     </div>
-
-    <div class=" ">
-    @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
-    @endcomponent
-    </div>
   </div>
 
+  <div class="row col-md-12 col-lg-12 mx-auto">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <h2>Last 10 Events</h2>
+        </div>
+      </div>
+      <div class="card-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Event</th>
+              <th>Notes</th>
+              <th>Tags</th>
+              <th>UserTags</th>
+            </tr>
+          </thead>
+          @foreach($person->lastTenEvents() as $event)
+            <tr>  
+              <td><a href="{{ route('events.edit', $event->id) }}">{{$event->time}}</a></td>
+              <td>{{$event->name}}</td>
+              <td class="notes">{{$event->notes}}</td>
+              <td>
+                @foreach($event->tags as $tag)
+                <a href="{{route('event-tag.show', $tag->id)}}"><span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span> </a>
+                @endforeach
+              </td>
+              <td>
+                @foreach($event->usertags as $tag)
+                <a href="{{route('event-tag.show', $tag->id)}}"><span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span> </a>
+                @endforeach
+              </td>
+            </tr>
+            @endforeach
+          <tbody>
 
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
 
 </div>
 @endsection

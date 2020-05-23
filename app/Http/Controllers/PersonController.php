@@ -153,7 +153,8 @@ class PersonController extends Controller
             'baptism'   => 'nullable|date_format:"d-m-Y"',
             'parents'   => 'nullable',
             'school'    => 'nullable',
-            'notes'     => 'nullable'
+            'notes'     => 'nullable',
+            'gender'    => 'nullable'
         ]);
     }
 }

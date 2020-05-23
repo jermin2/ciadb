@@ -5,11 +5,14 @@
       </div>
     </div>
     <div class="card-body">
-      <form method="POST" action="goals">
+      <form method="POST" action="{{route('goals.store')}}">
       @csrf
         <table>
           <thead>
             <tr>
+              @isset($individual)
+              <th>Person</th>
+              @endisset
               <th>Goal/prayer</th>
               <th>Start date</th>
               <th>End Date</th>
@@ -18,34 +21,44 @@
           </thead>
           <tbody>
             <tr>
-              <td><input class="form-control" type="text" name="goal" placeholder="Goal"></td>
+              @isset($individual)
+                {{$individual}}
+              @endisset
+              <td>
+              @empty($individual)
+                <input type="text" value="{{$person->id}}" name="person_id" hidden>
+              @endempty  
+              <input class="form-control" type="text" name="goal" placeholder="Goal"></td>
               <td>@component('components.timepicker', ['pickername'=>'start_date'])
                           @endcomponent
               </td>
               <td>@component('components.timepicker', ['pickername'=>'end_date'])
                           @endcomponent</td>
-              <td>
-              <div class="input-group-text">
-              <input class="" type="checkbox" name="private">
+              <td style="width:40px">
+              <div class="input-group-text" >
+                <input class=""  type="checkbox" name="private">
               </div></td>
-              <td><button class="btn btn-success" type="submit">Add</button>
+              <td><button class="add-goal btn btn-success" type="submit">Add</button>
             </tr>
             @foreach($goals as $goal)
               @if(!$goal->private || $goal->author_id == Auth::user()->id)
               <tr>
+                @isset($individual)
+                <td><a href="{{ route('people.edit', $goal->person->id) }}">{{$goal->person->name()}}</a></td>
+                @endisset
                 <td>{{$goal->goal}}</td>
                 <td>{{$goal->start_date}}</td>
                 <td>{{$goal->end_date}}</td>
-                <td>
-                <div class="input-group-text">
-                  <input type="checkbox" @if($goal->private) checked @endif>
+                <td style="width:40px">
+                <div class="input-group-text" >
+                  <input type="checkbox"  @if($goal->private) checked @endif>
                 </div>
                 </td>
                 <td>
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{route('goals.edit', [ 'goal' => $goal, 'person'=> $person ]) }}">Edit </a>
-                      <a class="dropdown-item" href="{{route('goals.delete', [ 'goal' => $goal, 'person'=> $person ]) }}" >Delete </a>
+                      <a class="dropdown-item" href="{{route('goals.edit', [ 'goal' => $goal, 'person'=> $goal->person ]) }}">Edit </a>
+                      <a class="dropdown-item" href="{{route('goals.delete', [ 'goal' => $goal, 'person'=> $goal->person ]) }}" >Delete </a>
                     </div>
                 </td>
               </tr>

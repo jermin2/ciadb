@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::get('/', 'UserController@home')->name('home');
-Route::get('/home', 'UserController@home')->name('home');
+Route::get('/dashboard', 'UserController@home')->name('dashboard');
 
 Route::get('/people', 'PersonController@index')->name('people.index');
 Route::post('/people', 'PersonController@store')->name('people.store');
@@ -39,7 +39,7 @@ Route::get('/events/{event}', 'EventController@show')->name('events.show');
 Route::get('/events/{event}/edit', 'EventController@edit')->name('events.edit');
 Route::put('/events/{event}', 'EventController@update')->name('events.update');
 
-Route::delete('/events/{event}', 'EventController@delete')->name('events.delete');
+Route::get('/events/{event}/delete', 'EventController@delete')->name('events.delete');
 
 Route::get('/events/tags/{tag}', 'EventTagController@show')->name('event-tag.show');
 
@@ -59,4 +59,6 @@ Route::post('ajaxRequest', 'EventPersonController@ajaxRequestPost')->name('ajaxR
 Route::get('people/{person}/goals/{goal}', 'PersonGoalController@delete')->name('goals.delete');
 Route::put('people/{person}/goals/{goal}/update', 'PersonGoalController@update')->name('goals.update');
 Route::get('people/{person}/goals/{goal}/edit', 'PersonGoalController@edit')->name('goals.edit');
-Route::post('people/{person}/goals', 'PersonGoalController@store')->name('goals.store');
+Route::post('people/{person}/goals', 'PersonGoalController@store')->name('goals.storea');
+
+Route::post('goals', 'PersonGoalController@store')->name('goals.store');

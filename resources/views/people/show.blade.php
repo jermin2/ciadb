@@ -26,6 +26,10 @@
       <input type="email" class="form-control" id="email"  value="{{$person->email}}" readonly>
       @endsection
 
+      @section('gender')
+        <input type="email" class="form-control" id="number"  value="{{$person->gender}}" readonly>
+      @endsection
+
       @section('number')
       <input type="email" class="form-control" id="number"  value="{{$person->number}}" readonly>
       @endsection

@@ -21,6 +21,7 @@ class CreatePeopleTable extends Migration
             $table->string('number')->nullable();
             $table->string('email')->nullable();
             $table->text('notes')->nullable();
+            $table->string('gender')->nullable();
             $table->date('dob')->nullable();
             $table->date('baptism')->nullable();
             $table->string('parents')->nullable();

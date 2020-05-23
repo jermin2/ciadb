@@ -8,34 +8,27 @@
 @section ('content')
     <div class="card">
         <div class="card-header">
-            @isset($tag)
-            <div class="text-center">
-                <h2>{{$tag->name}}</h2>
-            </div>
-            @endisset
-            <div class="row justify-content-between m-auto p-2">
+            <div class="card-title">
                 <h2 class="col-md-8"> People </h2>
-                <div class="col-md-4">
-                    <div class="d-flex justify-content-between ">
-                        System Tags
-                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
-                            @slot('text') System Tags @endslot
-                        @endcomponent
-                    </div>
-                    <div class="d-flex justify-content-between ">
-                        User Tags
-                        @component('components.tagpicker', ['tags' => $usertags])
-                            @slot('text') User Tags @endslot
-                            @slot('pickername')
-                                usertagpicker
-                            @endslot
-                        @endcomponent
-                    </div>
-                </div>
             </div>
-
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="input-group col-md-6 mb-3">
+                    <div class="input-group-prepend">
+                    <span class="input-group-text" for="tags">Filter</span>
+                    </div>
+                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                        @slot('text') System Tags @endslot
+                    @endcomponent
+                    @component('components.tagpicker', ['tags' => $usertags])
+                        @slot('text') User Tags @endslot
+                        @slot('pickername')
+                            usertagpicker
+                        @endslot
+                    @endcomponent
+                </div>
+            </div>
             <div class="table-responsive">
             <table id="main-table" class="table-hover table-striped" style="width:100%" >
                 <thead>
@@ -43,6 +36,7 @@
                         <th>id</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Gender</th>
                         <th>Number</th>
                         <th>Year</th>
                         <th>DOB</th>
@@ -61,6 +55,7 @@
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->id }} </a> </td>
                         <td> <a href="{{ route('people.edit' , $person->id) }}" >{{ $person->name() }}</a> </td>
                         <td> {{ $person->email}}</td>
+                        <td> {{ $person->gender }} </td>
                         <td> {{$person->number }} </td>
                         <td> {{ $person->year }} </td>
                         <td> {{ $person->dob }} </td>
@@ -90,16 +85,20 @@
 
                         <td>
                             <div class="input-class-append row">
-                                <a href="{{ route('event.person.show', $person->id) }}" class="btn btn-outline-secondary">Events</a>    
-                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a href="{{ route('event.person.show', $person->id) }}" class="btn btn-sm btn-outline-secondary">Events</a>    
+                                @can('edit_people')
+                                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="sr-only">Toggle Dropdown</span>
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="{{ route('people.show', $person->id ) }}">View</a>
                                     <a class="dropdown-item" href="{{ route('people.edit', $person->id ) }}">Edit</a>
+                                    @can('delete_people')
                                     <div role="separator" class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('people.delete', $person->id ) }}">Delete</a>
+                                    @endcan
                                 </div> 
+                                @endcan
                             </div>                 
                             
                         </td>
@@ -139,7 +138,7 @@
     $(document).ready(function() 
     {
         var table = $('#main-table').DataTable( { 
-            "paging":false,
+            pageLength:50,
             dom: 'Bfrtip',
             buttons: [
                 'colvis', 'excel'

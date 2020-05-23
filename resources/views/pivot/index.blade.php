@@ -11,40 +11,72 @@
         <div class="card-header">
             <div class="card-title"><h2>Pivot Table</h2></div>
 
-            
-            <div class="people-filters">
-            People Filters
-            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => Auth::user()->person->tags])
-            @slot('text') Sys Tags @endslot
-            @slot('pickername') people_tags @endslot
-            @endcomponent
 
-            @component('components.tagpicker', ['tags' => $usertags])
-            @slot('text') User Tags @endslot
-            @slot('pickername') people_usertags @endslot
-            @endcomponent
-            </div>
-
-            <div class="event-filters">
-            Event Filters
-            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => Auth::user()->person->tags])
-            @slot('text') Sys Tags @endslot
-            @slot('pickername') event_tags @endslot
-            @endcomponent
-
-            @component('components.tagpicker', ['tags' => $usertags])
-            @slot('text') User Tags @endslot
-            @slot('pickername') event_usertags @endslot
-            @endcomponent
-            </div>
         </div>
 
         <div class="card-body">
-            <div class="table-responsive">
-                <table id="main-table" class="table-hover table-striped" style="width:100%">
+            <div class="row">
+                <div class="input-group col-md-6 mb-3 people-filters events-filters">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" for="tags">Filters</span>
+                    </div>
+                    @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => Auth::user()->person->tags])
+                        @slot('text') Sys Tags @endslot
+                        @slot('pickername') people_tags @endslot
+                    @endcomponent
+                    @component('components.tagpicker', ['tags' => $usertags])
+                        @slot('text') User Tags @endslot
+                        @slot('pickername') people_usertags @endslot
+                    @endcomponent
+                    <div class="input-group-append">
+                        <button id="btn_clearpeoplefilter" class="btn btn-outline-secondary btn_clearpeoplefilter">Clear All</button>
+                    </div>
+                </div>
+            </div>
+            <a class="dropdown-toggle" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Individual Filters</a>
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="row">
+                    <div class="input-group col-md-6 mb-3 people-filters">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" for="tags">People</span>
+                        </div>
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                            @slot('text') Sys Tags @endslot
+                            @slot('pickername') people_tags @endslot
+                        @endcomponent
+                        @component('components.tagpicker', ['tags' => $usertags])
+                            @slot('text') User Tags @endslot
+                            @slot('pickername') people_usertags @endslot
+                        @endcomponent
+                        <div class="input-group-append">
+                            <button id="btn_clearpeoplefilter" class="btn btn-outline-secondary btn_clearpeoplefilter">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-group col-md-6 mb-3 events-filters">
+                        <div class="input-group-prepend">
+                        <span class="input-group-text" for="tags">Event</span>
+                        </div>
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                            @slot('text') Sys Tags @endslot
+                            @slot('pickername') event_tags @endslot
+                        @endcomponent
+                        @component('components.tagpicker', ['tags' => $usertags])
+                            @slot('text') User Tags @endslot
+                            @slot('pickername') event_usertags @endslot
+                        @endcomponent
+                        <div class="input-group-append">
+                            <button id="btn_cleareventfilter" class="btn btn-outline-secondary btn_cleareventfilter">Clear All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <table id="main-table" class="table-hover table-striped table-bordered"  >
                     <thead>
                         <!-- First row are the id. Second row is tags used for searching -->
-                        <tr class="first" hidden>
+                        <tr class="first" >
                             <th>id</th>
                             <th>Tags</th>
                             <th>Person Name</th>
@@ -52,22 +84,12 @@
                             <th data-id="{{$event->id}}">
                                 <span hidden>meta data</span>
                                 <span class="event-id" data-id="{{$event->id}}"></span>
-
+                                <span class="title" hidden>{{$event->name}}</span>
                                 @foreach($event->tags as $tag)
                                     <span class="event-tag" data-tag="{{$tag->name}}"></span>
                                 @endforeach
-
-                                {{$event->name}} {{$event->date}}
-                            </th>
-                            @endforeach
-                        </tr>  
-                        <tr>
-                            <th>id</th>
-                            <th>Tags</th>
-                            <th>Person Name</th>
-                            @foreach($events as $event)                          
-                            <th  data-id="{{$event->id}}">
                                 <a href="{{ route('events.edit', $event->id )}}"> {{$event->shortdate()}}</a>
+                                
                             </th>
                             @endforeach
                         </tr>                           
@@ -77,14 +99,15 @@
                         <tr>
                             <td>{{$person->id}}</td>
                             <td>
-                            <span class="">
-                            @foreach($person->tags as $tag)
-                                {{$tag->name}}
-                            @endforeach
-                            @foreach($person->usertags as $tag)
-                                {{$tag->name}}
-                            @endforeach
-                            </span></td>   
+                                <span class="">
+                                @foreach($person->tags as $tag)
+                                    {{$tag->name}}
+                                @endforeach
+                                @foreach($person->usertags as $tag)
+                                    {{$tag->name}}
+                                @endforeach
+                                </span>
+                            </td>   
                             <td><a href="{{ route('people.edit', $person->id ) }}" >{{$person->name()}}</a> </td>
                          
                             @foreach($events as $event)                          
@@ -119,9 +142,6 @@
         }
     });
 
-
-
-
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
             var values = [$('.people-filters select').find("option:selected").text()];
@@ -145,17 +165,21 @@
         var len = $('#main-table thead tr.first th').length;
 
         var table = $('#main-table').DataTable( { 
+            pageLength:50,
             select: {
                 style: 'os',
                 items: 'cell'
             },
             dom: 'Bfrtip',
             buttons: [
-                'colvis', 'excel'
+                'excel'
             ],
 
-            colReorder: true,
-            responsive: true,
+            //response:true,
+            scrollX: true,
+            autoWidth: false,
+
+            //colReorder: true,
 
             //Choose the top cell in the header (the one with tags);
             orderCellsTop: true, 
@@ -171,6 +195,16 @@
 
         });
 
+        table.on('shown.bs.collapse', function () {
+
+
+        $($.fn.dataTable.tables(true)).DataTable()
+            scroller.measure();
+        $($.fn.dataTable.tables(true)).DataTable()
+        .responsive.recalc(); 
+
+        });
+ 
 
         table
         .on( 'select', function ( e, dt, type, indexes ) {
@@ -194,10 +228,17 @@
             });
         } )
 
+        $('.btn_clearpeoplefilter').click(function(){
+            $('.people-filters select').selectpicker('deselectAll');
+        })
 
+        $('.btn_cleareventfilter').click(function(){
+            $('.events-filters select').selectpicker('deselectAll');
+        })
 
 
         $('.people-filters select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
+            console.log("people filter");
             $('#main-table').DataTable().draw();
         });
 
@@ -223,8 +264,8 @@
 
 
         */
-        $('.event-filters select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
-            var values = [$('.event-filters select').find("option:selected").text()];
+        $('.events-filters select').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
+            var values = [$('.events-filters select').find("option:selected").text()];
             values = values.join(" ").split(' ').filter(Boolean);
             
             
@@ -249,12 +290,14 @@
                 }
 
             }
+            table.columns.adjust();
+            
         });
 
         $('#main-table').DataTable().draw();
-        $('.event-filters select').trigger('changed.bs.select',  ["", "", "", ""]);
+        $('.events-filters select').trigger('changed.bs.select',  ["", "", "", ""]);
 
-        echo table.columns([0,1,2]).visible(false);
+        //echo table.columns([0,1,2]).visible(false);
 
         //tableVis = t.columns().visible().join(",")
         /*

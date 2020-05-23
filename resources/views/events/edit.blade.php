@@ -72,6 +72,7 @@
 
         @slot('buttons')
             <button class="btn btn-success btn-lg btn-round col-md-6 p-auto" type="submit">Save</button>
+            <a href="{{route('events.delete', $event->id) }}" class="btn btn-danger btn-lg btn-round col-md-6 p-auto">Delete</a>
         @endslot
 
 

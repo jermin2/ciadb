@@ -23,11 +23,22 @@
       </div>
     </div>
 
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" for="email"> Email</span>
+    <div class="row">
+      <div class="input-group col-md-8 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="email"> Email</span>
+        </div>
+        @yield('email')
       </div>
-      @yield('email')
+
+      <div class="input-group col-md-4 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" for="email">Gender</span>
+        </div>
+        @yield('gender')
+      </div>
+
+
     </div>
 
     <div class="row">
@@ -58,7 +69,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" for="user_tags">User tags</span>
         </div>
-        @yield('tags')
+        @yield('usertags')
       </div>
     </div>
 

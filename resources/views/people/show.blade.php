@@ -3,7 +3,7 @@
 @section ('content')
 
 <div class="row">
-  <div class=" col-lg-6 col-md-12 col-sm-12 mx-auto">
+  <div class=" col-xl-6 col-lg-12 col-md-12 col-sm-12 mx-auto">
     @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
       @section('content-title')
@@ -118,10 +118,21 @@
     @endcomponent
   </div>
 
-  <div class="col-lg-6 col-md-12  col-sm-12 mx-auto">
+  <div class="col-xl-6 col-lg-12 col-md-12  col-sm-12 mx-auto">
     @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
     @endcomponent
   </div>
+
+  @can('view_events')
+  <div class="row col-md-12 col-lg-12 mx-auto">
+        @component('components.lastevents', ['events' => $person->lastTenEvents() ])
+      @slot('title')
+        Last Ten Events
+      @endslot
+    @endcomponent
+  </div>
+  @endcan
+
 </div>
 @endsection
 

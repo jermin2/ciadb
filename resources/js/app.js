@@ -32,3 +32,4 @@ const app = new Vue({
 });
 
 require('../../node_modules/bootstrap-select/dist/js/bootstrap-select.min');
+require('../../node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js');

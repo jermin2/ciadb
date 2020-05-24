@@ -95,6 +95,9 @@
 
 
       @section('buttons')
+        @can('edit_people')
+          <a href="{{route('people.edit', $person->id)}}" class="col-md-6 btn btn-danger btn-lg btn-round">Edit</a>
+        @endcan
         <a href="{{route('people.index')}}" class="col-md-6 btn btn-primary btn-lg btn-round">Close</a>
       @endsection
 

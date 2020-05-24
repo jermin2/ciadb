@@ -10,7 +10,7 @@
 @section ('content')
 <div class=" col-md-12 col-lg-10 mx-auto">
     @component('components.event')
-        @slot('title') Edit Event @endslot
+        @slot('title') Add Event @endslot
 
         @slot('event_content_header')
             <form method="POST" action="{{ route('events.store') }}" class="needs-validation w-100" novalidate>
@@ -69,6 +69,16 @@
             @if(isset($user->person))
                 <a class="px-1" href="{{route('people.show', $user->person->id)}}"><input type="hidden" name="people[]" value="{{$user->person->id}}"> {{ $user->person->name() }} </a>
             @endif
+
+        @endslot
+
+        @slot('private')
+        <div class="input-group-text">
+            <div class="custom-control custom-checkbox ">
+                <input type="checkbox" class="custom-control-input input-lg" id="customCheck1" name="private">
+                <label class="custom-control-label" for="customCheck1"></label>
+            </div>
+          </div>
 
         @endslot
 

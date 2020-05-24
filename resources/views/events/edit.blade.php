@@ -56,14 +56,20 @@
             @component('components.peoplepicker', ['tagtypes' => $tagtypes, 'people' => $people, 'selectedpeople' => $event->people])
             @endcomponent
         @endslot
+
         @slot('attendees')
+            @foreach ($event->people as $person)
+                <a class="px-1" href="{{route('people.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
+            @endforeach
+        @endslot
 
-                @foreach ($event->people as $person)
-
-                    <a class="px-1" href="{{route('people.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
-
-                @endforeach
-
+        @slot('private')
+        <div class="input-group-text">
+            <div class="custom-control custom-checkbox ">
+                <input type="checkbox" class="custom-control-input input-lg" id="customCheck1" name="private" @if($event->private) checked @endif >
+                <label class="custom-control-label" for="customCheck1"></label>
+            </div>
+          </div>
         @endslot
 
         @slot('notes')

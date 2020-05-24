@@ -6,7 +6,6 @@
   @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
 
-
       @section('content-header')
         <form method="POST" action="{{ route('people.store') }}" class="needs-validation col-md-12" novalidate>
         @csrf 

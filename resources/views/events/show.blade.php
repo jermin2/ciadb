@@ -49,14 +49,20 @@
         @slot('attendee_button')
         <span class="input-group-text" for="attendees">Attendees</span>
         @endslot
+
         @slot('attendees')
-
                 @foreach ($event->people as $person)
-
-                    <a class="px-1" href="{{route('event.person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}" readonly> {{$person->first_name}} {{$person->last_name }} </a>
-
+                    <a class="px-1" href="{{route('people.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}" readonly> {{$person->first_name}} {{$person->last_name }} </a>
                 @endforeach
+        @endslot
 
+        @slot('private')
+        <div class="input-group-text">
+            <div class="custom-control custom-checkbox ">
+                <input type="checkbox" class="custom-control-input input-lg" id="customCheck1" name="private" @if($event->private) checked @endif >
+                <label class="custom-control-label" for="customCheck1"></label>
+            </div>
+          </div>
         @endslot
 
         @slot('notes')

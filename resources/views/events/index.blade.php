@@ -36,7 +36,7 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" for="tags">Filter</span>
                     </div>
-                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                    @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $selectedTagList])
                         @slot('text') System Tags @endslot
                     @endcomponent
                     @component('components.tagpicker', ['tags' => $usertags])

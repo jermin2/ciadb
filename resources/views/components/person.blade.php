@@ -120,9 +120,7 @@
     @yield('content-footer')
     
     <div class="row">
-      <div class="col-md-12">
       @yield('buttons')
-      </div>
     </div>
 
     </form>

@@ -33,6 +33,9 @@
                   <input class="form-control" type="text" name="goal" placeholder="Goal">
                 </td>
                 <td>@component('components.timepicker', ['pickername'=>'start_date'])
+                      @slot('currentTime')
+                      {{Carbon\Carbon::now()->format('d-m-Y')}}
+                      @endslot
                     @endcomponent
                 </td>
                 <td>@component('components.timepicker', ['pickername'=>'end_date'])

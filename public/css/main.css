@@ -291,3 +291,7 @@ div.checkboxdiv {
 div.nowrap {
   white-space:nowrap;
 }
+
+body {
+  background-color: #f4f3ef;
+}

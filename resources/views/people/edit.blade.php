@@ -131,6 +131,7 @@
 
 <script src="{{ asset('js/peoplepicker.js') }}?5"></script>
 
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 
@@ -141,6 +142,22 @@ $(document).ready( function() {
     format: "DD-MM-YYYY",
     debug: true,
     } );
+
+    $('#goalTable').DataTable( { 
+        dom: 'rt',
+        autoWidth: true,
+        responsive: true,
+        columnDefs: [
+          
+          { responsivePriority: 1, targets: [0,-1]},
+          { responsivePriority: 2, targets: 1},
+          { responsivePriority: 3, targets: 2},
+          { width: "40px", targets: 3},
+          { width: "110px", targets: [1,2]},
+          { width: "80px", targets: -1},
+          
+        ]
+    });
 });
 
 </script>

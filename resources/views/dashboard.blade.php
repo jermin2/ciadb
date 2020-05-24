@@ -61,10 +61,10 @@ $(document).ready( function() {
         responsive: true,
         columnDefs: [
           
-          { responsivePriority: 1, targets: [0,1]},
-          { responsivePriority: 2, targets: -1},
+          { responsivePriority: 1, targets: [0,-1]},
+          { responsivePriority: 2, targets: 1},
           { width: "40px", targets: 4},
-          { width: "150px", targets: [0, 2,3]},
+          { width: "110px", targets: [0, 2,3]},
           
         ]
     });

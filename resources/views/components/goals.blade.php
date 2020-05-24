@@ -12,13 +12,20 @@
             <thead>
               <tr>
                 @isset($individual)
-                <th scope="col">Person</th>
-                @endisset
+                <th >Person</th>
                 <th>Goal/prayer</th>
                 <th class="min-tablet-p">Start Date</th>
                 <th class="min-tablet-l">End Date</th>
                 <th class="min-tablet-l">Private</th>
                 <th>Action</th>
+                @else
+                <th>Goal/prayer</th>
+                <th class="min-tablet-p">Start Date</th>
+                <th class="min-tablet-p">End Date</th>
+                <th class="min-tablet-p">Private</th>
+                <th>Action</th>
+                @endisset
+
               </tr>
             </thead>
             <tbody>
@@ -55,9 +62,9 @@
                 @if(!$goal->private || $goal->author_id == Auth::user()->id)
                 <tr>
                   @isset($individual)
-                  <td><a href="{{ route('people.edit', $goal->person->id) }}">{{$goal->person->name()}}</a></td>
+                  <td><a  href="{{ route('people.edit', $goal->person->id) }}">{{$goal->person->name()}}</a></td>
                   @endisset
-                  <td>{{$goal->goal}}</td>
+                  <td >{{$goal->goal}}</td>
                   <td >{{$goal->start_date}}</td>
                   <td >{{$goal->end_date}}</td>
                   <td >

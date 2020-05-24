@@ -6,12 +6,12 @@
   </div>
   <div class="card-body">
     <div class="table-responsive-md">
-    <table class="table table-hover table-sm">
+    <table id="lasteventTable" class="table table-hover table-sm" style="width:100%">
       <thead>
         <tr>
           <th>Date</th>
           <th>Event</th>
-          <th>Notes</th>
+          <th style="min-width:200px">Notes</th>
           <th>Tags</th>
           <th>UserTags</th>
         </tr>

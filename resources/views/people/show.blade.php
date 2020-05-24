@@ -137,3 +137,30 @@
 @endsection
 
 
+@section('footer')
+
+<script type="text/javascript">
+
+$(document).ready( function() {
+
+    $('#goalTable').DataTable( { 
+        dom: 'rt',
+        autoWidth: true,
+        responsive: true,
+        columnDefs: [
+          
+          { responsivePriority: 1, targets: [0,-1]},
+          { responsivePriority: 2, targets: 1},
+          { responsivePriority: 3, targets: 2},
+          { width: "40px", targets: 3},
+          { width: "110px", targets: [1,2]},
+          { width: "80px", targets: -1},
+          
+        ]
+    });
+
+});
+
+</script>
+
+@endsection

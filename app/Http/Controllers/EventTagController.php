@@ -6,18 +6,31 @@ use Illuminate\Http\Request;
 use App\Tag;
 use App\Tagtype;
 use App\Usertag;
+use App\Event;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 
 class EventTagController extends Controller
 {
-    public function show(Tag $tag)
+    public function showByTag(Tag $tag)
     {
-        $events = $tag->events;
+        $this->authorize('show_events');
         //Show a list of the people
         return view('events/index', [
-            'events' => $events,
+            'events' => Event::all(),
             'selectedTagList'   => new Collection([$tag]),
+            'usertags' => Usertag::where('user_id', Auth::user()->id )->get(),
+            'tagtypes' => Tagtype::all()
+        ]);
+    }
+
+    public function showByUserTag(Usertag $usertag)
+    {
+        $this->authorize('show_events');
+        //Show a list of the people
+        return view('events/index', [
+            'events' => Event::all(),
+            'selectedUsertagList'   => new Collection([$usertag]),
             'usertags' => Usertag::where('user_id', Auth::user()->id )->get(),
             'tagtypes' => Tagtype::all()
         ]);

@@ -36,10 +36,20 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" for="tags">Filter</span>
                     </div>
-                    @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $selectedTagList])
+                    @isset($selectedTagList)
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList'=>$selectedTagList])
+                    @else
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                    @endisset
                         @slot('text') System Tags @endslot
+
                     @endcomponent
-                    @component('components.tagpicker', ['tags' => $usertags])
+
+                    @isset($selectedUsertagList)
+                        @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList'=>$selectedUsertagList])
+                    @else
+                        @component('components.tagpicker', ['tags' => $usertags])
+                    @endisset
                         @slot('text') User Tags @endslot
                         @slot('pickername')
                             usertagpicker
@@ -89,7 +99,7 @@
                             </td>
                             <td> 
                                 @foreach ($event->usertags as $tag)
-                                    <a href="{{route('event-tag.show', $tag->id)}}">
+                                    <a href="{{route('event-usertag.show', $tag->id)}}">
                                         <span class="badge" 
                                             style="color:#fff; background-color:{{$tag->color}}" >
                                         {{$tag->name}}

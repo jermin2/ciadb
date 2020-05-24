@@ -21,7 +21,7 @@ class Person extends Model
     public function lastTenEvents()
     {
         if($this->events != null)
-            return $this->events->take(10)->sort();
+            return $this->events->take(10)->sortdesc();
         return null;
     }
 

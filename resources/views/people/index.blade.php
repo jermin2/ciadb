@@ -18,10 +18,20 @@
                     <div class="input-group-prepend">
                     <span class="input-group-text" for="tags">Filter</span>
                     </div>
-                    @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                    @isset($selectedTagList)
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList'=>$selectedTagList])
+                    @else
+                        @component('components.tagpicker', ['tagtypes' => $tagtypes])
+                    @endisset
                         @slot('text') System Tags @endslot
+
                     @endcomponent
-                    @component('components.tagpicker', ['tags' => $usertags])
+
+                    @isset($selectedUsertagList)
+                        @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList'=>$selectedUsertagList])
+                    @else
+                        @component('components.tagpicker', ['tags' => $usertags])
+                    @endisset
                         @slot('text') User Tags @endslot
                         @slot('pickername')
                             usertagpicker
@@ -65,7 +75,7 @@
                         <td> {{ $person->notes }} </td>
                         <td> 
                         @foreach ($person->tags as $tag)
-                        <a href="{{route('event-tag.show', $tag->id)}}">
+                        <a href="{{route('people-tag.show', $tag->id)}}">
                                 <span class="badge" 
                                     style="color:#fff; background-color:{{$tag->color}}" >
                                 {{$tag->name}}
@@ -75,7 +85,7 @@
 
                         <td> 
                         @foreach ($person->usertags as $tag)
-                        <a href="{{route('event-tag.show', $tag->id)}}">
+                        <a href="{{route('people-usertag.show', $tag->id)}}">
                                 <span class="badge" 
                                     style="color:#fff; background-color:{{$tag->color}}" >
                                 {{$tag->name}}
@@ -122,7 +132,7 @@
             var values = [$('select').find("option:selected").text()];
             values = values.join(" ").split(' ').filter(Boolean);
 
-            var tags = data[10] + " " + data[11]; // use data for the tag column
+            var tags = data[11] + " " + data[12]; // use data for the tag column
             
             for(i = 0; i < values.length;i++)
             {

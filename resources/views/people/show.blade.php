@@ -39,13 +39,27 @@
       @endsection
 
       @section('tags')
-        @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $person->tags])   
-        @endcomponent
+        <div class="form-control">
+          @foreach ($person->tags as $tag)
+          <a href="{{route('people-tag.show', $tag->id)}}">
+                  <span class="badge" 
+                      style="color:#fff; background-color:{{$tag->color}}" >
+                  {{$tag->name}}
+              </span> </a>
+          @endforeach
+        </div>
       @endsection
 
       @section('usertags')
-        @component('components.tagpicker', ['tags' => $usertags, 'tagname' => "usertags[]", 'selectedTagList' => $person->usertags ])
-        @endcomponent
+        <div class="form-control">
+        @foreach ($person->usertags as $tag)
+          <a href="{{route('people-usertag.show', $tag->id)}}">
+                  <span class="badge" 
+                      style="color:#fff; background-color:{{$tag->color}}" >
+                  {{$tag->name}}
+              </span> </a>
+          @endforeach
+        </div>
       @endsection
 
       @section('parents')

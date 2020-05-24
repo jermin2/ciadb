@@ -28,22 +28,27 @@
         @endslot
 
         @slot('tags')
-            @component('components.tagpicker', ['tagtypes' => $tagtypes, 'selectedTagList' => $event->tags])
-                @slot('pickername')
-                    event_tag
-                @endslot
-            @endcomponent
+        <div class="form-control">
+          @foreach ($event->tags as $tag)
+          <a href="{{route('event-tag.show', $tag->id)}}">
+                  <span class="badge" 
+                      style="color:#fff; background-color:{{$tag->color}}" >
+                  {{$tag->name}}
+              </span> </a>
+          @endforeach
+        </div>
         @endslot
 
         @slot('usertags')
-            @component('components.tagpicker', ['tags' => $usertags, 'selectedTagList' => $event->usertags])
-                @slot('pickername')
-                    event_usertag
-                @endslot
-                @slot('tagname')
-                    usertags[]
-                @endslot
-            @endcomponent
+        <div class="form-control">
+        @foreach ($event->usertags as $tag)
+          <a href="{{route('event-usertag.show', $tag->id)}}">
+                  <span class="badge" 
+                      style="color:#fff; background-color:{{$tag->color}}" >
+                  {{$tag->name}}
+              </span> </a>
+          @endforeach
+        </div>
         @endslot
 
         @slot('attendee_button')

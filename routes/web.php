@@ -25,8 +25,8 @@ Route::get('/people/{person}/edit', 'PersonController@edit')->name('people.edit'
 Route::put('/people/{person}', 'PersonController@update')->name('people.update');
 Route::get('people/{person}/delete', 'PersonController@delete')->name('people.delete');
 
-
-Route::get('/people/tags/{tag}', 'PersonTagController@show')->name('tag.show');
+Route::get('/people/tags/{tag}', 'PersonTagController@showByTag')->name('people-tag.show');
+Route::get('/people/usertags/{usertag}', 'PersonTagController@showByUserTag')->name('people-usertag.show');
 
 Route::get('/pivot', 'EventPersonController@index')->name('event.person.index');
 Route::get('/events/people/{person}', 'EventPersonController@show')->name('event.person.show');
@@ -41,8 +41,8 @@ Route::put('/events/{event}', 'EventController@update')->name('events.update');
 
 Route::get('/events/{event}/delete', 'EventController@delete')->name('events.delete');
 
-Route::get('/events/tags/{tag}', 'EventTagController@show')->name('event-tag.show');
-
+Route::get('/events/tags/{tag}', 'EventTagController@showByTag')->name('event-tag.show');
+Route::get('/events/usertags/{usertag}', 'EventTagController@showByUserTag')->name('event-usertag.show');
 
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');

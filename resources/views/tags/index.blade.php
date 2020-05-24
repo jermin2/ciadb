@@ -18,10 +18,10 @@
                 @foreach($usertags as $usertag)
                     <tr>
                         <td>
-                            <a href="#"><span class=" tag tag-header mb-3 p-1" style="background-color:{{$usertag->color}}">{{$usertag->name}}</span></a>
+                            <a href="#"><h2><span class=" tag badge " style="background-color:{{$usertag->color}}">{{$usertag->name}}</span></h2></a>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary">Edit</a> <a href="#" class="btn btn-primary">Delete</a>
+                            <a href="{{route('usertags.delete', $usertag->id) }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 @endforeach

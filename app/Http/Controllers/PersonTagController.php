@@ -12,27 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonTagController extends Controller
 {
-        /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
-    {
-        $this->authorize('show_people');
-        
-        return view('people/index', [
-            'people' => $tag->people,
-            'tag'   => $tag,
-            'tagtypes' => Tagtype::all(),
-        ]);
-        
-    }
 
     public function showByTag(Tag $tag)
     {
         $this->authorize('show_people');
+        
         //Show a list of the people
         return view('people/index', [
             'people' => Person::all(),
@@ -45,6 +29,7 @@ class PersonTagController extends Controller
     public function showByUserTag(Usertag $usertag)
     {
         $this->authorize('show_people');
+
         //Show a list of the people
         return view('people/index', [
             'people' => Person::all(),

@@ -139,6 +139,9 @@
 @section ('footer')
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/rr-1.2.7/sc-2.0.2/sp-1.1.0/sl-1.3.1/datatables.min.js"></script>
 
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
 <script>
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
@@ -157,9 +160,9 @@
         }
     );
 
-
     $(document).ready(function()
     {
+        $.fn.dataTable.moment( 'ddd, Do MMM HH:mm YYYY' );
         var table = $('#main-table').DataTable( { 
             pageLength:50,
             dom: 'Bfrtip',
@@ -169,7 +172,7 @@
 
             colReorder: true,
             responsive: true,
-
+            order: [[2, "desc" ]],
             columnDefs:[
                 {
                     targets: [0,1],
@@ -188,9 +191,6 @@
             //window.location.href = id;
             
         } )
-
-
-
 
         $('#tags').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue){
             $('#main-table').DataTable().draw();

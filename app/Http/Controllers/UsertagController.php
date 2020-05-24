@@ -94,9 +94,11 @@ class UsertagController extends Controller
      * @param  \App\usertags  $usertags
      * @return \Illuminate\Http\Response
      */
-    public function destroy(usertags $usertags)
+    public function delete(Usertag $usertag)
     {
-        //
+        $usertag->delete();
+
+        return redirect(route('usertags.index'));
     }
 
     protected function validateUsertag()

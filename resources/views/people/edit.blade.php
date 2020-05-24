@@ -152,7 +152,7 @@ $(document).ready( function() {
           { responsivePriority: 1, targets: [0,-1]},
           { responsivePriority: 2, targets: 1},
           { responsivePriority: 3, targets: 2},
-          { width: "40px", targets: 3},
+          { width: "40px", targets: 4},
           { width: "110px", targets: [1,2]},
           { width: "80px", targets: -1},
           

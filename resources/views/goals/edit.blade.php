@@ -54,6 +54,16 @@
         </div>
       </div>
 
+      <div class="input-group  mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" for="usertags">Notes</span>
+            </div>
+            <textarea class="form-control w-100" type="text" name="notes" id="notes" rows=5>{{ $goal->notes }}</textarea>
+        </div>
+
+      
+
+
 
       <button class="btn btn-success" type="submit">Save</button>
     </form>

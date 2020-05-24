@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Goal extends Model
 {
-    protected $fillable = ['goal', 'start_date', 'end_date', 'author_id', 'person_id', 'private'];
+    protected $fillable = ['goal', 'start_date', 'end_date', 'author_id', 'person_id', 'private', 'notes'];
     public function person()
     {
         return $this->belongsTo(Person::class);

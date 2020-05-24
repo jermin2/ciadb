@@ -15,14 +15,16 @@
                 <th >Person</th>
                 <th>Goal/prayer</th>
                 <th class="min-tablet-p">Start Date</th>
-                <th class="min-tablet-l">End Date</th>
+                <th class="min-tablet-p">End Date</th>
+                <th class="min-tablet-l" >Notes</th>
                 <th class="min-tablet-l">Private</th>
                 <th>Action</th>
                 @else
                 <th>Goal/prayer</th>
                 <th class="min-tablet-p">Start Date</th>
                 <th class="min-tablet-p">End Date</th>
-                <th class="min-tablet-p">Private</th>
+                <th class="min-tablet-l" >Notes</th>
+                <th class="min-tablet-p">Private</th>              
                 <th>Action</th>
                 @endisset
 
@@ -48,6 +50,9 @@
                 <td>@component('components.timepicker', ['pickername'=>'end_date'])
                     @endcomponent
                 </td>
+
+                <td> <input class="form-control" type="text" name="notes" placeholder="Notes"> </td>
+
                 <td>
                   <div class="checkboxdiv input-group-text">
                     <div class="custom-control custom-checkbox ">
@@ -67,6 +72,9 @@
                   <td >{{$goal->goal}}</td>
                   <td >{{$goal->start_date}}</td>
                   <td >{{$goal->end_date}}</td>
+                  @empty($individual)
+                  <td> {{$goal->notes}} </td>
+                  @endempty
                   <td >
                     <div class="checkboxdiv input-group-text">
                       <div class="custom-control custom-checkbox ">

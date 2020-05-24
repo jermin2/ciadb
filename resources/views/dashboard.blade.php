@@ -63,9 +63,9 @@ $(document).ready( function() {
           
           { responsivePriority: 1, targets: [0,-1]},
           { responsivePriority: 2, targets: 1},
-          { width: "40px", targets: 4},
+          { width: "40px", targets: 5},
           { width: "110px", targets: [0, 2,3]},
-          
+          { width: "180px", targets: [1]},
         ]
     });
 

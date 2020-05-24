@@ -18,3 +18,12 @@ mix.styles([
     'public/css/content.css',
     'public/css/main.css'], 'public/css/all.css');
 
+
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+
+module.exports = {
+    plugins: [
+        // To strip all locales except “en”
+        new MomentLocalesPlugin(),
+    ],
+};

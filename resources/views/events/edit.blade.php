@@ -60,7 +60,7 @@
 
                 @foreach ($event->people as $person)
 
-                    <a class="px-1" href="{{route('event.person.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
+                    <a class="px-1" href="{{route('people.show',$person->id)}}"><input type="hidden" name="people[]" value="{{$person->id}}"> {{$person->first_name}} {{$person->last_name }} </a>
 
                 @endforeach
 

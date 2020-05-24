@@ -38,6 +38,7 @@ class AssignPermissionRole extends Migration
             ['name' => 'admin'],
             ['name' => 'serving_one'],
             ['name' => 'guest'],  
+            ['name' => 'approved'],
             ['name' => 'event_manager'],
             ['name' => 'people_manager'],
             ['name' => 'user_manager'],
@@ -56,7 +57,7 @@ class AssignPermissionRole extends Migration
             $this->getIds('serving_one', 'show_people'),
             $this->getIds('serving_one', 'edit_people'),
 
-            $this->getIds('guest', 'show_people'),
+            $this->getIds('approved', 'show_people'),
 
             $this->getIds('event_manager', 'edit_events'),
             $this->getIds('event_manager', 'create_events'),
@@ -81,6 +82,7 @@ class AssignPermissionRole extends Migration
             'name' => 'Jermin Tiu',
             'email' => 'jermin2@gmail.com',
             'password' => Hash::make('asdfasdf'),
+            'person_id' => 1
         ]);
 
         //Make the first user an admin (jermin2@gmail.com);

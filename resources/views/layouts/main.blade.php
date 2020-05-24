@@ -74,12 +74,13 @@
                     </li>
 
                     <hr class="navbar-divider my-2"/>
-
+                    @can('show_people')
                     <li> <a href="{{ route('dashboard')}}" class="dashboard"><svg class="bi bi-house-door icon icon-header" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 01.708 0l6 6a.5.5 0 01.146.354v7a.5.5 0 01-.5.5H9.5a.5.5 0 01-.5-.5v-4H7v4a.5.5 0 01-.5.5H2a.5.5 0 01-.5-.5v-7a.5.5 0 01.146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 01.5-.5h3a.5.5 0 01.5.5v4h3.5V7.707L8 2.207l-5.5 5.5z" clip-rule="evenodd"/>
                             <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 01.5-.5h1a.5.5 0 01.5.5z" clip-rule="evenodd"/>
                         </svg><span>Dashboard</span></a> 
                     </li>
+                    @endcan
                     @can('show_people')
                     <li> 
                         <a href="#peopleSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle people">
@@ -183,8 +184,11 @@
 
             <!--  Content Start -->
             <div class="content">
-            
-            @yield('content')
+            @isset(Auth::user()->person)
+                @yield('content')
+            @else
+                Please wait for the Admin to assign you a profile
+            @endisset
 
             </div>
         </div>
@@ -194,6 +198,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js?1') }}"></script>
+
+    <!-- Datatable script -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/b-1.6.2/b-colvis-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/r-2.2.4/rr-1.2.7/sc-2.0.2/sp-1.1.0/sl-1.3.1/datatables.min.js"></script>
+
 
     <script>
 

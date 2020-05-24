@@ -4,13 +4,12 @@
 
 
 
-  <div class="col col-lg-12 col-md-12 col-sm-12 mx-auto">
-    <div class=" ">
-            
+  @can('show_people')
+  <div class="col col-lg-12 col-md-12 col-sm-12 mx-auto">       
     @component('components.goals', ['goals'=>$user->goals])
       @slot('individual')
         <td>
-          <select class="selectpicker" name="person_id">
+          <select class="selectpicker form-control" name="person_id">
             @foreach($people as $u_person)
               <option value="{{$u_person->id}}">{{$u_person->name()}}</option>
             @endforeach
@@ -19,55 +18,19 @@
       @endslot
     @endcomponent
     </div>
-  </div>
+  @endcan
 
 
 
-
+  @can('view_events')
   <div class="row col-md-12 col-lg-12 mx-auto">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <h2>Last 10 Events</h2>
-        </div>
-      </div>
-      <div class="card-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Event</th>
-              <th>Notes</th>
-              <th>Tags</th>
-              <th>UserTags</th>
-            </tr>
-          </thead>
-          @foreach($person->lastTenEvents() as $event)
-            <tr>  
-              <td><a href="{{ route('events.edit', $event->id) }}">{{$event->time}}</a></td>
-              <td>{{$event->name}}</td>
-              <td class="notes">{{$event->notes}}</td>
-              <td>
-                @foreach($event->tags as $tag)
-                <a href="{{route('event-tag.show', $tag->id)}}"><span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span> </a>
-                @endforeach
-              </td>
-              <td>
-                @foreach($event->usertags as $tag)
-                <a href="{{route('event-tag.show', $tag->id)}}"><span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span> </a>
-                @endforeach
-              </td>
-            </tr>
-            @endforeach
-          <tbody>
-
-          </tbody>
-        </table>
-      </div>
-
-
-    </div>
+    @component('components.lastevents', ['events' => $person->lastTenEvents() ])
+      @slot('title')
+        Last Ten Events
+      @endslot
+    @endcomponent
   </div>
+  @endcan
 
   @endsection
 
@@ -88,10 +51,22 @@ $(document).ready( function() {
     debug: true,
     } );
 
+    $('#goalTable').DataTable( { 
+        dom: 'rt',
+        autoWidth: true,
+        responsive: true,
+        columnDefs: [
+          
+          { responsivePriority: 1, targets: [0,1]},
+          { responsivePriority: 2, targets: -1},
+          { width: "40px", targets: 4},
+          { width: "150px", targets: [0, 2,3]},
+          
+        ]
+    });
+
 });
 
 </script>
-
-
 
 @endsection

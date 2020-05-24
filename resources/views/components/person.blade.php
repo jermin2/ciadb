@@ -4,7 +4,7 @@
       @yield('content-title')
     </div>
   </div>
-  <div class="card-body d-flex justify-content-center col-md-12 col-lg-12 mx-auto">
+  <div class="card-body">
 
     @yield('content-header')
     <div class="row">

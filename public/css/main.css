@@ -224,6 +224,18 @@
         display: block;
         opacity: 1;
       }
+
+      .main-panel>.content {
+        padding: 0 10px 10px;
+      }
+
+      .card-body {
+        padding: 0.5rem;
+      }
+
+      .bootstrap-select {
+        width: 180px;
+      }
   }
 
 
@@ -253,14 +265,29 @@
     transition: all 0.5s ease-in-out;
 }
 
-td, th {
+td.shrink, th.shrink {
+  width:0.1%;
+} 
+
+td.nowrap, th.nowrap {
   width:0.1%;
   white-space: nowrap;
-  
-  } 
+} 
 
-td.notes {
+td.notest {
   white-space: normal;
   width: 100%;
 }
 
+.datetimepicker-input {
+  min-width: 70px;
+}
+
+div.checkboxdiv {
+  background-color: #fff;
+  border: 0;
+}
+
+div.nowrap {
+  white-space:nowrap;
+}

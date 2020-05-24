@@ -42,11 +42,20 @@
         @endcomponent
       </div>
 
+
+
+
       <div class="input-group mb-3">
         <span class="input-group-text">Make private</span>
         <div class="input-group-append">
           <div class="input-group-text">
-            <input type="checkbox"  name="private" @if($goal->private) checked @endif >
+
+        <div class="custom-control custom-checkbox ">
+            <input type="checkbox" class="custom-control-input input-lg" id="customCheck1" name="private" @if($goal->private) checked @endif >
+            <label class="custom-control-label" for="customCheck1"></label>
+        </div>
+
+
           </div>
         </div>
         

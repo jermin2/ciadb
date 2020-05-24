@@ -21,7 +21,10 @@ class PersonGoalController extends Controller
         $param = $this->validateGoal();
 
         $param['start_date']  = \Carbon\Carbon::createFromFormat('d-m-Y', $request->start_date);
-
+        if($request->end_date != null)
+        {
+            $param['end_date']  = \Carbon\Carbon::createFromFormat('d-m-Y', $request->end_date);
+        }
         $param['author_id'] = Auth::user()->id;
         $param['private'] = request()->private == "on" ? true : false;
         $goal = new Goal($param);

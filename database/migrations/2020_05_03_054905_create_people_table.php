@@ -49,7 +49,6 @@ class CreatePeopleTable extends Migration
         DB::table('people')->insert([
             [ 'first_name' => 'guest', 'last_name' => 'user'],
         ]);
-
         
     }
 

@@ -3,7 +3,7 @@
 @section ('content')
 
 <div class="row">
-  <div class="col-lg-6 col-md-12  col-sm-12 mx-auto">
+  <div class="col-xl-6 col-lg-12 col-md-12  col-sm-12 mx-auto">
   @component('components.person', ['tagtypes' => $tagtypes, 'usertags' => $usertags])
 
     @section('content-header')
@@ -111,56 +111,17 @@
   @endcomponent
   </div>
 
-  <div class="col col-lg-6 col-md-12 col-sm-12 mx-auto">
-    <div class=" ">
+  <div class="col col-xl-6 col-lg-12 col-md-12 col-sm-12 mx-auto">
     @component('components.goals', ['goals'=>$person->goals, 'person'=>$person])
     @endcomponent
-    </div>
   </div>
 
   <div class="row col-md-12 col-lg-12 mx-auto">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <h2>Last 10 Events</h2>
-        </div>
-      </div>
-      <div class="card-body">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Event</th>
-              <th>Notes</th>
-              <th>Tags</th>
-              <th>UserTags</th>
-            </tr>
-          </thead>
-          @foreach($person->lastTenEvents() as $event)
-            <tr>  
-              <td><a href="{{ route('events.edit', $event->id) }}">{{$event->time}}</a></td>
-              <td>{{$event->name}}</td>
-              <td class="notes">{{$event->notes}}</td>
-              <td>
-                @foreach($event->tags as $tag)
-                <a href="{{route('event-tag.show', $tag->id)}}"><span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span> </a>
-                @endforeach
-              </td>
-              <td>
-                @foreach($event->usertags as $tag)
-                <a href="{{route('event-tag.show', $tag->id)}}"><span class="badge" style="color:#fff; background-color:{{$tag->color}}" >{{$tag->name}}</span> </a>
-                @endforeach
-              </td>
-            </tr>
-            @endforeach
-          <tbody>
-
-          </tbody>
-        </table>
-      </div>
-
-
-    </div>
+        @component('components.lastevents', ['events' => $person->lastTenEvents() ])
+      @slot('title')
+        Last Ten Events
+      @endslot
+    @endcomponent
   </div>
 
 </div>

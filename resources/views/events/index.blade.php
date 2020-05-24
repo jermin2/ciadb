@@ -175,7 +175,8 @@
                     targets: [0,1],
                     visible: false,
                     searchable: false,
-                }
+                },
+                { responsivePriority: 1, targets: [2,3,-1] }
             ]
         });
 

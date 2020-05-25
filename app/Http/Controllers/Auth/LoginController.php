@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
 use App\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewRegistration;
 
 class LoginController extends Controller
 {

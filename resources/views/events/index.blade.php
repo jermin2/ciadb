@@ -105,7 +105,7 @@
                                 @endforeach
                             </td>
                             <td>
-                                <div class="input-class-append row">
+                                <div class="input-group">
                                     <a href="{{ route('events.show', $event->id) }}" class="btn btn-sm btn-outline-secondary">View</a>  
                                     @can('edit_events')  
                                     <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -81,18 +81,18 @@
                         @endforeach
                         </td>
 
-                        <td> 
+                        <td style="white-space:nowrap"> 
                         @foreach ($person->usertags as $tag)
                         <a href="{{route('people-usertag.show', $tag->id)}}">
-                                <span class="badge" 
+                                <div class="badge" 
                                     style="color:#fff; background-color:{{$tag->color}}" >
                                 {{$tag->name}}
-                            </span> </a>
+                            </div> </a>
                         @endforeach
                         </td>
 
                         <td>
-                            <div class="input-class-append row">
+                            <div class="input-group">
                                 <a href="{{ route('event.person.show', $person->id) }}" class="btn btn-sm btn-outline-secondary">Events</a>    
                                 @can('edit_people')
                                 <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

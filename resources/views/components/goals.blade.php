@@ -8,57 +8,37 @@
         <div >
           <table id="goalTable" style="width:100%">
             <thead>
-              <tr>
-                @isset($individual)
-                <th >Person</th>
-                <th>Goal/prayer</th>
-                <th class="min-tablet-p">Start Date</th>
-                <th class="min-tablet-p">End Date</th>
-                <th class="min-tablet-l" >Notes</th>
-                <th class="min-tablet-l">Private</th>
-                <th>Action</th>
-                @else
-                <th>Goal/prayer</th>
-                <th class="min-tablet-p">Start Date</th>
-                <th class="min-tablet-p">End Date</th>
-                <th class="min-tablet-l" >Notes</th>
-                <th class="min-tablet-p">Private</th>              
-                <th>Action</th>
-                @endisset
-
-              </tr>
-
             <tr>
                 @isset($individual)
                   {{$individual}}
                 @endisset
-                <td class="notes">
+                <th class="notes">
                   @empty($individual)
                     <input type="text" value="{{$person->id}}" name="person_id" hidden>
                   @endempty  
-                  <input class="form-control" type="text" name="goal" placeholder="Goal">
-                </td>
-                <td>@component('components.timepicker', ['pickername'=>'start_date'])
+                  <input class="form-control" type="text" name="goal" placeholder="Goal/Prayer">
+                </th>
+                <th style="min-width:110px" class="min-tablet-p">@component('components.timepicker', ['pickername'=>'start_date'])
                       @slot('currentTime')
                       {{Carbon\Carbon::now()->format('d-m-Y')}}
                       @endslot
                     @endcomponent
-                </td>
-                <td>@component('components.timepicker', ['pickername'=>'end_date'])
+                </th>
+                <th style="min-width:110px" class="min-tablet-p">@component('components.timepicker', ['pickername'=>'end_date'])
                     @endcomponent
-                </td>
+                </th>
 
-                <td> <input class="form-control" type="text" name="notes" placeholder="Notes"> </td>
+                <th class="min-tablet-l" > <input class="form-control" type="text" name="notes" placeholder="Notes"> </th>
 
-                <td>
+                <th class="min-tablet-l" >
                   <div class="checkboxdiv input-group-text">
                     <div class="custom-control custom-checkbox ">
                         <input type="checkbox" class="custom-control-input" id="customCheck1" name="private">
                         <label class="custom-control-label" for="customCheck1"></label>
                     </div>
                   </div>
-                </td>
-                <td><button class="add-goal btn btn-success" type="submit">Add</button></td>
+                </th>
+                <th><button class="add-goal btn btn-success" type="submit">Add</button></th>
               </tr>
               </thead>
             <tbody>

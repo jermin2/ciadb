@@ -56,6 +56,7 @@ $(document).ready( function() {
     $('#date').datetimepicker();
 
     $('#goalTable').DataTable( { 
+        orderCellsTop: true,
         dom: 'rt',
         autoWidth: true,
         responsive: true,

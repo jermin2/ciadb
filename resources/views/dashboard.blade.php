@@ -24,7 +24,7 @@
 
 
   @can('view_events')
-  <div class="row col-md-12 col-lg-12 mx-auto">
+  <div class="col col-md-12 col-lg-12 mx-auto">
     @component('components.lastevents', ['events' => $person->lastTenEvents() ])
       @slot('title')
         Last Ten Events

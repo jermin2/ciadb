@@ -38,6 +38,9 @@
             </td>
             <td>
               <a href="{{route('users.edit', $user->id)}}" class="btn btn-primary btn-sm">Edit</a>
+              @can('delete_users')
+              <a href="{{route('users.delete', $user->id)}}" class="btn btn-danger btn-sm">Delete</a>
+              @endcan
             </td>
           </tr>
 

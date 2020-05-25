@@ -108,11 +108,28 @@ class UserController extends Controller
     {
         $this->authorize('edit_users', $user);
 
-        $validation = request()->validate([
-            'email' => 'email|required',
-            'person' => 'unique:users,person_id|required|exists:people,id'
-            
-        ]);
+        //Check if the person hasn't changed, don't need to revalidate
+        if($request->person == $user->person->id){
+            $validation = request()->validate(['email' => 'email|required']);
+        }
+        else{
+            $validation = request()->validate([
+                'email' => 'email|required',
+                'person' => 'unique:users,person_id|required|exists:people,id'
+                
+            ]);
+        }
+
+        //If someone tries to make themselves admin without being an admin
+        if(in_array( '1', $request->roles))
+        {
+            if(!auth()->user()->roles->contains(Role::find(1))){
+                dd("You shouldn't be here boy");
+            }
+
+        }
+
+
         $user->roles()->sync(request('roles'));
 
         $user->person()->associate( Person::find(request('person')) );

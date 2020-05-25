@@ -47,7 +47,7 @@ Route::get('/events/usertags/{usertag}', 'EventTagController@showByUserTag')->na
 Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::put('/users/{user}', 'UserController@update')->name('users.update')->middleware('can:edit_events');;
-Route::delete('/users/{user}', 'UserController@delete')->name('users.delete');
+Route::get('/users/{user}/delete', 'UserController@delete')->name('users.delete');
 
 Route::get('/usertags/{usertag}/delete', 'UsertagController@delete')->name('usertags.delete');
 Route::get('/tags', 'UsertagController@index')->name('usertags.index');

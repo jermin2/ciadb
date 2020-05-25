@@ -1,8 +1,8 @@
 @extends('layouts.home')
 
 @section('content')
-
-<div class="card col-xl-8 col-lg-10 col-md-12 col-sm-10 mx-auto mt-5">
+<div class="col-xl-8 col-lg-10 col-md-12 col-sm-10 mx-auto mt-5">
+<div class="card ">
     <div class="card-header">
         <div class="card-title col-md-8 m-auto text-center">
             <h2>LOGIN</h2> 
@@ -35,18 +35,19 @@
             <div class="form-group  justify-content-between d-flex">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customCheck" name="remember">
-                    <label class="custom-control-label" for="customCheck">Remember</label>
+                    <label class="custom-control-label" for="customCheck">Remember Me</label>
                 </div>
 
-                <a class="" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
+
             </div>
 
-            <div class="form-group mb-0">
-                <button type="submit" class="btn btn-primary col-md-12">
+            <div class="form-group mb-0 row">
+                <button type="submit" class="col btn btn-primary py-2 m-1">
                     {{ __('Login') }}
                 </button>
+                <a href="{{ route('register') }}" class="col btn btn-secondary py-2 m-1">
+                    Register
+                </a>
             </div>
             <label class="text-muted col-md-12 text-center mt-2">Or</label>
             <hr class="mt-0 mb-0" />
@@ -55,6 +56,12 @@
             </div>
         </form>
     </div>
+    <div class="card-footer">
+        <div class="text-center">
+            <a class="" href="{{ route('password.request') }}"> {{ __('Forgot Your Password?') }}</a>
+        </div>
+    </div>
+</div>
 </div>
 
 @endsection

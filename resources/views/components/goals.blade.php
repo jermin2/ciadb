@@ -70,9 +70,7 @@
                   <td >{{$goal->goal}}</td>
                   <td >{{$goal->start_date}}</td>
                   <td >{{$goal->end_date}}</td>
-                  @empty($individual)
                   <td> {{$goal->notes}} </td>
-                  @endempty
                   <td >
                     <div class="checkboxdiv input-group-text">
                       <div class="custom-control custom-checkbox ">

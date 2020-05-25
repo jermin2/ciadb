@@ -31,6 +31,12 @@ class AssignPermissionRole extends Migration
             [ 'name' => 'show_users'],
             [ 'name' => 'edit_users'],
             [ 'name' => 'delete_users'],
+
+            [ 'name' => 'edit_systemtags'],
+            [ 'name' => 'edit_usertags'],
+
+            
+            
         ];
         DB::table('permissions')->insert($permissions);
 
@@ -43,7 +49,9 @@ class AssignPermissionRole extends Migration
             ['name' => 'people_manager'],
             ['name' => 'user_manager'],
             ['name' => 'event_admin'],
-            ['name' => 'people_admin']         
+            ['name' => 'people_admin'],  
+            ['name' => 'user_admin'],
+            ['name' => 'tag_admin']         
         ];
         DB::table('roles')->insert($roles);
 
@@ -56,6 +64,7 @@ class AssignPermissionRole extends Migration
             $this->getIds('serving_one', 'create_people'),
             $this->getIds('serving_one', 'show_people'),
             $this->getIds('serving_one', 'edit_people'),
+            $this->getIds('serving_one', 'edit_usertags'),
 
             $this->getIds('approved', 'show_people'),
 
@@ -73,6 +82,11 @@ class AssignPermissionRole extends Migration
 
             $this->getIds('user_manager', 'show_users'),
             $this->getIds('user_manager', 'edit_users'),
+
+            $this->getIds('user_admin', 'delete_users'),
+
+            $this->getIds('tag_admin', 'edit_systemtags'),
+            $this->getIds('tag_admin', 'edit_usertags'),
             
         ];
 

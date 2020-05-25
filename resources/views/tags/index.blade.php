@@ -6,21 +6,13 @@
 
 @section ('content')
 <div class="row">
-    <div class="card col-md-5 mx-auto">
-        <div class="card-header">
-            <div class="card-title">
-                <h2>User Tags</h2>
-            </div>
-        </div>
-        <div class="card-body">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+    <div class="col-md-6 mx-auto">
+        @component('components.tagindex' )
+            @slot('title')
+                User Tags
+            @endslot
+
+            @slot('content')
                 @foreach($usertags as $usertag)
                     <tr>
                         <td>
@@ -29,47 +21,79 @@
                         <td>
                             <a href="{{route('usertags.delete', $usertag->id) }}" class="btn btn-danger">Delete</a>
                         </td>
+                        {{ $tagtype_content ?? '' }}
                     </tr>
                 @endforeach
-                </tbody>
-            </table>
-        </div>
+            @endslot
+        @endcomponent
     </div>
 
-    <div class="card col-md-5 mx-auto">
-        <div class="card-header">
-            <div class="card-title">
-                <h2>Create New Tag</h2>
+    <div class="col-md-6 mx-auto">
+        @component('components.tagcreate', ['errors' => $errors] )
+        @slot('title')
+            Create User Tag
+        @endslot
+
+        @slot('action')
+            {{ route('usertags.store') }}
+        @endslot
+        @endcomponent
+    </div>
+
+    @can('edit_systemtags')
+    <div class="col-md-6 mx-auto">
+        @component('components.tagindex' )
+            @slot('title')
+                System Tags
+            @endslot
+
+            @slot('tagtype_header')
+                <th>Tagtype</th>
+            @endslot
+
+            @slot('content')
+                @foreach($tags as $tag)
+                    <tr>
+                        <td>
+                            <a href="#"><h2><span class=" tag badge " style="background-color:{{$tag->color}}">{{$tag->name}}</span></h2></a>
+                        </td>
+                        <td>
+                            <a href="{{route('tags.delete', $tag->id) }}" class="btn btn-danger">Delete</a>
+                        </td>
+                        <td class="text-center">
+                            <label >{{$tag->tagtype->name}}</label>
+                        </td>
+                    </tr>
+                @endforeach
+            @endslot
+        @endcomponent
+    </div>
+
+    <div class="col-md-6 mx-auto">
+        @component('components.tagcreate', ['errors' => $errors] )
+        @slot('title')
+                Create System Tag
+        @endslot
+
+        @slot('action')
+            {{ route('tags.store') }}
+        @endslot
+
+        @slot('tagtype')
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Tagtype</span>
+                </div>
+                <select class="custom-select" name="tagtype_id">
+                    @foreach($tagtypes as $tagtype)
+                    <option value="{{$tagtype->id}}">{{$tagtype->name}}</option>
+                    @endforeach
+                </select>
             </div>
-        </div>
-        <div class="card-body">
-            <form method="POST" action="{{ route('usertags.store') }}" class="col-md-9" autocomplete="off">
-                @csrf
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Name</span>
-                    </div>
-                    <input type="text" class="form-control" id="name" name="name">
-                    
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Color</span>
-                    </div>
-                    <input id="cp1" type="text" class="form-control" name="color" value=""/>
-                </div>
-
-                
-
-                @if($errors->any())
-                    {{ implode('', $errors->all('<div>:message</div>')) }}
-                @endif
-                <button class="btn-round btn-lg btn-primary" type="submit">Create</button>
-            </form>
-        </div>
+        @endslot
+        @endcomponent
     </div>
+    @endcan
 </div>
 
 @endsection

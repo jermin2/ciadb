@@ -187,7 +187,11 @@
             @isset(Auth::user()->person)
                 @yield('content')
             @else
-                Please wait for the Admin to assign you a profile
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">Please wait for the Admin to assign you a profile</div>
+                    </div>
+                </div>
             @endisset
 
             </div>

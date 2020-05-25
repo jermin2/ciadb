@@ -20,4 +20,9 @@ class Role extends Model
         }
         $this->permissions()->sync($permission, false);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

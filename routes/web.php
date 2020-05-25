@@ -49,9 +49,11 @@ Route::get('/users/{user}/edit', 'UserController@edit')->name('users.edit');
 Route::put('/users/{user}', 'UserController@update')->name('users.update')->middleware('can:edit_events');;
 Route::delete('/users/{user}', 'UserController@delete')->name('users.delete');
 
-Route::get('/tags/{usertag}/delete', 'UsertagController@delete')->name('usertags.delete');
+Route::get('/usertags/{usertag}/delete', 'UsertagController@delete')->name('usertags.delete');
 Route::get('/tags', 'UsertagController@index')->name('usertags.index');
-Route::post('/tags', 'UsertagController@store')->name('usertags.store');
+Route::post('/usertags', 'UsertagController@store')->name('usertags.store');
+Route::post('/tags', 'TagController@store')->name('tags.store');
+Route::get('/tags/{tag}/delete', 'TagController@delete')->name('tags.delete');
 
 Route::get('ajaxRequest', 'AjaxController@ajaxRequest');
 Route::post('ajaxRequest', 'EventPersonController@ajaxRequestPost')->name('ajaxRequest.post');

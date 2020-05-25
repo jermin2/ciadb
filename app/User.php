@@ -68,4 +68,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Goal::class, 'author_id');
     }
+
+    public function hasPermission($permission)
+    {
+        if($this->roles->contains('name','admin')) return true;
+
+        return $this->permissions()->contains($permission);
+    }
+
 }

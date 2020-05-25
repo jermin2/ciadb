@@ -6,9 +6,20 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Usertag;
+use App\Tag;
+use App\Tagtype;
+
+
+use App\Role;
 
 class UsertagController extends Controller
 {
+    public function __construct()
+    {
+        //Requires Login to access anything
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +27,17 @@ class UsertagController extends Controller
      */
     public function index()
     {
+        $this->authorize('edit_usertags');
+        if(Auth::user()->hasPermission('edit_systemtags'))
+        {
+            return view('tags/index', [
+                'user' => Auth::user(),
+                'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),
+                'tags' => Tag::all(),
+                'tagtypes' => Tagtype::all()
+            ]);
+        }
+        else
         return view('tags/index', [
             'user' => Auth::user(),
             'usertags' => Usertag::where('user_id', Auth::user()->id)->get(),

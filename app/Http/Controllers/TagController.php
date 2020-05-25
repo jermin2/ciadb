@@ -11,7 +11,6 @@ class TagController extends Controller
     {
         //Requires Login to access anything
         $this->middleware('auth');
-        $this->authorize('edit_systemtags');
     }
 
     /**
@@ -22,6 +21,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('edit_systemtags');
+
         $validate = $this->validateTag();
 
         $usertag = new Tag([
@@ -43,6 +44,8 @@ class TagController extends Controller
      */
     public function delete(Tag $tag)
     {
+        $this->authorize('edit_systemtags');
+
         $tag->delete();
 
         return redirect(route('usertags.index'));

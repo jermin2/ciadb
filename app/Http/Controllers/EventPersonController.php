@@ -7,21 +7,22 @@ use App\Person;
 use App\Tagtype;
 use App\Event;
 use App\Usertag;
-
+use Illuminate\Support\Facades\Auth;
 
 class EventPersonController extends Controller
 {
     public function show(Person $person)
     {
         $this->authorize('show_events');
-        ddd("TO BE FIXED");
+
         $events = $person->events;
 
         //Show a list of the people
         return view('events/index', [
             'events' => $events,
             'person' => $person,
-            'tagtypes' => Tagtype::all()->latest()
+            'tagtypes' => Tagtype::all(),
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get()
         ]);
     }
 
@@ -45,6 +46,8 @@ class EventPersonController extends Controller
      */
     public function ajaxRequestPost(Request $request)
     {
+        $this->authorize('edit_events');
+
         $msg = $request->all();
 
         if($request->state == "true"){

@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonGoalController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -17,6 +22,7 @@ class PersonGoalController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('show_people');
 
         $param = $this->validateGoal();
 
@@ -45,7 +51,8 @@ class PersonGoalController extends Controller
 
     public function delete(Person $person, Goal $goal)
     {
-        //$this->authorize('delete_goals', $goal);
+        $this->authorize('show_people');
+
         $goal->delete();
 
         return redirect(route('people.edit', $person->id));
@@ -53,6 +60,8 @@ class PersonGoalController extends Controller
 
     public function update(Request $request, Person $person, Goal $goal)
     {
+        $this->authorize('show_people');
+
         $param = request()->validate([
             'goal' => 'required',
             'start_date' => 'date_format:"d-m-Y"',
@@ -78,6 +87,8 @@ class PersonGoalController extends Controller
 
     public function edit(Person $person, Goal $goal)
     {
+        $this->authorize('show_people');
+        
         return view('goals/edit', [
             'person' => $person,
             'goal' => $goal,

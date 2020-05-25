@@ -63,6 +63,8 @@ class UsertagController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('edit_usertags');
+
         $validate = $this->validateUsertag();
 
         $usertag = new Usertag([
@@ -118,6 +120,8 @@ class UsertagController extends Controller
      */
     public function delete(Usertag $usertag)
     {
+        $this->authorize('edit_usertags');
+        
         $usertag->delete();
 
         return redirect(route('usertags.index'));

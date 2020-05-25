@@ -75,10 +75,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
-
         $this->authorize('show_events');
-
+        
         if(request('tag')){
             $events = Tag::where('name', request('tag'))->firstOrFail()->events;
         } elseif(request('person'))

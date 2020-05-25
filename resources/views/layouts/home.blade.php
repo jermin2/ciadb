@@ -45,7 +45,7 @@
         a.nav-link {
             color: #fff;
         }
-    
+
     </style>
 </head>
 <body>

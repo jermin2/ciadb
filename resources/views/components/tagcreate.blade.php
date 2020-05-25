@@ -20,7 +20,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">Color</span>
                     </div>
-                    <input id="cp1" type="text" class="form-control" name="color" value=""/>
+                    <input id="{{$cpname ?? 'cp1'}}" type="text" class="form-control cp1" name="color" value=""/>
                 </div>
 
                 {{ $tagtype ?? '' }}

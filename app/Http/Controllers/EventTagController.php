@@ -15,6 +15,7 @@ class EventTagController extends Controller
     public function showByTag(Tag $tag)
     {
         $this->authorize('show_events');
+
         //Show a list of the people
         return view('events/index', [
             'events' => Event::all(),
@@ -27,6 +28,7 @@ class EventTagController extends Controller
     public function showByUserTag(Usertag $usertag)
     {
         $this->authorize('show_events');
+        
         //Show a list of the people
         return view('events/index', [
             'events' => Event::all(),

@@ -75,6 +75,10 @@
                 Create System Tag
         @endslot
 
+        @slot('cpname')
+            cp2
+        @endslot
+
         @slot('action')
             {{ route('tags.store') }}
         @endslot
@@ -95,14 +99,13 @@
     </div>
     @endcan
 </div>
-
 @endsection
 
 @section('footer')
 
 <script>
   $(function () {
-    $('#cp1').colorpicker();
+    $('.cp1').colorpicker();
   });
 </script>
 @endsection

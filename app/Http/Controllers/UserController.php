@@ -109,7 +109,7 @@ class UserController extends Controller
         $this->authorize('edit_users', $user);
 
         //Check if the person hasn't changed, don't need to revalidate
-        if($request->person == $user->person->id){
+        if( isset($user->person) && $request->person == $user->person->id){
             $validation = request()->validate(['email' => 'email|required']);
         }
         else{
@@ -129,21 +129,19 @@ class UserController extends Controller
 
         }
 
+        //If you assign someone, then they are verified
+        $user->markEmailAsVerified();
 
         $user->roles()->sync(request('roles'));
-
         $user->person()->associate( Person::find(request('person')) );
         
-
         $validation['name'] = $user->person->name();
         $user->update( $validation);
         $user->person->update( [
             'email' => request('email')
         ]);
 
-
         return redirect(route('users.index'));
-        
     }
 
     /**

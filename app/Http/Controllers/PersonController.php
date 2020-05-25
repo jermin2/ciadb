@@ -58,8 +58,8 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         $this->authorize('create_people');
+        
         $person = new Person($this->validatePerson());
         $person->save();
 

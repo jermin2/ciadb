@@ -5,8 +5,7 @@
 <div class="card col-xl-8 col-lg-10 col-md-12 col-sm-10 mx-auto mt-5">
     <div class="card-header">
         <div class="card-title col-md-8 m-auto text-center">
-            <h2>LOGIN</h2>
-            
+            <h2>LOGIN</h2> 
         </div>
     </div>
 
@@ -40,29 +39,20 @@
                 </div>
 
                 <a class="" href="{{ route('password.request') }}">
-                            {{ __('Forgot Your Password?') }}
-                        </a>
-
+                    {{ __('Forgot Your Password?') }}
+                </a>
             </div>
 
             <div class="form-group mb-0">
-                    <button type="submit" class="btn btn-primary col-md-12">
-                        {{ __('Login') }}
-                    </button>
+                <button type="submit" class="btn btn-primary col-md-12">
+                    {{ __('Login') }}
+                </button>
             </div>
             <label class="text-muted col-md-12 text-center mt-2">Or</label>
             <hr class="mt-0 mb-0" />
             <div class="form-group row mb-0">          
                 <a href="{{ url('/redirect') }}"  class="btn col-md-12"  ><img id="google" style="max-height:52px" src="/btn_normal.png" ></a>
             </div>
-
-
-            @if (Route::has('password.request'))
-                        
-                    @endif
-
-            
-
         </form>
     </div>
 </div>

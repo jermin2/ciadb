@@ -16,7 +16,7 @@ class UserController extends Controller
     public function __construct()
     {
         //Requires Login to access anything
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     public function home()

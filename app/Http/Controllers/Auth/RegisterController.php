@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewRegistration;
 
 class RegisterController extends Controller
 {
@@ -72,6 +74,8 @@ class RegisterController extends Controller
 
         //Make all new users a guest
         $new_user->assignRole('guest');
+
+        Mail::to('jermin2@gmail.com')->send(new NewRegistration($new_user) );
         return $new_user;
 
     }

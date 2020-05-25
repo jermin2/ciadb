@@ -2,7 +2,7 @@
 
 
 @section('header')
-    <link href="{{ asset('css/content.css?2') }}" rel="stylesheet">
+    <link href="{{ asset('css/content.css') }}" rel="stylesheet">
 @endsection
 
 

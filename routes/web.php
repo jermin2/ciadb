@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/', 'UserController@home')->name('home');
 Route::get('/dashboard', 'UserController@home')->name('dashboard');
 

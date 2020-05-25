@@ -30,3 +30,9 @@ pipelines:
                 SERVER: $SERVER
                 REMOTE_PATH: 'public_html/serving_database/js'
                 LOCAL_PATH: '${BITBUCKET_CLONE_DIR}/public/js/*'
+            - pipe: atlassian/scp-deploy:0.3.3
+              variables:
+                USER: $USER
+                SERVER: $SERVER
+                REMOTE_PATH: 'public_html/serving_database/images'
+                LOCAL_PATH: '${BITBUCKET_CLONE_DIR}/public/images/*'

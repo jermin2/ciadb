@@ -83,7 +83,7 @@ class LoginController extends Controller
             //Send an email verification to the new user
             $newUser->sendEmailVerificationNotification();
             //Mail the new user to the admin
-            Mail::to('jermin2@gmail.com')->send(new NewRegistration($new_user) );
+            Mail::to('jermin2@gmail.com')->send(new NewRegistration($newUser) );
             auth()->login($newUser, true);
         }
         return redirect()->to('/');

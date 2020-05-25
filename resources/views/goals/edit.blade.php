@@ -4,9 +4,7 @@
 
 <div class="card col-md-6 mx-auto">
   <div class="card-header">
-    <div class="card-title">
-      <h2>Edit Goal</h2>
-    </div>
+    <h2 class="card-title">Edit Goal</h2>
   </div>
 
   <div class="card-body">

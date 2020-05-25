@@ -1,8 +1,6 @@
   <div class="card">
     <div class="card-header">
-      <div class="card-title text-center">
-        <h2>Goals / Prayers </h2>
-      </div>
+      <h2 class="card-title">Goals / Prayers </h2>
     </div>
     <div class="card-body">
       <form method="POST" action="{{route('goals.store')}}">

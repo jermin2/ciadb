@@ -1,8 +1,6 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title">
-      <h2>{{$title}}</h2>
-    </div>
+    <h2 class="card-title">{{$title}}</h2>
   </div>
   <div class="card-body">
     <div class="table-responsive-md">

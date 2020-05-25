@@ -16,7 +16,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/content.css?') }}{{date('l jS \of F Y h:i:s A')}}" rel="stylesheet">
+    <link href="{{ asset('css/content.css?5') }}{{date('l jS \of F Y h:i:s A')}}" rel="stylesheet">
 
     <style>
     

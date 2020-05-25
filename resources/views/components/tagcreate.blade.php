@@ -1,9 +1,7 @@
 <div class="card">
-        <div class="card-header">
-            <div class="card-title">
-                <h2>{{$title}}</h2>
-            </div>
-        </div>
+    <div class="card-header">
+        <h2 class="card-title">{{$title}}</h2>
+    </div>
         <div class="card-body">
             <form method="POST" action="{{ $action ?? '' }}" class="col-md-9" autocomplete="off">
                 @csrf

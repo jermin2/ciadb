@@ -1,8 +1,8 @@
 <div class="card">
   <div class="card-header">
-    <div class="card-title text-center">
+    <h2 class="card-title">
       @yield('content-title')
-    </div>
+    </h2>
   </div>
   <div class="card-body">
 

@@ -11,13 +11,11 @@
     <div class="card">
         <div class="card-header">
             @isset($tag)
-            <div class="text-center">
-                <h2>{{$tag->name}}</h2>
-            </div>
+            <h2 class="card-title">{{$tag->name}}</h2>
             @endisset
 
             @isset($person)
-            <div class="text-center">
+            <div class="card-title">
                 <h2>{{$person->first_name}} {{$person->last_name}}</h2>
                 <h2>
                     @foreach($person->tags as $tag)
@@ -27,7 +25,7 @@
             </div>
             @endisset
 
-            <h2 class="col-md-8"> Events </h2>
+            <h2 class="card-title"> Events </h2>
         </div>
 
         <div class="card-body">

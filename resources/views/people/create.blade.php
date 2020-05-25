@@ -12,7 +12,7 @@
       @endsection
 
       @section('content-title')
-        <h2>Add a person</h2>
+        Add a person
       @endsection
 
       @section('first_name')

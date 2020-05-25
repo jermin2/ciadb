@@ -3,11 +3,9 @@
 @section ('content')
 
 <div class="card d-flex justify-content-center col-md-8 mx-auto">
-<div class="card-header">
-            <div class="card-title">
-                <h2>User: {{$user->email}}</h2>
-            </div>
-        </div>
+    <div class="card-header">
+        <h2 class="card-title">>User: {{$user->email}}</h2>
+    </div>
 <div class="card-body col-md-12">
     <div class="row" >
     <form method="POST" class="col-md-12 m-auto" action="{{route('users.update', $user->id) }}">

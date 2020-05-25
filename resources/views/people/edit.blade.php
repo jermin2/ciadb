@@ -13,7 +13,7 @@
     @endsection
 
     @section('content-title')
-      <h2>Edit: {{$person->name()}}</h2>
+      Edit: {{$person->name()}}
     @endsection
 
     @section('first_name')

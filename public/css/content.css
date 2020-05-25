@@ -1,14 +1,18 @@
-.card .card-header {
-  padding: 15px 15px 0;
-  border: 0;
-  background-color: #fff;
-  border-radius: 14px;
-
+.card-header {
+  background-color: #5dca87;
+  color: #fff
 }
 
-.card .card-header .card-title {
-  margin-top: 10px;
+.card-header:first-child {
+  border-radius: calc(.8rem - 1px) calc(.8rem - 1px) 0 0;
 }
+
+.card-title {
+  text-align: center;
+  margin-bottom: 0px;
+  text-transform: uppercase;
+}
+
 
 .card .card-header::not([data-bakground-color]){
   background-color: transparent;

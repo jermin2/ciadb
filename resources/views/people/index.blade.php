@@ -8,9 +8,7 @@
 @section ('content')
     <div class="card">
         <div class="card-header">
-            <div class="card-title">
-                <h2 class="col-md-8"> People </h2>
-            </div>
+            <h2 class="card-title">People</h2>
         </div>
         <div class="card-body">
             <div class="row">

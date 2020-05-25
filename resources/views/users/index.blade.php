@@ -3,9 +3,7 @@
 @section ('content')
   <div class="card">
     <div class="card-header">
-      <div class="card-title">
-        <h2>User Management</h2>
-      </div>
+      <h2 class="card-title">User Management</h2>
     </div>
     <div class="card-body">
       <div class="table-responsive">

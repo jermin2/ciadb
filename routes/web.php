@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
+
+Route::get('/redirect', 'Auth\LoginController@redirectToProvider');
+Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
+
 Route::get('/', 'UserController@home')->name('home');
 Route::get('/dashboard', 'UserController@home')->name('dashboard');
 

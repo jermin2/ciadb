@@ -92,12 +92,13 @@ class AssignPermissionRole extends Migration
 
         DB::table('permission_role')->insert($role_permissions);
 
-        User::create([
+        $user = User::create([
             'name' => 'Jermin Tiu',
             'email' => 'jermin2@gmail.com',
             'password' => Hash::make('asdfasdf'),
             'person_id' => 1
         ]);
+        $user->markEmailAsVerified();
 
         //Make the first user an admin (jermin2@gmail.com);
         DB::table('role_user')->insert([

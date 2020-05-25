@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card w-100">
   <div class="card-header">
     <h2 class="card-title">{{$title}}</h2>
   </div>

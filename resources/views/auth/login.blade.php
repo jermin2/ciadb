@@ -1,7 +1,7 @@
 @extends('layouts.home')
 
 @section('content')
-<div class="col-xl-8 col-lg-10 col-md-12 col-sm-10 mx-auto mt-5">
+<div class="col-xl-8 col-lg-10 col-md-12 col-sm-10 mx-auto mt-3">
 <div class="card ">
     <div class="card-header">
         <h2 class="card-title">LOGIN</h2> 

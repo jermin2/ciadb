@@ -51,7 +51,7 @@
             <label class="text-muted col-md-12 text-center mt-2">Or</label>
             <hr class="mt-0 mb-0" />
             <div class="form-group row mb-0">          
-                <a href="{{ url('/redirect') }}"  class="btn col-md-12"  ><img id="google" style="max-height:52px" src="/btn_normal.png" ></a>
+                <a href="{{ url('/redirect') }}"  class="btn col-md-12"  ><img id="google" style="max-height:52px" src="{{URL::asset('btn_normal.png')}}" ></a>
             </div>
         </form>
     </div>

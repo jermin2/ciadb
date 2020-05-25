@@ -46,6 +46,7 @@ class PersonGoalController extends Controller
             'goal' => 'required',
             'start_date' => 'date_format:"d-m-Y"',
             'end_date' => 'nullable|date_format:"d-m-Y"',
+            'notes' => 'nullable'
         ]);
     }
 
@@ -66,6 +67,7 @@ class PersonGoalController extends Controller
             'goal' => 'required',
             'start_date' => 'date_format:"d-m-Y"',
             'end_date' => 'nullable|date_format:"d-m-Y"',
+            'notes' => 'nullable'
         ]);
 
         $param['private'] = request()->private == "on" ? true : false;

@@ -112,7 +112,7 @@
 
         <div class="container-fluid">
             <div class="row justify-content-center py-4"> 
-                <main role="main"  class="col-md-9 col-lg-10 px-4 ">            
+                <main role="main"  class="col-md-9 col-lg-10 px-4">            
                     @yield('content')
                 
                 </main>

@@ -27,8 +27,7 @@
                 @endisset
 
               </tr>
-            </thead>
-            <tbody>
+
             <tr>
                 @isset($individual)
                   {{$individual}}
@@ -61,6 +60,8 @@
                 </td>
                 <td><button class="add-goal btn btn-success" type="submit">Add</button></td>
               </tr>
+              </thead>
+            <tbody>
               @foreach($goals as $goal)
                 @if(!$goal->private || $goal->author_id == Auth::user()->id)
                 <tr>

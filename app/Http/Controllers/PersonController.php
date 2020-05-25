@@ -121,7 +121,11 @@ class PersonController extends Controller
 
         $person->update($this->validatePerson());
         $person->tags()->sync(request('tags'));
-        $person->usertags()->sync(request('usertags'));
+
+        //remove all the user tags and add the user tags selected (so we don't interfere with other user tags)
+        $person->usertags()->detach(auth()->user()->usertags);
+        $person->usertags()->attach(request('usertags'));
+
         return redirect(route('people.show', $person->id));        
     }
 

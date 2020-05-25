@@ -76,4 +76,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->permissions()->contains($permission);
     }
 
+    public function usertags()
+    {
+        return $this->hasMany(Usertag::class);
+    }
+
 }

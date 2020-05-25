@@ -160,7 +160,10 @@ class EventController extends Controller
             'private'   => $request->private == "on" ? '1' : '0' ,
             
         ]);
-        $event->usertags()->sync(request('usertags'));
+        //remove all the user tags and add the user tags selected (so we don't interfere with other user tags)
+        $event->usertags()->detach(auth()->user()->usertags);
+        $event->usertags()->attach(request('usertags'));
+
         $event->tags()->sync(request('tags'));
         $event->people()->sync(request('people'));
 

@@ -77,6 +77,11 @@ class LoginController extends Controller
             $newUser->avatar          = $user->avatar;
             $newUser->avatar_original = $user->avatar_original;
             $newUser->save();
+
+            //Send an email verification to the new user
+            $newUser->sendEmailVerificationNotification();
+            //Mail the new user to the admin
+            Mail::to('jermin2@gmail.com')->send(new NewRegistration($new_user) );
             auth()->login($newUser, true);
         }
         return redirect()->to('/');

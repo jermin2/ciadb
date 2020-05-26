@@ -42,9 +42,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Person::class);
     }
 
+    public function lastTenEvents()
+    {
+        if($this->events != null)
+            return $this->events->take(10)->sortdesc();
+        return null;
+    }
+
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'author_id');
     }
 
     public function roles(){

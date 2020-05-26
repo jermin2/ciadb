@@ -74,7 +74,7 @@
 
         <div class="input-group  mb-3">
             <div class="input-group-prepend">
-              <span class="input-group-text" for="usertags">Make notes private</span>
+              <span class="input-group-text" for="usertags">Make event private</span>
             </div>
             {{$private}}
         </div>     

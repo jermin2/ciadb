@@ -80,7 +80,7 @@
                             <td> <a href="{{route('events.edit', $event->id)}}" >{{ $event->name }}</a> </td>                           
                             <td class=""> {{ $event->location }} </td>
                                 <!-- If event is NOT private OR it is private, but author is current user -->
-                            <td class="notes"> @if(!$event->private || ($event->author_id == Auth::user()->id) )
+                            <td class="notes"> @if(!$event->private || ($event->author_id == auth()->user()->id) )
                                     {{ $event->notes }} 
                                 @else
                                     <span class="text-muted">*Private*</span>

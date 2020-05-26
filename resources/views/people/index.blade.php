@@ -161,7 +161,7 @@
                     searchable: false,
                 },
                 {
-                    "width":"40%",
+                    "width":"30%",
                     "targets":1
                 },
                 { responsivePriority: 1, targets: [1]},

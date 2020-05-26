@@ -18,7 +18,7 @@ class EventTagController extends Controller
 
         //Show a list of the people
         return view('events/index', [
-            'events' => Event::all(),
+            'events' => Event::orderBy('time')->get(),
             'selectedTagList'   => new Collection([$tag]),
             'usertags' => Usertag::where('user_id', Auth::user()->id )->get(),
             'tagtypes' => Tagtype::all()
@@ -31,7 +31,7 @@ class EventTagController extends Controller
         
         //Show a list of the people
         return view('events/index', [
-            'events' => Event::all(),
+            'events' => Event::orderBy('time')->get(),
             'selectedUsertagList'   => new Collection([$usertag]),
             'usertags' => Usertag::where('user_id', Auth::user()->id )->get(),
             'tagtypes' => Tagtype::all()

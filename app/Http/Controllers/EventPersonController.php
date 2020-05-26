@@ -32,7 +32,7 @@ class EventPersonController extends Controller
 
         //Show a list of the people
         return view('pivot/index', [
-            'events' => Event::all(),
+            'events' => Event::orderBy('time')->get(),
             'people' => Person::all(),
             'tagtypes' => Tagtype::all(),
             'usertags' => Usertag::all()

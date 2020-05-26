@@ -35,7 +35,7 @@ class EventPersonController extends Controller
             'events' => Event::orderBy('time')->get(),
             'people' => Person::all(),
             'tagtypes' => Tagtype::all(),
-            'usertags' => Usertag::all()
+            'usertags' => Usertag::where('user_id', Auth::user()->id)->get()
         ]);
     }
 

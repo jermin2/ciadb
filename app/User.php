@@ -45,7 +45,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lastTenEvents()
     {
         if($this->events != null)
-            return $this->events->take(10)->sortdesc();
+            $lastten = $this->events->sortByDesc(function ($obj)
+        {
+            return \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $obj->time);
+        });
+            return $lastten->take(4);
         return null;
     }
 

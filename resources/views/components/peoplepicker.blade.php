@@ -47,7 +47,7 @@
 
             @if(isset($selectedpeople) && $selectedpeople->contains($person))
                 class="list-group-item list-group-item-action active"
-            @elseif(isset($selectedperson) && $selectedperson == $person)
+            @elseif(isset($selectedperson) && $selectedperson->id == $person->id)
                 class="list-group-item list-group-item-action active"
             @else
                 class="list-group-item list-group-item-action"

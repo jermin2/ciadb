@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return \Carbon\Carbon::createFromFormat('D, jS M H:i Y', $obj->time);
         });
-            return $lastten->take(4);
+            return $lastten->take(10);
         return null;
     }
 
